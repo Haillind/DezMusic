@@ -11,6 +11,7 @@ import UIKit
 class MusicController: UIViewController {
     
     var user: String?
+    var userProfileId: String?
     var favoriteUrls = [URL]()
     var favoriteImageForScreen = [UIImage]()
     
@@ -23,11 +24,11 @@ class MusicController: UIViewController {
         collectionViewFavorArtists.dataSource = self
         collectionViewFavorArtists.delegate = self
         settingCollectionView()
-        //screenUISettings()
         
         collectionViewFavorArtists.register(UINib(nibName: "FavoriteArtistsCell", bundle: nil), forCellWithReuseIdentifier: "favArtistCell")
         
         user = UserDefaults.standard.string(forKey: "accessToken")!
+        userProfileId = UserDefaults.standard.string(forKey: "userProfileId")!
         
         getFavoriteArtistsUrl(){
             self.getFavoriteArtistImagesForScreen() {
@@ -37,26 +38,19 @@ class MusicController: UIViewController {
             }
         }
         
-    }
-    
-    func screenUISettings() {
-        musicLabel.font = UIFont(name: "HelveticaNeue-Bold", size: 30)
+        getRecomendedPlaylists()
+        
     }
     
     @IBAction func logOut(_ sender: UIButton) {
         
         UserDefaults.standard.set(nil, forKey: "accessToken")
+        UserDefaults.standard.set(nil, forKey: "userProfileId")
         
         guard let loginVC = storyboard?.instantiateViewController(withIdentifier: "LoginScreen") else {return}
         loginVC.modalPresentationStyle = .fullScreen
         
         present(loginVC, animated: true, completion: nil)
-    }
-    
-    @IBAction func testFav(_ sender: UIButton) {
-        
-        
-        collectionViewFavorArtists.reloadData()
     }
     
     func getFavoriteArtistsUrl(completion: (() -> Void)?) {
@@ -97,6 +91,31 @@ class MusicController: UIViewController {
         }
     }
     
+    func getRecomendedPlaylists() {
+        
+        let urlForRecomendedPlaylists = "https://api.deezer.com/user/\(userProfileId!)/recommendations/playlists?access_token=\(user!)"
+        
+        guard let url = URL(string: urlForRecomendedPlaylists) else {return}
+        
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            
+            guard let data = data else {return}
+            
+            do{
+                let recomendedPlaylistInfo = try JSONDecoder().decode(RecomendedPlaylistsData.self, from: data)
+                print(recomendedPlaylistInfo.data[0].id)
+                print(recomendedPlaylistInfo.data[0].nb_tracks)
+                print(recomendedPlaylistInfo.data[0].title)
+            } catch {
+                print(error)
+            }
+            
+            
+            
+            
+            
+        }.resume()
+    }
     
     
 }

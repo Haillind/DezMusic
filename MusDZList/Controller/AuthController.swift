@@ -35,6 +35,26 @@ class AuthController: UIViewController {
         view = webView
         startAuthorization()
     }
+    
+    func getUserInfo(accessToken: String?, completion: (() -> Void)?) {
+        guard let accessToken = accessToken else {return}
+        let urlQuery = "https://api.deezer.com/user/me?access_token=\(accessToken)"
+        guard let url = URL(string: urlQuery) else {return}
+        
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            
+            guard let data = data else {return}
+            
+            do {
+                let userInfo = try JSONDecoder().decode(UserInfoData.self, from: data)
+                self.defaults.set(userInfo.id, forKey: "userProfileId")
+            } catch {
+                print(error)
+            }
+            completion!()
+        }.resume()
+        
+    }
 }
 
 //MARK: - WKWeb Methods
@@ -65,10 +85,10 @@ extension AuthController: WKNavigationDelegate, WKUIDelegate {
                 
                 let jsonData = try JSONDecoder().decode(AuthData.self, from: data)
                 self.defaults.set(jsonData.access_token, forKey: "accessToken")
-                
-                DispatchQueue.main.async {
-                    
-                    self.performSegue(withIdentifier: "goToTabBar", sender: self)
+                self.getUserInfo(accessToken: jsonData.access_token){
+                    DispatchQueue.main.async {
+                        self.performSegue(withIdentifier: "goToTabBar", sender: self)
+                    }
                 }
                 
             } catch {
@@ -107,3 +127,6 @@ extension AuthController: WKNavigationDelegate, WKUIDelegate {
 // https://www.youtube.com/watch?v=YA20F7RJnwA
 
 // https://www.youtube.com/watch?v=e6u-NnpgSRo
+
+
+//{\"id\":3699700782,\"name\":\"Haillind\",\"lastname\":\"\",\"firstname\":\"\",\"email\":\"selivanovdzenis@gmail.com\",\"status\":0,\"birthday\":\"0000-00-00\",\"inscription_date\":\"2020-06-02\",\"gender\":\"\",\"link\":\"https:\\/\\/www.deezer.com\\/profile\\/3699700782\",\"picture\":\"https:\\/\\/api.deezer.com\\/user\\/3699700782\\/image\",\"picture_small\":\"https:\\/\\/cdns-images.dzcdn.net\\/images\\/user\\/\\/56x56-000000-80-0-0.jpg\",\"picture_medium\":\"https:\\/\\/cdns-images.dzcdn.net\\/images\\/user\\/\\/250x250-000000-80-0-0.jpg\",\"picture_big\":\"https:\\/\\/cdns-images.dzcdn.net\\/images\\/user\\/\\/500x500-000000-80-0-0.jpg\",\"picture_xl\":\"https:\\/\\/cdns-images.dzcdn.net\\/images\\/user\\/\\/1000x1000-000000-80-0-0.jpg\",\"country\":\"BY\",\"lang\":\"RU\",\"is_kid\":false,\"explicit_content_level\":\"explicit_display\",\"explicit_content_levels_available\":[\"explicit_display\",\"explicit_no_recommendation\",\"explicit_hide\"],\"tracklist\":\"https:\\/\\/api.deezer.com\\/user\\/3699700782\\/flow\",\"type\":\"user\"}

@@ -12,6 +12,8 @@
 		921FCDDE248ED13A000DB7FE /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FCDDD248ED13A000DB7FE /* AuthController.swift */; };
 		9234AAFD2490EB59006E37A8 /* Player.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9234AAFC2490EB59006E37A8 /* Player.storyboard */; };
 		9234AAFF2490EC86006E37A8 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234AAFE2490EC86006E37A8 /* PlayerController.swift */; };
+		925573EB24923CA70057A2B5 /* UserInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925573EA24923CA70057A2B5 /* UserInfoData.swift */; };
+		925573ED249242960057A2B5 /* RecomendedPlaylistsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */; };
 		9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */; };
 		929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297909E248FE72200006CB1 /* FavoriteArtistsCell.swift */; };
 		929790A1248FE72200006CB1 /* FavoriteArtistsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9297909F248FE72200006CB1 /* FavoriteArtistsCell.xib */; };
@@ -29,6 +31,8 @@
 		921FCDDD248ED13A000DB7FE /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
 		9234AAFC2490EB59006E37A8 /* Player.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = Player.storyboard; sourceTree = "<group>"; };
 		9234AAFE2490EC86006E37A8 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
+		925573EA24923CA70057A2B5 /* UserInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoData.swift; sourceTree = "<group>"; };
+		925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendedPlaylistsData.swift; sourceTree = "<group>"; };
 		9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteArtistsData.swift; sourceTree = "<group>"; };
 		9297909E248FE72200006CB1 /* FavoriteArtistsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteArtistsCell.swift; sourceTree = "<group>"; };
 		9297909F248FE72200006CB1 /* FavoriteArtistsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteArtistsCell.xib; sourceTree = "<group>"; };
@@ -67,6 +71,8 @@
 			children = (
 				92DF0741248AB636008C4353 /* AuthData.swift */,
 				9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */,
+				925573EA24923CA70057A2B5 /* UserInfoData.swift */,
+				925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -76,7 +82,6 @@
 			children = (
 				921FCDDD248ED13A000DB7FE /* AuthController.swift */,
 				921560C6248FA73900229F1F /* MusicController.swift */,
-				921560C4248F979100229F1F /* TestController.swift */,
 				9234AAFE2490EC86006E37A8 /* PlayerController.swift */,
 			);
 			path = Controller;
@@ -112,6 +117,7 @@
 			children = (
 				92A763632489485100147C69 /* AppDelegate.swift */,
 				92A763652489485100147C69 /* SceneDelegate.swift */,
+				921560C4248F979100229F1F /* TestController.swift */,
 				921560C2248F971A00229F1F /* Model */,
 				921560C3248F976C00229F1F /* Controller */,
 				921560C1248F971100229F1F /* View */,
@@ -196,8 +202,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925573EB24923CA70057A2B5 /* UserInfoData.swift in Sources */,
 				921560C5248F979100229F1F /* TestController.swift in Sources */,
 				92DF0742248AB636008C4353 /* AuthData.swift in Sources */,
+				925573ED249242960057A2B5 /* RecomendedPlaylistsData.swift in Sources */,
 				9234AAFF2490EC86006E37A8 /* PlayerController.swift in Sources */,
 				921FCDDE248ED13A000DB7FE /* AuthController.swift in Sources */,
 				92A763642489485100147C69 /* AppDelegate.swift in Sources */,

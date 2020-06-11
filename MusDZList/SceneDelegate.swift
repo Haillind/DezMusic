@@ -17,7 +17,7 @@ class SceneDelegate: UIResponder, UIWindowSceneDelegate {
         
         let storyboard = UIStoryboard(name: "Main", bundle: nil)
         
-        if UserDefaults.standard.string(forKey: "accessToken") != nil {
+        if UserDefaults.standard.string(forKey: "accessToken") != nil && UserDefaults.standard.string(forKey: "userProfileId") != nil {
             let initialController = storyboard.instantiateViewController(identifier: "TabBarController")
             window?.rootViewController = initialController
             window?.makeKeyAndVisible()
