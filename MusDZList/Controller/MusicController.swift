@@ -10,12 +10,15 @@ import UIKit
 
 class MusicController: UIViewController {
     
-    var user: String?
+    var accessToken: String?
     var userProfileId: String?
     var favoriteUrls = [URL]()
     var favoriteImageForScreen = [UIImage]()
+    var recomendedPlaylistResults = [RecomendedPlaylistInfo]()
+    var recomendedPlaylistImages = [UIImage]()
     
     @IBOutlet weak var collectionViewFavorArtists: UICollectionView!
+    @IBOutlet weak var collectionViewRecomendedPlaylists: UICollectionView!
     @IBOutlet weak var musicLabel: UILabel!
     
     override func viewDidLoad() {
@@ -23,11 +26,15 @@ class MusicController: UIViewController {
         
         collectionViewFavorArtists.dataSource = self
         collectionViewFavorArtists.delegate = self
+        collectionViewRecomendedPlaylists.dataSource = self
+        collectionViewRecomendedPlaylists.delegate = self
+        
         settingCollectionView()
         
         collectionViewFavorArtists.register(UINib(nibName: "FavoriteArtistsCell", bundle: nil), forCellWithReuseIdentifier: "favArtistCell")
+        collectionViewRecomendedPlaylists.register(UINib(nibName: "RecomendedPlaylistsCell", bundle: nil), forCellWithReuseIdentifier: "recomendListCell")
         
-        user = UserDefaults.standard.string(forKey: "accessToken")!
+        accessToken = UserDefaults.standard.string(forKey: "accessToken")!
         userProfileId = UserDefaults.standard.string(forKey: "userProfileId")!
         
         getFavoriteArtistsUrl(){
@@ -38,8 +45,19 @@ class MusicController: UIViewController {
             }
         }
         
-        getRecomendedPlaylists()
+        getRecomendedPlaylists() {
+            self.getImagesForRecomendedList() {
+                DispatchQueue.main.async {
+                    self.collectionViewRecomendedPlaylists.reloadData()
+                    print(self.recomendedPlaylistImages)
+                }
+            }
+        }
         
+    }
+    
+    @IBAction func test(_ sender: UIButton) {
+        collectionViewRecomendedPlaylists.reloadData()
     }
     
     @IBAction func logOut(_ sender: UIButton) {
@@ -55,7 +73,7 @@ class MusicController: UIViewController {
     
     func getFavoriteArtistsUrl(completion: (() -> Void)?) {
         
-        let urlUser = "https://api.deezer.com/user/me/artists?access_token=\(user!)"
+        let urlUser = "https://api.deezer.com/user/me/artists?access_token=\(accessToken!)"
 
         guard let url = URL(string: urlUser) else {return}
 
@@ -91,9 +109,9 @@ class MusicController: UIViewController {
         }
     }
     
-    func getRecomendedPlaylists() {
+    func getRecomendedPlaylists(completion: (() -> Void)?) {
         
-        let urlForRecomendedPlaylists = "https://api.deezer.com/user/\(userProfileId!)/recommendations/playlists?access_token=\(user!)"
+        let urlForRecomendedPlaylists = "https://api.deezer.com/user/\(userProfileId!)/recommendations/playlists?access_token=\(accessToken!)"
         
         guard let url = URL(string: urlForRecomendedPlaylists) else {return}
         
@@ -103,18 +121,30 @@ class MusicController: UIViewController {
             
             do{
                 let recomendedPlaylistInfo = try JSONDecoder().decode(RecomendedPlaylistsData.self, from: data)
-                print(recomendedPlaylistInfo.data[0].id)
-                print(recomendedPlaylistInfo.data[0].nb_tracks)
-                print(recomendedPlaylistInfo.data[0].title)
+                for object in recomendedPlaylistInfo.data {
+                    self.recomendedPlaylistResults.append(object)
+                }
+                
             } catch {
                 print(error)
             }
-            
-            
-            
-            
-            
+            completion!()
         }.resume()
+    }
+    
+    func getImagesForRecomendedList(completion: (() -> Void)?) {
+        
+        for playlistInfo in recomendedPlaylistResults {
+            
+            URLSession.shared.dataTask(with: playlistInfo.picture_big) { (data, _, error) in
+                
+                guard let data = data else {return}
+                guard let image = UIImage(data: data) else {return}
+                self.recomendedPlaylistImages.append(image)
+                
+                completion!()
+            }.resume()
+        }
     }
     
     
@@ -126,34 +156,74 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
     
     
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return favoriteImageForScreen.count
+        if collectionView == collectionViewFavorArtists {
+           return favoriteImageForScreen.count
+        }
+        
+        return recomendedPlaylistImages.count
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         
-        let cell = collectionViewFavorArtists.dequeueReusableCell(withReuseIdentifier: "favArtistCell", for: indexPath) as! FavoriteArtistsCell
-        
-        cell.artistIcon.image = favoriteImageForScreen[indexPath.item]
-        
-        return cell
+        if collectionView == collectionViewFavorArtists {
+            let cell = collectionViewFavorArtists.dequeueReusableCell(withReuseIdentifier: "favArtistCell", for: indexPath) as! FavoriteArtistsCell
+            
+            cell.artistIcon.image = favoriteImageForScreen[indexPath.item]
+            
+            return cell
+        } else {
+            
+            let cell = collectionViewRecomendedPlaylists.dequeueReusableCell(withReuseIdentifier: "recomendListCell", for: indexPath) as! RecomendedPlaylistsCell
+
+            cell.recomendedPlaylistImage.image = recomendedPlaylistImages[indexPath.item]
+            cell.nameLabel.text = recomendedPlaylistResults[indexPath.item].title
+            cell.countOftrackLabel.text = String(recomendedPlaylistResults[indexPath.item].id)
+
+            return cell
+           
+        }
         
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
-        let storyboard = UIStoryboard(name: "Player", bundle: nil)
-        let playerVC = storyboard.instantiateViewController(withIdentifier: "PlayerController") as! PlayerController
-        present(playerVC, animated: true, completion: nil)
+        
+        if collectionView == collectionViewFavorArtists {
+            let storyboard = UIStoryboard(name: "Player", bundle: nil)
+            let playerVC = storyboard.instantiateViewController(withIdentifier: "PlayerController") as! PlayerController
+            present(playerVC, animated: true, completion: nil)
+        }
     }
     
     //MARK: - Collection Layout
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        return CGSize(width: 110, height: 110)
+        
+        if collectionView == collectionViewFavorArtists {
+            return CGSize(width: 110, height: 110)
+        } else {
+            let width = (collectionViewRecomendedPlaylists.frame.width - 45) / 2 - 1
+            return CGSize(width: width, height: 265)
+        }
+
+        
     }
     
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 15
+        if collectionView == collectionViewFavorArtists {
+            return 15
+        } else {
+            return 15
+        }
     }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumInteritemSpacingForSectionAt section: Int) -> CGFloat {
+        if collectionView == collectionViewFavorArtists {
+            return 1
+        } else {
+            return 1
+        }
+    }
+    
     
     //MARK: - Other setting of collection
     

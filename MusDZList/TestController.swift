@@ -10,18 +10,18 @@ import UIKit
 
 class TestController: UIViewController {
     
-    var user: String?
+    var accessToken: String?
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        user = UserDefaults.standard.string(forKey: "accessToken")!
+        accessToken = UserDefaults.standard.string(forKey: "accessToken")!
         
     }
     
     @IBAction func testFav(_ sender: UIButton) {
         
-        let urlUser = "https://api.deezer.com/user/me/artists?access_token=\(user!)"
+        let urlUser = "https://api.deezer.com/user/me/artists?access_token=\(accessToken!)"
 
         guard let url = URL(string: urlUser) else {return}
 

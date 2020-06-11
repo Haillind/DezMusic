@@ -23,6 +23,8 @@
 		92A7636D2489485200147C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92A7636C2489485200147C69 /* Assets.xcassets */; };
 		92A763702489485200147C69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A7636E2489485200147C69 /* LaunchScreen.storyboard */; };
 		92DF0742248AB636008C4353 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF0741248AB636008C4353 /* AuthData.swift */; };
+		92E4A931249246E500A212BC /* RecomendedPlaylistsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */; };
+		92E4A932249246E500A212BC /* RecomendedPlaylistsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +46,8 @@
 		92A7636F2489485200147C69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92A763712489485200147C69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92DF0741248AB636008C4353 /* AuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
+		92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendedPlaylistsCell.swift; sourceTree = "<group>"; };
+		92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecomendedPlaylistsCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -90,8 +94,8 @@
 		9297909D248FE6F900006CB1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
-				9297909E248FE72200006CB1 /* FavoriteArtistsCell.swift */,
-				9297909F248FE72200006CB1 /* FavoriteArtistsCell.xib */,
+				92E4A92E249246BC00A212BC /* RecomendedPlaylistsCell */,
+				92E4A92D249246AE00A212BC /* FavoriteArtistsCell */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -127,6 +131,24 @@
 				92A763712489485200147C69 /* Info.plist */,
 			);
 			path = MusDZList;
+			sourceTree = "<group>";
+		};
+		92E4A92D249246AE00A212BC /* FavoriteArtistsCell */ = {
+			isa = PBXGroup;
+			children = (
+				9297909E248FE72200006CB1 /* FavoriteArtistsCell.swift */,
+				9297909F248FE72200006CB1 /* FavoriteArtistsCell.xib */,
+			);
+			path = FavoriteArtistsCell;
+			sourceTree = "<group>";
+		};
+		92E4A92E249246BC00A212BC /* RecomendedPlaylistsCell */ = {
+			isa = PBXGroup;
+			children = (
+				92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */,
+				92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */,
+			);
+			path = RecomendedPlaylistsCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -190,6 +212,7 @@
 				92A763702489485200147C69 /* LaunchScreen.storyboard in Resources */,
 				92A7636D2489485200147C69 /* Assets.xcassets in Resources */,
 				9234AAFD2490EB59006E37A8 /* Player.storyboard in Resources */,
+				92E4A932249246E500A212BC /* RecomendedPlaylistsCell.xib in Resources */,
 				929790A1248FE72200006CB1 /* FavoriteArtistsCell.xib in Resources */,
 				92A7636B2489485100147C69 /* Main.storyboard in Resources */,
 			);
@@ -209,6 +232,7 @@
 				9234AAFF2490EC86006E37A8 /* PlayerController.swift in Sources */,
 				921FCDDE248ED13A000DB7FE /* AuthController.swift in Sources */,
 				92A763642489485100147C69 /* AppDelegate.swift in Sources */,
+				92E4A931249246E500A212BC /* RecomendedPlaylistsCell.swift in Sources */,
 				92A763662489485100147C69 /* SceneDelegate.swift in Sources */,
 				9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */,
 				929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */,
