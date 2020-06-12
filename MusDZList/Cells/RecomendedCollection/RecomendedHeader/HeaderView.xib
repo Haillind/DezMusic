@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="16097" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" useSafeAreas="YES" colorMatched="YES">
+    <device id="retina6_1" orientation="portrait" appearance="light"/>
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="16087"/>
+        <capability name="Safe area layout guides" minToolsVersion="9.0"/>
+        <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <collectionReusableView opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" reuseIdentifier="header" id="U6b-Vx-4bR" customClass="HeaderView" customModule="MusDZList" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="320" height="50"/>
+            <autoresizingMask key="autoresizingMask"/>
+            <subviews>
+                <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="3zg-YY-O3i">
+                    <rect key="frame" x="15" y="0.0" width="305" height="50"/>
+                    <inset key="titleEdgeInsets" minX="15" minY="0.0" maxX="0.0" maxY="0.0"/>
+                    <state key="normal" image="RecommendBtn">
+                        <color key="titleColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
+                    </state>
+                    <connections>
+                        <action selector="recomendedPressed:" destination="U6b-Vx-4bR" eventType="touchUpInside" id="cGq-ZW-aiQ"/>
+                    </connections>
+                </button>
+            </subviews>
+            <constraints>
+                <constraint firstItem="3zg-YY-O3i" firstAttribute="top" secondItem="U6b-Vx-4bR" secondAttribute="top" id="6UZ-er-HOf"/>
+                <constraint firstItem="3zg-YY-O3i" firstAttribute="trailing" secondItem="VXr-Tz-HHm" secondAttribute="trailing" id="7Rf-2M-evg"/>
+                <constraint firstItem="3zg-YY-O3i" firstAttribute="bottom" secondItem="VXr-Tz-HHm" secondAttribute="bottom" id="Zfr-XE-lTM"/>
+                <constraint firstItem="3zg-YY-O3i" firstAttribute="leading" secondItem="VXr-Tz-HHm" secondAttribute="leading" constant="15" id="aLn-dL-CHI"/>
+            </constraints>
+            <viewLayoutGuide key="safeArea" id="VXr-Tz-HHm"/>
+            <connections>
+                <outlet property="recomendedBtn" destination="3zg-YY-O3i" id="j6d-cE-hFZ"/>
+            </connections>
+            <point key="canvasLocation" x="137.68115942028987" y="103.79464285714285"/>
+        </collectionReusableView>
+    </objects>
+    <resources>
+        <image name="RecommendBtn" width="365" height="33"/>
+    </resources>
+</document>

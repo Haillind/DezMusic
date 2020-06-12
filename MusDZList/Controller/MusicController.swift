@@ -32,7 +32,10 @@ class MusicController: UIViewController {
         settingCollectionView()
         
         collectionViewFavorArtists.register(UINib(nibName: "FavoriteArtistsCell", bundle: nil), forCellWithReuseIdentifier: "favArtistCell")
+        
         collectionViewRecomendedPlaylists.register(UINib(nibName: "RecomendedPlaylistsCell", bundle: nil), forCellWithReuseIdentifier: "recomendListCell")
+        collectionViewRecomendedPlaylists.register(UINib(nibName: "HeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
+        collectionViewRecomendedPlaylists.register(UINib(nibName: "FooterView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
         
         accessToken = UserDefaults.standard.string(forKey: "accessToken")!
         userProfileId = UserDefaults.standard.string(forKey: "userProfileId")!
@@ -222,6 +225,46 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
         } else {
             return 1
         }
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
+        
+        
+        switch kind {
+
+        case UICollectionView.elementKindSectionHeader:
+
+            let headerView = collectionViewRecomendedPlaylists.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderView
+            
+            
+            return headerView
+
+        case UICollectionView.elementKindSectionFooter:
+            
+            let footerView = collectionViewRecomendedPlaylists.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath) as! FooterView
+
+            return footerView
+
+        default:
+
+            assert(false, "Unexpected element kind")
+        }
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+        if collectionView == collectionViewRecomendedPlaylists {
+            return CGSize(width: collectionView.frame.width - 30, height: 50)
+        }
+        return CGSize(width: 0, height: 0)
+        
+    }
+    
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForFooterInSection section: Int) -> CGSize {
+        if collectionView == collectionViewRecomendedPlaylists {
+            return CGSize(width: collectionView.frame.width, height: 40)
+        }
+        return CGSize(width: 0, height: 0)
     }
     
     
