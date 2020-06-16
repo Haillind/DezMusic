@@ -17,7 +17,6 @@ struct FavoritesArtistsData: Codable {
     
     let id: Int
     let name: String
-    let picture_small: URL
     let picture_big: URL
-    let picture_xl: URL
+    let tracklist: URL
 }

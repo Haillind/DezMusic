@@ -7,6 +7,11 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		9206C9BE2493A4290082565D /* TopTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9206C9BD2493A4290082565D /* TopTrack.storyboard */; };
+		9206C9C02493A4420082565D /* TopTrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9BF2493A4420082565D /* TopTrackController.swift */; };
+		9206C9C52493A4820082565D /* TopTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9C32493A4820082565D /* TopTrackCell.swift */; };
+		9206C9C62493A4820082565D /* TopTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9206C9C42493A4820082565D /* TopTrackCell.xib */; };
+		9206C9C82493A7100082565D /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9C72493A7100082565D /* TestCell.swift */; };
 		921014CF2492975A00757D79 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921014CD2492975A00757D79 /* FooterView.swift */; };
 		921014D02492975A00757D79 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921014CE2492975A00757D79 /* FooterView.xib */; };
 		921560C5248F979100229F1F /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921560C4248F979100229F1F /* TestController.swift */; };
@@ -24,14 +29,22 @@
 		92A7636B2489485100147C69 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A763692489485100147C69 /* Main.storyboard */; };
 		92A7636D2489485200147C69 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 92A7636C2489485200147C69 /* Assets.xcassets */; };
 		92A763702489485200147C69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A7636E2489485200147C69 /* LaunchScreen.storyboard */; };
+		92A7C1812497943C0040347F /* TopTracksSongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7C1802497943C0040347F /* TopTracksSongModel.swift */; };
+		92A7C1832497A1500040347F /* FavoriteArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */; };
 		92D2C8942492884900579488 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2C8922492884900579488 /* HeaderView.swift */; };
 		92D2C8952492884900579488 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D2C8932492884900579488 /* HeaderView.xib */; };
+		92DCD1892494DD540013A2C8 /* ListOfTopTracksData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */; };
 		92DF0742248AB636008C4353 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF0741248AB636008C4353 /* AuthData.swift */; };
 		92E4A931249246E500A212BC /* RecomendedPlaylistsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */; };
 		92E4A932249246E500A212BC /* RecomendedPlaylistsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		9206C9BD2493A4290082565D /* TopTrack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TopTrack.storyboard; sourceTree = "<group>"; };
+		9206C9BF2493A4420082565D /* TopTrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackController.swift; sourceTree = "<group>"; };
+		9206C9C32493A4820082565D /* TopTrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackCell.swift; sourceTree = "<group>"; };
+		9206C9C42493A4820082565D /* TopTrackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopTrackCell.xib; sourceTree = "<group>"; };
+		9206C9C72493A7100082565D /* TestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		921014CD2492975A00757D79 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		921014CE2492975A00757D79 /* FooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
 		921560C4248F979100229F1F /* TestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
@@ -51,8 +64,11 @@
 		92A7636C2489485200147C69 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		92A7636F2489485200147C69 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		92A763712489485200147C69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		92A7C1802497943C0040347F /* TopTracksSongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksSongModel.swift; sourceTree = "<group>"; };
+		92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteArtistsModel.swift; sourceTree = "<group>"; };
 		92D2C8922492884900579488 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		92D2C8932492884900579488 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
+		92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfTopTracksData.swift; sourceTree = "<group>"; };
 		92DF0741248AB636008C4353 /* AuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
 		92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendedPlaylistsCell.swift; sourceTree = "<group>"; };
 		92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecomendedPlaylistsCell.xib; sourceTree = "<group>"; };
@@ -69,6 +85,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		9206C9C12493A44F0082565D /* TopTrackTableView */ = {
+			isa = PBXGroup;
+			children = (
+				9206C9C22493A45A0082565D /* TopTrackCell */,
+			);
+			path = TopTrackTableView;
+			sourceTree = "<group>";
+		};
+		9206C9C22493A45A0082565D /* TopTrackCell */ = {
+			isa = PBXGroup;
+			children = (
+				9206C9C32493A4820082565D /* TopTrackCell.swift */,
+				9206C9C42493A4820082565D /* TopTrackCell.xib */,
+				9206C9C72493A7100082565D /* TestCell.swift */,
+			);
+			path = TopTrackCell;
+			sourceTree = "<group>";
+		};
 		921014CA2492910400757D79 /* RecomendedHeader */ = {
 			isa = PBXGroup;
 			children = (
@@ -102,6 +136,7 @@
 			children = (
 				92A763692489485100147C69 /* Main.storyboard */,
 				9234AAFC2490EB59006E37A8 /* Player.storyboard */,
+				9206C9BD2493A4290082565D /* TopTrack.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -113,6 +148,9 @@
 				9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */,
 				925573EA24923CA70057A2B5 /* UserInfoData.swift */,
 				925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */,
+				92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */,
+				92A7C1802497943C0040347F /* TopTracksSongModel.swift */,
+				92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -123,6 +161,7 @@
 				921FCDDD248ED13A000DB7FE /* AuthController.swift */,
 				921560C6248FA73900229F1F /* MusicController.swift */,
 				9234AAFE2490EC86006E37A8 /* PlayerController.swift */,
+				9206C9BF2493A4420082565D /* TopTrackController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -130,6 +169,7 @@
 		9297909D248FE6F900006CB1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				9206C9C12493A44F0082565D /* TopTrackTableView */,
 				921014CB2492913600757D79 /* RecomendedCollection */,
 				92E4A92D249246AE00A212BC /* FavoriteArtistsCell */,
 			);
@@ -246,8 +286,10 @@
 			buildActionMask = 2147483647;
 			files = (
 				92A763702489485200147C69 /* LaunchScreen.storyboard in Resources */,
+				9206C9C62493A4820082565D /* TopTrackCell.xib in Resources */,
 				921014D02492975A00757D79 /* FooterView.xib in Resources */,
 				92A7636D2489485200147C69 /* Assets.xcassets in Resources */,
+				9206C9BE2493A4290082565D /* TopTrack.storyboard in Resources */,
 				9234AAFD2490EB59006E37A8 /* Player.storyboard in Resources */,
 				92E4A932249246E500A212BC /* RecomendedPlaylistsCell.xib in Resources */,
 				929790A1248FE72200006CB1 /* FavoriteArtistsCell.xib in Resources */,
@@ -268,15 +310,21 @@
 				921560C5248F979100229F1F /* TestController.swift in Sources */,
 				92DF0742248AB636008C4353 /* AuthData.swift in Sources */,
 				925573ED249242960057A2B5 /* RecomendedPlaylistsData.swift in Sources */,
+				9206C9C52493A4820082565D /* TopTrackCell.swift in Sources */,
 				9234AAFF2490EC86006E37A8 /* PlayerController.swift in Sources */,
 				921FCDDE248ED13A000DB7FE /* AuthController.swift in Sources */,
+				92A7C1832497A1500040347F /* FavoriteArtistsModel.swift in Sources */,
 				92A763642489485100147C69 /* AppDelegate.swift in Sources */,
 				92E4A931249246E500A212BC /* RecomendedPlaylistsCell.swift in Sources */,
+				92A7C1812497943C0040347F /* TopTracksSongModel.swift in Sources */,
+				92DCD1892494DD540013A2C8 /* ListOfTopTracksData.swift in Sources */,
 				92A763662489485100147C69 /* SceneDelegate.swift in Sources */,
 				9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */,
 				929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */,
 				921560C7248FA73900229F1F /* MusicController.swift in Sources */,
 				92D2C8942492884900579488 /* HeaderView.swift in Sources */,
+				9206C9C02493A4420082565D /* TopTrackController.swift in Sources */,
+				9206C9C82493A7100082565D /* TestCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

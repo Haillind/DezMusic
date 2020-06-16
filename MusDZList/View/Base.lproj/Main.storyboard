@@ -93,10 +93,10 @@
                                                 <nil key="highlightedColor"/>
                                             </label>
                                             <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="BgE-2T-48a">
-                                                <rect key="frame" x="0.0" y="282" width="414" height="630"/>
+                                                <rect key="frame" x="0.0" y="282" width="414" height="640"/>
                                                 <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                                                 <constraints>
-                                                    <constraint firstAttribute="height" constant="630" id="vde-v4-biK"/>
+                                                    <constraint firstAttribute="height" constant="640" id="vde-v4-biK"/>
                                                 </constraints>
                                                 <collectionViewFlowLayout key="collectionViewLayout" minimumLineSpacing="10" minimumInteritemSpacing="10" id="8cV-as-Swj">
                                                     <size key="itemSize" width="156" height="169"/>
@@ -155,7 +155,7 @@
                                             <constraint firstItem="2jw-EP-WJA" firstAttribute="top" secondItem="u7i-68-zYk" secondAttribute="top" id="3fv-qK-Sp3"/>
                                             <constraint firstItem="R6a-vg-Pzw" firstAttribute="leading" secondItem="pLs-yV-oVM" secondAttribute="leading" id="6gg-Oo-5EW"/>
                                             <constraint firstItem="KUP-rh-yGS" firstAttribute="leading" secondItem="pLs-yV-oVM" secondAttribute="leading" constant="15" id="Gzr-ZJ-89N"/>
-                                            <constraint firstAttribute="bottom" secondItem="BgE-2T-48a" secondAttribute="bottom" constant="138" id="OKU-6G-m5W"/>
+                                            <constraint firstAttribute="bottom" secondItem="BgE-2T-48a" secondAttribute="bottom" constant="128" id="OKU-6G-m5W"/>
                                             <constraint firstItem="u7i-68-zYk" firstAttribute="top" secondItem="pLs-yV-oVM" secondAttribute="top" constant="22" id="WgG-kh-0Ut"/>
                                             <constraint firstAttribute="trailing" secondItem="R6a-vg-Pzw" secondAttribute="trailing" id="aMQ-rN-raN"/>
                                             <constraint firstItem="2jw-EP-WJA" firstAttribute="trailing" secondItem="pLs-yV-oVM" secondAttribute="trailingMargin" id="cEg-np-QjA"/>
