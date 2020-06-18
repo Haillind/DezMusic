@@ -23,7 +23,6 @@ class PlayerController: UIViewController {
             return playlist
         }
     }
-    var newPlayerItem: AVPlayerItem?
     
     var indexPath: Int?
     var currentIndexPath = 0 {
@@ -39,8 +38,6 @@ class PlayerController: UIViewController {
         }
     }
     
-    var timer : Timer?
-    
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var songLabel: UILabel!
     @IBOutlet weak var songContributorsLabel: UILabel!
@@ -53,7 +50,6 @@ class PlayerController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
-        
         
         guard let artistName = artistName else {return}
         guard let indexPath = indexPath else {return}
@@ -70,11 +66,14 @@ class PlayerController: UIViewController {
         songLabel.text = playlist[currentIndexPath].nameOfSong
         songContributorsLabel.text = playlist[currentIndexPath].nameOFContributors
         albumImage.image = UIImage(data: playlist[currentIndexPath].albumImage)
+        
+        albumImage.layer.cornerRadius = albumImage.frame.size.height / 16
+        albumImage.clipsToBounds = true
     }
     
     @IBAction func backBtn(_ sender: UIButton) {
         
-        //player = nil
+        player = nil
         dismiss(animated: true, completion: nil)
     }
     

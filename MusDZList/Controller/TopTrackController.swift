@@ -47,6 +47,8 @@ class TopTrackController: UIViewController {
 
 }
 
+
+
 extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -73,7 +75,8 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         playerVC.artistName = topTracksInfo[indexPath.item].artistName
         playerVC.playlistOptional = topTracksInfo
         playerVC.indexPath = indexPath.item
-        playerVC.newPlayerItem = nil
+        //playerVC.player = nil
+        
         
         
         present(playerVC, animated: true, completion: nil)
