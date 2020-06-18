@@ -49,7 +49,6 @@ class PlayerController: UIViewController {
         artistNameLabel.text = artistName
         
         currentIndexPath = indexPath
-        setPlayerScreenInfo()
         
         play()
     }
@@ -63,7 +62,7 @@ class PlayerController: UIViewController {
     
     @IBAction func backBtn(_ sender: UIButton) {
         
-        killTimer()
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -74,30 +73,24 @@ class PlayerController: UIViewController {
             player!.play()
             playBtn.setImage(UIImage(named: "Pause"), for: .normal)
             currentDuration = pausedDuration
-            startTimer(with: playlist[currentIndexPath].totalDuration)
         } else {
             
             player!.pause()
             playBtn.setImage(UIImage(named: "Play"), for: .normal)
             pausedDuration = currentDuration
-            killTimer()
         }
         
     }
     
     @IBAction func previousTrackBtn(_ sender: UIButton) {
         
-        killTimer()
         currentIndexPath -= 1
-        setPlayerScreenInfo()
         play()
     }
     
     @IBAction func nextTrackBtn(_ sender: UIButton) {
         
-        killTimer()
         currentIndexPath += 1
-        setPlayerScreenInfo()
         play()
     }
     
@@ -108,36 +101,64 @@ class PlayerController: UIViewController {
         
         player.rate = 1
         playBtn.setImage(UIImage(named: "Pause"), for: .normal)
+        setPlayerScreenInfo()
+        
+        guard let totalDuration = Int(playlist[currentIndexPath].totalDuration) else {return}
+        drawSpinnerOfSong(totalDuration: Float(totalDuration))
         
         print("Current Index os Song = \(currentIndexPath)")
         
-        startTimer(with: playlist[currentIndexPath].totalDuration)
-    }
-    
-    func killTimer() {
-        currentDuration = 0
-        timer?.invalidate()
-        timer = nil
-    }
-    
-    func startTimer(with totalDuration: String) {
+        NotificationCenter.default.addObserver(self, selector: #selector(finishTrackPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         
-        guard let totalDuration = Int(totalDuration) else {return}
-        progressOfSongLine.progress = 0.0
-        timer = Timer.scheduledTimer(withTimeInterval: 1.0, repeats: true, block: { (timer) in
-            
-            if Float(self.currentDuration) < Float(totalDuration) {
-                self.currentDuration += 1
-                print(self.currentDuration)
-                self.progressOfSongLine.progress = Float(self.currentDuration) / Float(totalDuration)
-            } else {
-                self.killTimer()
-                self.currentIndexPath += 1
-                self.play()
-            }
-            
-        })
+        //NotificationCenter.default.addObserver(self, selector: #selector(drawSpinnerOfSong(_:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
+        
+        
     }
+    
+    @objc func finishTrackPlaying(_ notificate: NSNotification) {
+        
+        currentIndexPath += 1
+        play()
+    }
+    
+//    @objc func drawSpinnerOfSong(_ notificate: NSNotification) {
+//        print("work")
+//    }
+    
+    func drawSpinnerOfSong(totalDuration: Float) {
+        
+        progressOfSongLine.progress = 0.0
+        self.currentDurationSongLabel.text = "0:00"
+        self.totalDurationSongLabel.text = "\(Int(totalDuration))"
+        
+        let _ = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main) { (time) in
+            
+            //let currentTimeSong = String(format: "%.1f", Float(CMTimeGetSeconds(time)))
+            //print(Int(Float(CMTimeGetSeconds(time))))
+            let currentTimeSong = Float(CMTimeGetSeconds(time))
+            //let currentTimeForSpinner = String(format: "%.0f", currentTimeSong)
+            print(currentTimeSong)
+            self.progressOfSongLine.progress = Float(currentTimeSong) / totalDuration
+            
+            
+            
+//            if Float(currentTimeSong) < Float(totalDuration) && Float(currentTimeSong + 1) != Float(totalDuration) {
+//                self.currentDuration += 1
+//                print(currentTimeSong)
+//                self.progressOfSongLine.progress = Float(currentTimeSong + 1) / Float(totalDuration)
+//            } else {
+//                self.killTimer()
+//                self.currentIndexPath += 1
+//                self.play()
+//
+//            }
+        }
+        
+    }
+    
+    
+    
+    
     
     
     
