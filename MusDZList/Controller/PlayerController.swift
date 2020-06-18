@@ -23,9 +23,21 @@ class PlayerController: UIViewController {
             return playlist
         }
     }
+    var newPlayerItem: AVPlayerItem?
     
     var indexPath: Int?
-    var currentIndexPath = 0
+    var currentIndexPath = 0 {
+        willSet{
+        }
+        didSet{
+            if currentIndexPath < 0 {
+                currentIndexPath = 0
+            }
+            if currentIndexPath > playlist.count - 1 {
+                currentIndexPath = playlist.count - 1
+            }
+        }
+    }
     
     var timer : Timer?
     
@@ -41,6 +53,7 @@ class PlayerController: UIViewController {
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
         
         guard let artistName = artistName else {return}
         guard let indexPath = indexPath else {return}
@@ -61,6 +74,7 @@ class PlayerController: UIViewController {
     
     @IBAction func backBtn(_ sender: UIButton) {
         
+        //player = nil
         dismiss(animated: true, completion: nil)
     }
     
@@ -96,6 +110,7 @@ class PlayerController: UIViewController {
 extension PlayerController {
     
     func play() {
+        
         guard let url = URL.init(string: "\(playlist[currentIndexPath].urlForSong)") else {return}
         let playerItem = AVPlayerItem(url: url)
         player = AVPlayer.init(playerItem: playerItem)

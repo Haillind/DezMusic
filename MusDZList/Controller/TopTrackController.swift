@@ -73,6 +73,8 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         playerVC.artistName = topTracksInfo[indexPath.item].artistName
         playerVC.playlistOptional = topTracksInfo
         playerVC.indexPath = indexPath.item
+        playerVC.newPlayerItem = nil
+        
         
         present(playerVC, animated: true, completion: nil)
         
