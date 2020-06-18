@@ -11,9 +11,9 @@
 		9206C9C02493A4420082565D /* TopTrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9BF2493A4420082565D /* TopTrackController.swift */; };
 		9206C9C52493A4820082565D /* TopTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9C32493A4820082565D /* TopTrackCell.swift */; };
 		9206C9C62493A4820082565D /* TopTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9206C9C42493A4820082565D /* TopTrackCell.xib */; };
-		9206C9C82493A7100082565D /* TestCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9C72493A7100082565D /* TestCell.swift */; };
 		921014CF2492975A00757D79 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921014CD2492975A00757D79 /* FooterView.swift */; };
 		921014D02492975A00757D79 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921014CE2492975A00757D79 /* FooterView.xib */; };
+		921186B4249B96F300D76BC2 /* PlayerDurationLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921186B3249B96F300D76BC2 /* PlayerDurationLogic.swift */; };
 		921560C5248F979100229F1F /* TestController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921560C4248F979100229F1F /* TestController.swift */; };
 		921560C7248FA73900229F1F /* MusicController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921560C6248FA73900229F1F /* MusicController.swift */; };
 		921FCDDE248ED13A000DB7FE /* AuthController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921FCDDD248ED13A000DB7FE /* AuthController.swift */; };
@@ -44,9 +44,9 @@
 		9206C9BF2493A4420082565D /* TopTrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackController.swift; sourceTree = "<group>"; };
 		9206C9C32493A4820082565D /* TopTrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackCell.swift; sourceTree = "<group>"; };
 		9206C9C42493A4820082565D /* TopTrackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopTrackCell.xib; sourceTree = "<group>"; };
-		9206C9C72493A7100082565D /* TestCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestCell.swift; sourceTree = "<group>"; };
 		921014CD2492975A00757D79 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		921014CE2492975A00757D79 /* FooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
+		921186B3249B96F300D76BC2 /* PlayerDurationLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDurationLogic.swift; sourceTree = "<group>"; };
 		921560C4248F979100229F1F /* TestController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestController.swift; sourceTree = "<group>"; };
 		921560C6248FA73900229F1F /* MusicController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusicController.swift; sourceTree = "<group>"; };
 		921FCDDD248ED13A000DB7FE /* AuthController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthController.swift; sourceTree = "<group>"; };
@@ -98,7 +98,6 @@
 			children = (
 				9206C9C32493A4820082565D /* TopTrackCell.swift */,
 				9206C9C42493A4820082565D /* TopTrackCell.xib */,
-				9206C9C72493A7100082565D /* TestCell.swift */,
 			);
 			path = TopTrackCell;
 			sourceTree = "<group>";
@@ -131,6 +130,35 @@
 			path = RecomendedFooter;
 			sourceTree = "<group>";
 		};
+		921186B0249B964D00D76BC2 /* CodableDataFiles */ = {
+			isa = PBXGroup;
+			children = (
+				92DF0741248AB636008C4353 /* AuthData.swift */,
+				9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */,
+				925573EA24923CA70057A2B5 /* UserInfoData.swift */,
+				925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */,
+				92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */,
+			);
+			path = CodableDataFiles;
+			sourceTree = "<group>";
+		};
+		921186B1249B969400D76BC2 /* ObjectModels */ = {
+			isa = PBXGroup;
+			children = (
+				92A7C1802497943C0040347F /* TopTracksSongModel.swift */,
+				92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */,
+			);
+			path = ObjectModels;
+			sourceTree = "<group>";
+		};
+		921186B2249B96C400D76BC2 /* LogicFiles */ = {
+			isa = PBXGroup;
+			children = (
+				921186B3249B96F300D76BC2 /* PlayerDurationLogic.swift */,
+			);
+			path = LogicFiles;
+			sourceTree = "<group>";
+		};
 		921560C1248F971100229F1F /* View */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,13 +172,9 @@
 		921560C2248F971A00229F1F /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				92DF0741248AB636008C4353 /* AuthData.swift */,
-				9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */,
-				925573EA24923CA70057A2B5 /* UserInfoData.swift */,
-				925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */,
-				92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */,
-				92A7C1802497943C0040347F /* TopTracksSongModel.swift */,
-				92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */,
+				921186B0249B964D00D76BC2 /* CodableDataFiles */,
+				921186B1249B969400D76BC2 /* ObjectModels */,
+				921186B2249B96C400D76BC2 /* LogicFiles */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -319,12 +343,12 @@
 				92A7C1812497943C0040347F /* TopTracksSongModel.swift in Sources */,
 				92DCD1892494DD540013A2C8 /* ListOfTopTracksData.swift in Sources */,
 				92A763662489485100147C69 /* SceneDelegate.swift in Sources */,
+				921186B4249B96F300D76BC2 /* PlayerDurationLogic.swift in Sources */,
 				9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */,
 				929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */,
 				921560C7248FA73900229F1F /* MusicController.swift in Sources */,
 				92D2C8942492884900579488 /* HeaderView.swift in Sources */,
 				9206C9C02493A4420082565D /* TopTrackController.swift in Sources */,
-				9206C9C82493A7100082565D /* TestCell.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -27,7 +27,6 @@ class TopTrackController: UIViewController {
         tableViewTopTrack.delegate = self
         tableViewTopTrack.dataSource = self
         
-        tableViewTopTrack.register(TestCell.self, forCellReuseIdentifier: "TestCell")
         tableViewTopTrack.register(UINib(nibName: "TopTrackCell", bundle: nil), forCellReuseIdentifier: "topTrackCell")
         
         settingForTableView()

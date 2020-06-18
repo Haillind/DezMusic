@@ -12,6 +12,7 @@ import AVKit
 class PlayerController: UIViewController {
     
     var player: AVPlayer!
+    let playerManage = PlayerDurationLogic()
     
     var artistName: String?
     
@@ -27,8 +28,6 @@ class PlayerController: UIViewController {
     var currentIndexPath = 0
     
     var timer : Timer?
-    var currentDuration = 0
-    var pausedDuration = 0
     
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var songLabel: UILabel!
@@ -62,7 +61,6 @@ class PlayerController: UIViewController {
     
     @IBAction func backBtn(_ sender: UIButton) {
         
-        
         dismiss(animated: true, completion: nil)
     }
     
@@ -72,14 +70,12 @@ class PlayerController: UIViewController {
             
             player!.play()
             playBtn.setImage(UIImage(named: "Pause"), for: .normal)
-            currentDuration = pausedDuration
+            
         } else {
             
             player!.pause()
             playBtn.setImage(UIImage(named: "Play"), for: .normal)
-            pausedDuration = currentDuration
         }
-        
     }
     
     @IBAction func previousTrackBtn(_ sender: UIButton) {
@@ -93,6 +89,11 @@ class PlayerController: UIViewController {
         currentIndexPath += 1
         play()
     }
+}
+
+
+
+extension PlayerController {
     
     func play() {
         guard let url = URL.init(string: "\(playlist[currentIndexPath].urlForSong)") else {return}
@@ -110,9 +111,6 @@ class PlayerController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(finishTrackPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
         
-        //NotificationCenter.default.addObserver(self, selector: #selector(drawSpinnerOfSong(_:)), name: NSNotification.Name.AVPlayerItemPlaybackStalled, object: playerItem)
-        
-        
     }
     
     @objc func finishTrackPlaying(_ notificate: NSNotification) {
@@ -121,45 +119,26 @@ class PlayerController: UIViewController {
         play()
     }
     
-//    @objc func drawSpinnerOfSong(_ notificate: NSNotification) {
-//        print("work")
-//    }
-    
     func drawSpinnerOfSong(totalDuration: Float) {
         
+        guard let safeTotalDuration = Int(playlist[currentIndexPath].totalDuration) else {return}
         progressOfSongLine.progress = 0.0
         self.currentDurationSongLabel.text = "0:00"
-        self.totalDurationSongLabel.text = "\(Int(totalDuration))"
+        self.totalDurationSongLabel.text = playerManage.setDurationLeft(totalDuration: safeTotalDuration, currentTimeSong: 0)
         
         let _ = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main) { (time) in
             
-            //let currentTimeSong = String(format: "%.1f", Float(CMTimeGetSeconds(time)))
-            //print(Int(Float(CMTimeGetSeconds(time))))
             let currentTimeSong = Float(CMTimeGetSeconds(time))
-            //let currentTimeForSpinner = String(format: "%.0f", currentTimeSong)
+            
             print(currentTimeSong)
+            
             self.progressOfSongLine.progress = Float(currentTimeSong) / totalDuration
             
+            self.totalDurationSongLabel.text = self.playerManage.setDurationLeft(totalDuration: Int(totalDuration), currentTimeSong: Int(currentTimeSong))
             
+            self.currentDurationSongLabel.text = self.playerManage.setCurrentDuration(currentTimeSong: Int(currentTimeSong))
             
-//            if Float(currentTimeSong) < Float(totalDuration) && Float(currentTimeSong + 1) != Float(totalDuration) {
-//                self.currentDuration += 1
-//                print(currentTimeSong)
-//                self.progressOfSongLine.progress = Float(currentTimeSong + 1) / Float(totalDuration)
-//            } else {
-//                self.killTimer()
-//                self.currentIndexPath += 1
-//                self.play()
-//
-//            }
         }
-        
     }
-    
-    
-    
-    
-    
-    
     
 }
