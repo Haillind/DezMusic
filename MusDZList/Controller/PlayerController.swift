@@ -75,6 +75,15 @@ class PlayerController: UIViewController {
         
         player = nil
         dismiss(animated: true, completion: nil)
+        
+//        let duration: TimeInterval = 0.75
+//        let damping: CGFloat = 1
+//        let velocity: CGFloat = 0.5
+//
+//        UIView.animate(withDuration: duration, delay: 0.5, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: .curveLinear, animations: {
+//            self.view.center.y = self.view.frame.height/2
+//        }, completion: nil)
+        
     }
     
     @IBAction func playBtn(_ sender: UIButton) {
@@ -137,7 +146,7 @@ extension PlayerController {
         
         guard let safeTotalDuration = Int(playlist[currentIndexPath].totalDuration) else {return}
         progressOfSongLine.progress = 0.0
-        self.currentDurationSongLabel.text = "0:00"
+        self.currentDurationSongLabel.text = "00:00"
         self.totalDurationSongLabel.text = playerManage.setDurationLeft(totalDuration: safeTotalDuration, currentTimeSong: 0)
         
         let _ = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main) { (time) in
@@ -156,3 +165,13 @@ extension PlayerController {
     }
     
 }
+
+
+// https://stackoverflow.com/questions/30881214/how-to-animate-an-object-vertically-with-touch-like-spotifys-music-player-does
+
+// https://stackoverflow.com/questions/35917608/spotify-like-dragging-bottom-player-in-swift
+
+// https://stackoverflow.com/questions/45786346/how-to-make-tab-bar-view-controller-animate-like-modal-transition-like-itunes
+
+
+// https://stackoverflow.com/questions/26758029/how-do-i-make-a-now-playing-bar-like-in-media-player-apps-in-ios-with-xcode

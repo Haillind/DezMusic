@@ -77,8 +77,6 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         playerVC.indexPath = indexPath.item
         //playerVC.player = nil
         
-        
-        
         present(playerVC, animated: true, completion: nil)
         
     }
