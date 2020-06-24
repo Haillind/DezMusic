@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import AVKit
 
 class TopTrackController: UIViewController {
 
@@ -38,6 +39,8 @@ class TopTrackController: UIViewController {
                 }
             }
         }
+        
+        
     }
     
     func preSettingController() {
@@ -75,8 +78,8 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         playerVC.artistName = topTracksInfo[indexPath.item].artistName
         playerVC.playlistOptional = topTracksInfo
         playerVC.indexPath = indexPath.item
-        //playerVC.player = nil
         
+                
         present(playerVC, animated: true, completion: nil)
         
     }

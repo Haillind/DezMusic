@@ -9,9 +9,18 @@
 import UIKit
 import AVKit
 
+class PlayerManager {
+
+    var player: AVPlayer?
+    
+    static let shared = PlayerManager()
+
+    private init() {}
+}
+
 class PlayerController: UIViewController {
     
-    var player: AVPlayer!
+    //var player: AVPlayer!
     let playerManage = PlayerDurationLogic()
     
     var artistName: String?
@@ -58,6 +67,8 @@ class PlayerController: UIViewController {
         
         currentIndexPath = indexPath
         
+        PlayerManager.shared.player = nil
+        
         play()
     }
     
@@ -73,7 +84,8 @@ class PlayerController: UIViewController {
     
     @IBAction func backBtn(_ sender: UIButton) {
         
-        player = nil
+        //player = nil
+        
         dismiss(animated: true, completion: nil)
         
 //        let duration: TimeInterval = 0.75
@@ -88,26 +100,28 @@ class PlayerController: UIViewController {
     
     @IBAction func playBtn(_ sender: UIButton) {
         
-        if player?.rate == 0 {
+        if PlayerManager.shared.player?.rate == 0 {
             
-            player!.play()
+            PlayerManager.shared.player!.play()
             playBtn.setImage(UIImage(named: "Pause"), for: .normal)
             
         } else {
             
-            player!.pause()
+            PlayerManager.shared.player!.pause()
             playBtn.setImage(UIImage(named: "Play"), for: .normal)
         }
     }
     
     @IBAction func previousTrackBtn(_ sender: UIButton) {
         
+        PlayerManager.shared.player = nil
         currentIndexPath -= 1
         play()
     }
     
     @IBAction func nextTrackBtn(_ sender: UIButton) {
         
+        PlayerManager.shared.player = nil
         currentIndexPath += 1
         play()
     }
@@ -119,11 +133,26 @@ extension PlayerController {
     
     func play() {
         
+//        do {
+//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+//            print("Playback OK")
+//            try AVAudioSession.sharedInstance().setActive(true)
+//            print("Session is Active")
+//        } catch {
+//            print(error)
+//        }
+        
         guard let url = URL.init(string: "\(playlist[currentIndexPath].urlForSong)") else {return}
         let playerItem = AVPlayerItem(url: url)
-        player = AVPlayer.init(playerItem: playerItem)
         
-        player.rate = 1
+        if PlayerManager.shared.player == nil {
+            PlayerManager.shared.player = AVPlayer.init(playerItem: playerItem)
+        } else {
+            PlayerManager.shared.player?.replaceCurrentItem(with: playerItem)
+            PlayerManager.shared.player?.play()
+        }
+        
+        PlayerManager.shared.player?.rate = 1
         playBtn.setImage(UIImage(named: "Pause"), for: .normal)
         setPlayerScreenInfo()
         
@@ -138,6 +167,7 @@ extension PlayerController {
     
     @objc func finishTrackPlaying(_ notificate: NSNotification) {
         
+        PlayerManager.shared.player = nil
         currentIndexPath += 1
         play()
     }
@@ -149,7 +179,7 @@ extension PlayerController {
         self.currentDurationSongLabel.text = "00:00"
         self.totalDurationSongLabel.text = playerManage.setDurationLeft(totalDuration: safeTotalDuration, currentTimeSong: 0)
         
-        let _ = player.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main) { (time) in
+        let _ = PlayerManager.shared.player?.addPeriodicTimeObserver(forInterval: CMTime(seconds: 1.0, preferredTimescale: CMTimeScale(NSEC_PER_SEC)), queue: DispatchQueue.main) { (time) in
             
             let currentTimeSong = Float(CMTimeGetSeconds(time))
             
@@ -160,6 +190,7 @@ extension PlayerController {
             self.totalDurationSongLabel.text = self.playerManage.setDurationLeft(totalDuration: Int(totalDuration), currentTimeSong: Int(currentTimeSong))
             
             self.currentDurationSongLabel.text = self.playerManage.setCurrentDuration(currentTimeSong: Int(currentTimeSong))
+            
             
         }
     }

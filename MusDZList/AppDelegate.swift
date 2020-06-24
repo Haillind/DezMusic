@@ -37,6 +37,16 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 //        // This will enable to show nowplaying controls on lock screen
 //        application.beginReceivingRemoteControlEvents()
         
+        
+//        do {
+//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
+//            print("Playback OK")
+//            try AVAudioSession.sharedInstance().setActive(true)
+//            print("Session is Active")
+//        } catch {
+//            print(error)
+//        }
+        
         return true
     }
 
