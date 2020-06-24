@@ -220,15 +220,19 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
         
         if collectionView == collectionViewFavorArtists {
             
-            let storyboard = UIStoryboard(name: "TopTrack", bundle: nil)
-            let topTrackVC = storyboard.instantiateViewController(withIdentifier: "TopTrack") as! TopTrackController
-            
-            topTrackVC.nameForTitle = userFavoriteArtistModels[indexPath.item].name
-            topTrackVC.idArtistsForQuery = userFavoriteArtistModels[indexPath.item].id
-            //topTrackVC.linkToTracklist = favoriteArtistResults[indexPath.item].tracklist
-            //topTrackVC.modalPresentationStyle = .fullScreen
-            present(topTrackVC, animated: true, completion: nil)
+            performSegue(withIdentifier: "topTrackSegue", sender: self)
         }
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
+        let topTrackVC = segue.destination as! TopTrackController
+        
+        if let indexPath = collectionViewFavorArtists.indexPathsForSelectedItems?.first {
+            
+                topTrackVC.nameForTitle = userFavoriteArtistModels[indexPath.item].name
+                topTrackVC.idArtistsForQuery = userFavoriteArtistModels[indexPath.item].id
+            }
     }
     
     //MARK: - Collection Layout

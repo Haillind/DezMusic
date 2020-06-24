@@ -8,11 +8,11 @@
 
 import UIKit
 import AVKit
+import LNPopupController
 
 class TopTrackController: UIViewController {
 
     @IBOutlet weak var tableViewTopTrack: UITableView!
-    @IBOutlet weak var nameNavigationLabel: UILabel!
     
     var nameForTitle: String?
     var idArtistsForQuery: Int?
@@ -45,7 +45,8 @@ class TopTrackController: UIViewController {
     
     func preSettingController() {
         guard let name = nameForTitle else {return}
-        nameNavigationLabel.text = name
+        navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = "\(name)"
     }
 
 }
@@ -78,9 +79,9 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         playerVC.artistName = topTracksInfo[indexPath.item].artistName
         playerVC.playlistOptional = topTracksInfo
         playerVC.indexPath = indexPath.item
-        
                 
-        present(playerVC, animated: true, completion: nil)
+        //present(playerVC, animated: true, completion: nil)
+        tabBarController?.presentPopupBar(withContentViewController: playerVC, openPopup: true, animated: true,  completion: nil)
         
     }
     

@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		9206C9BE2493A4290082565D /* TopTrack.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 9206C9BD2493A4290082565D /* TopTrack.storyboard */; };
 		9206C9C02493A4420082565D /* TopTrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9BF2493A4420082565D /* TopTrackController.swift */; };
 		9206C9C52493A4820082565D /* TopTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9C32493A4820082565D /* TopTrackCell.swift */; };
 		9206C9C62493A4820082565D /* TopTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9206C9C42493A4820082565D /* TopTrackCell.xib */; };
@@ -35,12 +34,27 @@
 		92D2C8952492884900579488 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D2C8932492884900579488 /* HeaderView.xib */; };
 		92DCD1892494DD540013A2C8 /* ListOfTopTracksData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */; };
 		92DF0742248AB636008C4353 /* AuthData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DF0741248AB636008C4353 /* AuthData.swift */; };
+		92E47F6424A3CEF400E79774 /* LNPopupController.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 92E47F6324A3CEF400E79774 /* LNPopupController.framework */; };
+		92E47F6524A3CEF400E79774 /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92E47F6324A3CEF400E79774 /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92E4A931249246E500A212BC /* RecomendedPlaylistsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */; };
 		92E4A932249246E500A212BC /* RecomendedPlaylistsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXCopyFilesBuildPhase section */
+		92E47F6624A3CEF400E79774 /* Embed Frameworks */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "";
+			dstSubfolderSpec = 10;
+			files = (
+				92E47F6524A3CEF400E79774 /* LNPopupController.framework in Embed Frameworks */,
+			);
+			name = "Embed Frameworks";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
 /* Begin PBXFileReference section */
-		9206C9BD2493A4290082565D /* TopTrack.storyboard */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; path = TopTrack.storyboard; sourceTree = "<group>"; };
 		9206C9BF2493A4420082565D /* TopTrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackController.swift; sourceTree = "<group>"; };
 		9206C9C32493A4820082565D /* TopTrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackCell.swift; sourceTree = "<group>"; };
 		9206C9C42493A4820082565D /* TopTrackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopTrackCell.xib; sourceTree = "<group>"; };
@@ -70,6 +84,7 @@
 		92D2C8932492884900579488 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfTopTracksData.swift; sourceTree = "<group>"; };
 		92DF0741248AB636008C4353 /* AuthData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthData.swift; sourceTree = "<group>"; };
+		92E47F6324A3CEF400E79774 /* LNPopupController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LNPopupController.framework; path = Carthage/Build/iOS/LNPopupController.framework; sourceTree = "<group>"; };
 		92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendedPlaylistsCell.swift; sourceTree = "<group>"; };
 		92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecomendedPlaylistsCell.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -79,6 +94,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				92E47F6424A3CEF400E79774 /* LNPopupController.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -164,7 +180,6 @@
 			children = (
 				92A763692489485100147C69 /* Main.storyboard */,
 				9234AAFC2490EB59006E37A8 /* Player.storyboard */,
-				9206C9BD2493A4290082565D /* TopTrack.storyboard */,
 			);
 			path = View;
 			sourceTree = "<group>";
@@ -205,6 +220,7 @@
 			children = (
 				92A763622489485100147C69 /* MusDZList */,
 				92A763612489485100147C69 /* Products */,
+				92E47F6224A3CEF400E79774 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -231,6 +247,14 @@
 				92A763712489485200147C69 /* Info.plist */,
 			);
 			path = MusDZList;
+			sourceTree = "<group>";
+		};
+		92E47F6224A3CEF400E79774 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				92E47F6324A3CEF400E79774 /* LNPopupController.framework */,
+			);
+			name = Frameworks;
 			sourceTree = "<group>";
 		};
 		92E4A92D249246AE00A212BC /* FavoriteArtistsCell */ = {
@@ -261,6 +285,8 @@
 				92A7635C2489485100147C69 /* Sources */,
 				92A7635D2489485100147C69 /* Frameworks */,
 				92A7635E2489485100147C69 /* Resources */,
+				92E47F6624A3CEF400E79774 /* Embed Frameworks */,
+				92E47F6724A3CEFB00E79774 /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -313,7 +339,6 @@
 				9206C9C62493A4820082565D /* TopTrackCell.xib in Resources */,
 				921014D02492975A00757D79 /* FooterView.xib in Resources */,
 				92A7636D2489485200147C69 /* Assets.xcassets in Resources */,
-				9206C9BE2493A4290082565D /* TopTrack.storyboard in Resources */,
 				9234AAFD2490EB59006E37A8 /* Player.storyboard in Resources */,
 				92E4A932249246E500A212BC /* RecomendedPlaylistsCell.xib in Resources */,
 				929790A1248FE72200006CB1 /* FavoriteArtistsCell.xib in Resources */,
@@ -323,6 +348,27 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		92E47F6724A3CEFB00E79774 /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/LNPopupController.framework",
+			);
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "# Type a script or drag a script file from your workspace to insert its path.\n/usr/local/bin/carthage copy-frameworks\n";
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		92A7635C2489485100147C69 /* Sources */ = {
@@ -494,6 +540,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SRH5R2XNGW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MusDZList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -512,6 +562,10 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = SRH5R2XNGW;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
+				);
 				INFOPLIST_FILE = MusDZList/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",

@@ -8,6 +8,7 @@
 
 import UIKit
 import AVKit
+import LNPopupController
 
 class PlayerManager {
 
@@ -70,6 +71,8 @@ class PlayerController: UIViewController {
         PlayerManager.shared.player = nil
         
         play()
+        
+        
     }
     
     func setPlayerScreenInfo() {
@@ -80,6 +83,16 @@ class PlayerController: UIViewController {
         
         albumImage.layer.cornerRadius = albumImage.frame.size.height / 16
         albumImage.clipsToBounds = true
+    }
+    
+    func setPopupInfo() {
+        guard let artistName = artistName else {return}
+        self.popupItem.title = artistName
+        self.popupItem.subtitle = playlist[currentIndexPath].nameOfSong
+        self.popupItem.progress = 0.54
+        
+        navigationController?.popupBar.progressViewStyle = .bottom
+        navigationController?.popupContentView.popupCloseButtonStyle = .round
     }
     
     @IBAction func backBtn(_ sender: UIButton) {
@@ -133,15 +146,6 @@ extension PlayerController {
     
     func play() {
         
-//        do {
-//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
-//            print("Playback OK")
-//            try AVAudioSession.sharedInstance().setActive(true)
-//            print("Session is Active")
-//        } catch {
-//            print(error)
-//        }
-        
         guard let url = URL.init(string: "\(playlist[currentIndexPath].urlForSong)") else {return}
         let playerItem = AVPlayerItem(url: url)
         
@@ -155,6 +159,7 @@ extension PlayerController {
         PlayerManager.shared.player?.rate = 1
         playBtn.setImage(UIImage(named: "Pause"), for: .normal)
         setPlayerScreenInfo()
+        setPopupInfo()
         
         guard let totalDuration = Int(playlist[currentIndexPath].totalDuration) else {return}
         drawSpinnerOfSong(totalDuration: Float(totalDuration))
@@ -162,7 +167,6 @@ extension PlayerController {
         print("Current Index os Song = \(currentIndexPath)")
         
         NotificationCenter.default.addObserver(self, selector: #selector(finishTrackPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
-        
     }
     
     @objc func finishTrackPlaying(_ notificate: NSNotification) {
@@ -191,10 +195,8 @@ extension PlayerController {
             
             self.currentDurationSongLabel.text = self.playerManage.setCurrentDuration(currentTimeSong: Int(currentTimeSong))
             
-            
         }
     }
-    
 }
 
 
