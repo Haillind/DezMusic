@@ -23,13 +23,16 @@
                                 </constraints>
                             </imageView>
                             <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="NAX-qR-6t7">
-                                <rect key="frame" x="54" y="650" width="306" height="37.5"/>
+                                <rect key="frame" x="54" y="650" width="306" height="40.5"/>
                                 <subviews>
-                                    <progressView opaque="NO" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="sHr-nF-MSI">
-                                        <rect key="frame" x="0.0" y="0.0" width="306" height="2"/>
-                                    </progressView>
+                                    <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="Ugp-Pk-nLc">
+                                        <rect key="frame" x="-2" y="0.0" width="310" height="6"/>
+                                        <connections>
+                                            <action selector="seekCurrentTrack:" destination="aBk-e0-5HZ" eventType="valueChanged" id="FYY-1J-5v0"/>
+                                        </connections>
+                                    </slider>
                                     <stackView opaque="NO" contentMode="scaleToFill" spacing="212" translatesAutoresizingMaskIntoConstraints="NO" id="gZH-JK-UYx">
-                                        <rect key="frame" x="0.0" y="17" width="306" height="20.5"/>
+                                        <rect key="frame" x="0.0" y="20" width="306" height="20.5"/>
                                         <subviews>
                                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="252" verticalHuggingPriority="251" text="--/--" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="5KX-Zx-GiW">
                                                 <rect key="frame" x="0.0" y="0.0" width="36" height="20.5"/>
@@ -48,24 +51,24 @@
                                 </subviews>
                             </stackView>
                             <stackView opaque="NO" contentMode="scaleToFill" spacing="12" translatesAutoresizingMaskIntoConstraints="NO" id="dTK-Td-mBd">
-                                <rect key="frame" x="92" y="766" width="281" height="25"/>
+                                <rect key="frame" x="92" y="769" width="281" height="22"/>
                                 <subviews>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="gpX-3K-9AH">
-                                        <rect key="frame" x="0.0" y="0.0" width="89" height="25"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="89" height="22"/>
                                         <state key="normal" title="Button" image="Rewind"/>
                                         <connections>
                                             <action selector="previousTrackBtn:" destination="aBk-e0-5HZ" eventType="touchUpInside" id="x1s-ki-n7e"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="GK4-au-h3y">
-                                        <rect key="frame" x="101" y="0.0" width="79" height="25"/>
+                                        <rect key="frame" x="101" y="0.0" width="79" height="22"/>
                                         <state key="normal" title="Button" image="Play"/>
                                         <connections>
                                             <action selector="playBtn:" destination="aBk-e0-5HZ" eventType="touchUpInside" id="epR-x7-KJk"/>
                                         </connections>
                                     </button>
                                     <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uMH-kX-n9H">
-                                        <rect key="frame" x="192" y="0.0" width="89" height="25"/>
+                                        <rect key="frame" x="192" y="0.0" width="89" height="22"/>
                                         <state key="normal" title="Button" image="Forward"/>
                                         <connections>
                                             <action selector="nextTrackBtn:" destination="aBk-e0-5HZ" eventType="touchUpInside" id="ANC-rA-wGR"/>
@@ -90,14 +93,6 @@
                                     </label>
                                 </subviews>
                             </stackView>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ykN-sN-xmN">
-                                <rect key="frame" x="20" y="44" width="40" height="40"/>
-                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" image="BackBlack"/>
-                                <connections>
-                                    <action selector="backBtn:" destination="aBk-e0-5HZ" eventType="touchUpInside" id="8LO-75-DPb"/>
-                                </connections>
-                            </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="wMG-oY-RH1">
                                 <rect key="frame" x="100" y="54" width="214" height="20.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
@@ -126,6 +121,7 @@
                             <constraint firstItem="n5g-fo-nud" firstAttribute="trailing" secondItem="pBg-pI-YXb" secondAttribute="trailing" constant="54" id="ouy-eS-qdp"/>
                             <constraint firstItem="dTK-Td-mBd" firstAttribute="top" secondItem="NAX-qR-6t7" secondAttribute="bottom" constant="78.5" id="tp3-k1-3nk"/>
                             <constraint firstItem="NAX-qR-6t7" firstAttribute="top" secondItem="pBg-pI-YXb" secondAttribute="bottom" constant="64" id="y1e-JO-t1x"/>
+                            <constraint firstItem="NAX-qR-6t7" firstAttribute="top" secondItem="1Wd-NC-h1M" secondAttribute="top" constant="650" id="yQa-in-vJF"/>
                             <constraint firstItem="n5g-fo-nud" firstAttribute="trailing" secondItem="wMG-oY-RH1" secondAttribute="trailing" constant="100" id="zdi-FV-90b"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="n5g-fo-nud"/>
@@ -135,7 +131,7 @@
                         <outlet property="artistNameLabel" destination="wMG-oY-RH1" id="e7c-Ut-zD0"/>
                         <outlet property="currentDurationSongLabel" destination="5KX-Zx-GiW" id="u3v-T5-pqz"/>
                         <outlet property="playBtn" destination="GK4-au-h3y" id="KOl-yY-UAE"/>
-                        <outlet property="progressOfSongLine" destination="sHr-nF-MSI" id="Nfp-VG-nUn"/>
+                        <outlet property="progressOfSongLine" destination="Ugp-Pk-nLc" id="xrJ-yP-rR0"/>
                         <outlet property="songContributorsLabel" destination="qr7-lI-fjl" id="6OP-z1-XXl"/>
                         <outlet property="songLabel" destination="ZmO-YY-kIi" id="Q9U-Dg-Fzi"/>
                         <outlet property="totalDurationSongLabel" destination="L0i-zC-M2S" id="Hek-6g-lBM"/>
@@ -147,7 +143,6 @@
         </scene>
     </scenes>
     <resources>
-        <image name="BackBlack" width="13" height="21"/>
         <image name="Forward" width="35" height="20"/>
         <image name="Play" width="25" height="28"/>
         <image name="Rewind" width="35" height="20"/>

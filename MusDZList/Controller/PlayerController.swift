@@ -21,7 +21,6 @@ class PlayerManager {
 
 class PlayerController: UIViewController {
     
-    //var player: AVPlayer!
     let playerManage = PlayerDurationLogic()
     
     var artistName: String?
@@ -48,18 +47,27 @@ class PlayerController: UIViewController {
         }
     }
     
+    var buttons = [UIBarButtonItem]()
+    
     @IBOutlet weak var artistNameLabel: UILabel!
     @IBOutlet weak var songLabel: UILabel!
     @IBOutlet weak var songContributorsLabel: UILabel!
     @IBOutlet weak var currentDurationSongLabel: UILabel!
     @IBOutlet weak var totalDurationSongLabel: UILabel!
-    @IBOutlet weak var progressOfSongLine: UIProgressView!
+    @IBOutlet weak var progressOfSongLine: UISlider!
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var albumImage: UIImageView!
     
     override func viewDidLoad() {
         
         super.viewDidLoad()
+        
+        let popupPlayBtn = UIBarButtonItem(image: UIImage(named: "Pause"),
+                                 style: .plain,
+                                 target: self,
+                                 action: #selector(actionForPopupPlayBtn))
+        popupPlayBtn.tintColor = .black
+        buttons.append(popupPlayBtn)
         
         guard let artistName = artistName else {return}
         guard let indexPath = indexPath else {return}
@@ -75,6 +83,20 @@ class PlayerController: UIViewController {
         
     }
     
+    @objc func actionForPopupPlayBtn() {
+        
+        if PlayerManager.shared.player?.rate == 0 {
+            
+            PlayerManager.shared.player!.play()
+            buttons[0].image = UIImage(named: "Pause")
+            
+        } else {
+            
+            PlayerManager.shared.player!.pause()
+            buttons[0].image = UIImage(named: "Play")
+        }
+    }
+    
     func setPlayerScreenInfo() {
         
         songLabel.text = playlist[currentIndexPath].nameOfSong
@@ -85,30 +107,11 @@ class PlayerController: UIViewController {
         albumImage.clipsToBounds = true
     }
     
-    func setPopupInfo() {
-        guard let artistName = artistName else {return}
-        self.popupItem.title = artistName
-        self.popupItem.subtitle = playlist[currentIndexPath].nameOfSong
-        self.popupItem.progress = 0.54
-        
-        navigationController?.popupBar.progressViewStyle = .bottom
-        navigationController?.popupContentView.popupCloseButtonStyle = .round
-    }
-    
-    @IBAction func backBtn(_ sender: UIButton) {
-        
-        //player = nil
-        
-        dismiss(animated: true, completion: nil)
-        
-//        let duration: TimeInterval = 0.75
-//        let damping: CGFloat = 1
-//        let velocity: CGFloat = 0.5
-//
-//        UIView.animate(withDuration: duration, delay: 0.5, usingSpringWithDamping: damping, initialSpringVelocity: velocity, options: .curveLinear, animations: {
-//            self.view.center.y = self.view.frame.height/2
-//        }, completion: nil)
-        
+    func setPopupScreen() {
+        popupItem.title = playlist[currentIndexPath].nameOfSong
+        popupItem.subtitle = playlist[currentIndexPath].nameOFContributors
+        popupItem.image = UIImage(data: playlist[currentIndexPath].albumImage)
+        popupItem.rightBarButtonItems = buttons
     }
     
     @IBAction func playBtn(_ sender: UIButton) {
@@ -138,6 +141,15 @@ class PlayerController: UIViewController {
         currentIndexPath += 1
         play()
     }
+    
+    @IBAction func seekCurrentTrack(_ sender: UISlider) {
+        
+        print(sender.value)
+        let currentDuration: CMTime = (PlayerManager.shared.player?.currentItem?.asset.duration)!
+        let newCurrentTime: TimeInterval = Double(sender.value) * CMTimeGetSeconds(currentDuration)
+        let seekToTime: CMTime = CMTimeMakeWithSeconds(Float64(Float(newCurrentTime)), preferredTimescale: 30)
+        PlayerManager.shared.player?.seek(to: seekToTime)
+    }
 }
 
 
@@ -159,7 +171,7 @@ extension PlayerController {
         PlayerManager.shared.player?.rate = 1
         playBtn.setImage(UIImage(named: "Pause"), for: .normal)
         setPlayerScreenInfo()
-        setPopupInfo()
+        setPopupScreen()
         
         guard let totalDuration = Int(playlist[currentIndexPath].totalDuration) else {return}
         drawSpinnerOfSong(totalDuration: Float(totalDuration))
@@ -179,7 +191,11 @@ extension PlayerController {
     func drawSpinnerOfSong(totalDuration: Float) {
         
         guard let safeTotalDuration = Int(playlist[currentIndexPath].totalDuration) else {return}
-        progressOfSongLine.progress = 0.0
+       
+        progressOfSongLine.minimumValue = 0.0
+        progressOfSongLine.value = 0.0
+        //progressOfSongLine.maximumValue = Float(safeTotalDuration)
+        
         self.currentDurationSongLabel.text = "00:00"
         self.totalDurationSongLabel.text = playerManage.setDurationLeft(totalDuration: safeTotalDuration, currentTimeSong: 0)
         
@@ -189,7 +205,9 @@ extension PlayerController {
             
             print(currentTimeSong)
             
-            self.progressOfSongLine.progress = Float(currentTimeSong) / totalDuration
+            //self.progressOfSongLine.progress = Float(currentTimeSong) / totalDuration
+            self.progressOfSongLine.value = Float(currentTimeSong) / totalDuration
+            self.popupItem.progress = Float(currentTimeSong) / totalDuration
             
             self.totalDurationSongLabel.text = self.playerManage.setDurationLeft(totalDuration: Int(totalDuration), currentTimeSong: Int(currentTimeSong))
             
@@ -197,6 +215,8 @@ extension PlayerController {
             
         }
     }
+    
+    
 }
 
 

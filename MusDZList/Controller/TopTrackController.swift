@@ -81,8 +81,11 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         playerVC.indexPath = indexPath.item
                 
         //present(playerVC, animated: true, completion: nil)
-        tabBarController?.presentPopupBar(withContentViewController: playerVC, openPopup: true, animated: true,  completion: nil)
         
+        tabBarController?.popupBar.progressViewStyle = .top
+        tabBarController?.popupInteractionStyle = .drag
+        tabBarController?.popupContentView.popupCloseButtonStyle = .round
+        tabBarController?.presentPopupBar(withContentViewController: playerVC, openPopup: true, animated: true,  completion: nil)
     }
     
     func settingForTableView() {
