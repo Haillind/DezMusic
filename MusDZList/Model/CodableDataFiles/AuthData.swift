@@ -10,6 +10,10 @@ import Foundation
 
 struct AuthData: Codable {
     
-    let access_token: String?
+    let accessToken: String?
+    
+    enum CodingKeys: String, CodingKey {
+        case accessToken = "access_token"
+    }
     
 }

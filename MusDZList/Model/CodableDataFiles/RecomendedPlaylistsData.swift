@@ -15,7 +15,15 @@ struct RecomendedPlaylistsData: Codable {
 struct RecomendedPlaylistInfo: Codable {
     let id: Int
     let title: String
-    let nb_tracks: Int
-    let picture_big: URL
+    let numberOfTracks: Int
+    let pictureBig: URL
     let tracklist: URL
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case title
+        case numberOfTracks = "nb_tracks"
+        case pictureBig = "picture_big"
+        case tracklist
+    }
 }

@@ -84,8 +84,8 @@ extension AuthController: WKNavigationDelegate, WKUIDelegate {
             do {
                 
                 let jsonData = try JSONDecoder().decode(AuthData.self, from: data)
-                self.defaults.set(jsonData.access_token, forKey: "accessToken")
-                self.getUserInfo(accessToken: jsonData.access_token){
+                self.defaults.set(jsonData.accessToken, forKey: "accessToken")
+                self.getUserInfo(accessToken: jsonData.accessToken){
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "goToTabBar", sender: self)
                     }

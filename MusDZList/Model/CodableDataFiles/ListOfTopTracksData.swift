@@ -26,7 +26,12 @@ struct ContributorsOfTrack: Codable {
 
 struct AlbumOFTrackInTopList: Codable {
     let title: String
-    let cover_big: URL
+    let coverBig: URL
+    
+    enum CodingKeys: String, CodingKey {
+        case title
+        case coverBig = "cover_big"
+    }
 }
 
 struct ArtistInfo: Codable {

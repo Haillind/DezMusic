@@ -247,11 +247,11 @@
             </objects>
             <point key="canvasLocation" x="1155" y="113"/>
         </scene>
-        <!--Item 1-->
+        <!--Music-->
         <scene sceneID="XbV-lo-UZ8">
             <objects>
-                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="xNw-YL-Tfp" sceneMemberID="viewController">
-                    <tabBarItem key="tabBarItem" title="Item 1" id="f16-WS-Bkg"/>
+                <navigationController storyboardIdentifier="Music" automaticallyAdjustsScrollViewInsets="NO" id="xNw-YL-Tfp" sceneMemberID="viewController">
+                    <tabBarItem key="tabBarItem" title="Music" image="music.note.list" catalog="system" id="f16-WS-Bkg"/>
                     <toolbarItems/>
                     <navigationBar key="navigationBar" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" id="b1h-qu-IYc">
                         <rect key="frame" x="0.0" y="44" width="414" height="44"/>
@@ -267,7 +267,9 @@
             <point key="canvasLocation" x="2073.913043478261" y="-318.08035714285711"/>
         </scene>
     </scenes>
+    <color key="tintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
     <resources>
         <image name="authPicture" width="480" height="600"/>
+        <image name="music.note.list" catalog="system" width="128" height="113"/>
     </resources>
 </document>

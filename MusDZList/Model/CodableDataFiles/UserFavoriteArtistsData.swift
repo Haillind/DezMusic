@@ -17,6 +17,13 @@ struct FavoritesArtistsData: Codable {
     
     let id: Int
     let name: String
-    let picture_big: URL
+    let pictureBig: URL
     let tracklist: URL
+    
+    enum CodingKeys: String, CodingKey {
+        case id
+        case name
+        case pictureBig = "picture_big"
+        case tracklist
+    }
 }

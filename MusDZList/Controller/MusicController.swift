@@ -28,6 +28,10 @@ class MusicController: UIViewController {
     @IBOutlet weak var collectionViewRecomendedPlaylists: UICollectionView!
     @IBOutlet weak var musicLabel: UILabel!
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = true
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -103,7 +107,7 @@ class MusicController: UIViewController {
         
         for artist in userFavoriteArtistData {
             
-            let urlForImage = artist.picture_big
+            let urlForImage = artist.pictureBig
             
             URLSession.shared.dataTask(with: urlForImage) { (data, _, _) in
                 
@@ -149,7 +153,7 @@ class MusicController: UIViewController {
         
         for playlistInfo in recomendedPlaylistResults {
             
-            URLSession.shared.dataTask(with: playlistInfo.picture_big) { (data, _, error) in
+            URLSession.shared.dataTask(with: playlistInfo.pictureBig) { (data, _, error) in
                 
                 guard let data = data else {return}
                 guard let image = UIImage(data: data) else {return}
@@ -161,7 +165,7 @@ class MusicController: UIViewController {
         
         for playlistInfo in fourRecomendedPlaylistResults {
             
-            URLSession.shared.dataTask(with: playlistInfo.picture_big) { (data, _, error) in
+            URLSession.shared.dataTask(with: playlistInfo.pictureBig) { (data, _, error) in
                 
                 guard let data = data else {return}
                 guard let image = UIImage(data: data) else {return}
@@ -208,12 +212,10 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
             
             cell.recomendedPlaylistImage.image = fourRecomendedPlaylistImages[indexPath.item]
             cell.nameLabel.text = fourRecomendedPlaylistResults[indexPath.item].title
-            cell.countOftrackLabel.text = String(fourRecomendedPlaylistResults[indexPath.item].id)
+            cell.countOftrackLabel.text = " \(String(fourRecomendedPlaylistResults[indexPath.item].numberOfTracks)) tracks"
 
             return cell
-           
         }
-        
     }
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
@@ -279,7 +281,6 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
             return footerView
 
         default:
-            
             assert(false, "Unexpected element kind")
         }
     }

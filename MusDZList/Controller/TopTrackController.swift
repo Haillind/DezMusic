@@ -20,6 +20,10 @@ class TopTrackController: UIViewController {
     var arrayOfDataTracks = [TopTracksList]()
     var topTracksInfo = [TopTracksSongModel]()
     
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -136,7 +140,7 @@ extension TopTrackController {
             
             // URL Sesion
             
-            let urlForImage = track.album.cover_big
+            let urlForImage = track.album.coverBig
             
             URLSession.shared.dataTask(with: urlForImage) { (data, _, error) in
                 
@@ -150,7 +154,4 @@ extension TopTrackController {
             }.resume()
         }
     }
-    
-    
-    
 }

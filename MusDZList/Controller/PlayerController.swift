@@ -63,9 +63,9 @@ class PlayerController: UIViewController {
         super.viewDidLoad()
         
         let popupPlayBtn = UIBarButtonItem(image: UIImage(named: "Pause"),
-                                 style: .plain,
-                                 target: self,
-                                 action: #selector(actionForPopupPlayBtn))
+                                           style: .plain,
+                                           target: self,
+                                           action: #selector(actionForPopupPlayBtn))
         popupPlayBtn.tintColor = .black
         buttons.append(popupPlayBtn)
         
@@ -79,8 +79,6 @@ class PlayerController: UIViewController {
         PlayerManager.shared.player = nil
         
         play()
-        
-        
     }
     
     @objc func actionForPopupPlayBtn() {
@@ -101,8 +99,8 @@ class PlayerController: UIViewController {
         
         songLabel.text = playlist[currentIndexPath].nameOfSong
         songContributorsLabel.text = playlist[currentIndexPath].nameOFContributors
-        albumImage.image = UIImage(data: playlist[currentIndexPath].albumImage)
         
+        albumImage.image = UIImage(data: playlist[currentIndexPath].albumImage)
         albumImage.layer.cornerRadius = albumImage.frame.size.height / 16
         albumImage.clipsToBounds = true
     }
@@ -179,6 +177,8 @@ extension PlayerController {
         print("Current Index os Song = \(currentIndexPath)")
         
         NotificationCenter.default.addObserver(self, selector: #selector(finishTrackPlaying(_:)), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: playerItem)
+        
+        progressOfSongLine.addTarget(self, action: #selector(onSliderValChanged(slider:event:)), for: .valueChanged)
     }
     
     @objc func finishTrackPlaying(_ notificate: NSNotification) {
@@ -188,13 +188,26 @@ extension PlayerController {
         play()
     }
     
+    @objc func onSliderValChanged(slider: UISlider, event: UIEvent) {
+        if let touchEvent = event.allTouches?.first {
+            switch touchEvent.phase {
+                
+            case .began: PlayerManager.shared.player?.pause()
+            case .moved: break
+            case .ended: PlayerManager.shared.player?.play()
+                
+            default:
+                break
+            }
+        }
+    }
+    
     func drawSpinnerOfSong(totalDuration: Float) {
         
         guard let safeTotalDuration = Int(playlist[currentIndexPath].totalDuration) else {return}
        
         progressOfSongLine.minimumValue = 0.0
         progressOfSongLine.value = 0.0
-        //progressOfSongLine.maximumValue = Float(safeTotalDuration)
         
         self.currentDurationSongLabel.text = "00:00"
         self.totalDurationSongLabel.text = playerManage.setDurationLeft(totalDuration: safeTotalDuration, currentTimeSong: 0)
@@ -205,18 +218,14 @@ extension PlayerController {
             
             print(currentTimeSong)
             
-            //self.progressOfSongLine.progress = Float(currentTimeSong) / totalDuration
             self.progressOfSongLine.value = Float(currentTimeSong) / totalDuration
             self.popupItem.progress = Float(currentTimeSong) / totalDuration
             
             self.totalDurationSongLabel.text = self.playerManage.setDurationLeft(totalDuration: Int(totalDuration), currentTimeSong: Int(currentTimeSong))
             
             self.currentDurationSongLabel.text = self.playerManage.setCurrentDuration(currentTimeSong: Int(currentTimeSong))
-            
         }
     }
-    
-    
 }
 
 
