@@ -8,6 +8,12 @@
 
 import UIKit
 
+class TrackIsLiked {
+    var userTrackIsLiked: Set<Int>?
+    static let shared = TrackIsLiked()
+    private init() {}
+}
+
 class MusicController: UIViewController {
     
     var accessToken: String?
@@ -66,6 +72,8 @@ class MusicController: UIViewController {
                 }
             }
         }
+        
+        singletonForCheckFavoriteTracksIsLiked()
         
     }
     
@@ -306,4 +314,68 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
         collectionViewRecomendedPlaylists.showsVerticalScrollIndicator = false
     }
     
+}
+
+extension MusicController {
+    
+    func singletonForCheckFavoriteTracksIsLiked() {
+        
+        TrackIsLiked.shared.userTrackIsLiked = Set.init()
+        
+        let urlFavoriteTracks = "https://api.deezer.com/user/me/tracks?access_token=\(UserDefaults.standard.string(forKey: "accessToken")!)"
+        
+        guard let url = URL(string: urlFavoriteTracks) else {return}
+        
+        URLSession.shared.dataTask(with: url) { (data, _, _) in
+            
+            guard let data = data else {return}
+            
+            do {
+                let safeData = try JSONDecoder().decode(FavoriteTracksData.self, from: data)
+                
+                for object in safeData.data {
+                    TrackIsLiked.shared.userTrackIsLiked?.insert(object.id)
+                }
+                
+                if safeData.next != nil {
+                    self.downloadNextListOfFavoriteTrackForSingleton(url: safeData.next)
+                } else {
+                    return
+                }
+                
+                
+            } catch {
+                print(error)
+            }
+        }.resume()
+    }
+    
+    func downloadNextListOfFavoriteTrackForSingleton(url: URL?) {
+        
+        guard let url = url else {return}
+        
+        URLSession.shared.dataTask(with: url) { (data, _, _) in
+            
+            guard let data = data else {return}
+            
+            do {
+                let safeData = try JSONDecoder().decode(FavoriteTracksData.self, from: data)
+                
+                for object in safeData.data {
+                    TrackIsLiked.shared.userTrackIsLiked?.insert(object.id)
+                }
+                
+                if safeData.next != nil {
+                    self.downloadNextListOfFavoriteTrackForSingleton(url: safeData.next)
+                } else {
+                    print(TrackIsLiked.shared.userTrackIsLiked?.count)
+                    return
+                }
+                
+            } catch {
+                print(error)
+            }
+            
+        }.resume()
+    }
 }

@@ -19,7 +19,13 @@ class PlayerManager {
     private init() {}
 }
 
+protocol PlayerControllerFavoriteTableDelegate {
+    func updateInfoTableView()
+}
+
 class PlayerController: UIViewController {
+    
+    var delegate: PlayerControllerFavoriteTableDelegate?
     
     let playerManage = PlayerDurationLogic()
     
@@ -57,6 +63,7 @@ class PlayerController: UIViewController {
     @IBOutlet weak var progressOfSongLine: UISlider!
     @IBOutlet weak var playBtn: UIButton!
     @IBOutlet weak var albumImage: UIImageView!
+    @IBOutlet weak var likeBtn: UIButton!
     
     override func viewDidLoad() {
         
@@ -79,6 +86,12 @@ class PlayerController: UIViewController {
         PlayerManager.shared.player = nil
         
         play()
+        
+        
+    }
+    
+    func passToFavoriteTableViewAboutReloadTrackCount (){
+         NotificationCenter.default.post(name: NSNotification.Name(rawValue: "newDataNotif"), object: nil)
     }
     
     @objc func actionForPopupPlayBtn() {
@@ -103,6 +116,11 @@ class PlayerController: UIViewController {
         albumImage.image = UIImage(data: playlist[currentIndexPath].albumImage)
         albumImage.layer.cornerRadius = albumImage.frame.size.height / 16
         albumImage.clipsToBounds = true
+        
+        checkTrackIsLiked()
+        likeBtn.setTitle("", for: .normal)
+        likeBtn.frame.size = CGSize(width: 40, height: 40)
+        
     }
     
     func setPopupScreen() {
@@ -148,9 +166,18 @@ class PlayerController: UIViewController {
         let seekToTime: CMTime = CMTimeMakeWithSeconds(Float64(Float(newCurrentTime)), preferredTimescale: 30)
         PlayerManager.shared.player?.seek(to: seekToTime)
     }
+    
+    //Like or unlike track with Add/Delete him into/from favorite user list
+    @IBAction func likeOrUnlikeTrack(_ sender: UIButton) {
+        
+    if TrackIsLiked.shared.userTrackIsLiked?.contains(playlist[currentIndexPath].id) ?? false {
+        unlikeTrackAndDeleteFromUserFavoriteTrackList{self.checkTrackIsLiked()}
+    } else {
+        likeTrackAndAddToUserFavoriteTrackList{self.checkTrackIsLiked()}
+        }
+    }
+    
 }
-
-
 
 extension PlayerController {
     
@@ -226,6 +253,65 @@ extension PlayerController {
             self.currentDurationSongLabel.text = self.playerManage.setCurrentDuration(currentTimeSong: Int(currentTimeSong))
         }
     }
+    
+    
+}
+
+//MARK: - Add and delete methods for favorite track(track likes on/off)
+
+extension PlayerController {
+    
+    func likeTrackAndAddToUserFavoriteTrackList(complition: (() -> Void)?) {
+        guard let urlRequest = URL(string: "https://api.deezer.com/user/\(UserDefaults.standard.value(forKey: "userProfileId")!)/tracks?&access_token=\(UserDefaults.standard.string(forKey: "accessToken")!)&request_method=post&track_id=\(playlist[currentIndexPath].id)") else {return}
+        let request = URLRequest(url: urlRequest)
+        
+        //URLSession.shared.dataTask(with: request).resume()
+        
+//        TrackIsLiked.shared.userTrackIsLiked?.insert(playlist[currentIndexPath].id)
+//        //delegate?.updateInfoTableView()
+//        someAction()
+        
+        URLSession.shared.dataTask(with: request) { (_, _, _) in
+            TrackIsLiked.shared.userTrackIsLiked?.insert(self.playlist[self.currentIndexPath].id)
+            self.passToFavoriteTableViewAboutReloadTrackCount()
+            complition!()
+        }.resume()
+        
+    }
+    
+    func unlikeTrackAndDeleteFromUserFavoriteTrackList(complition: (() -> Void)?) {
+        guard let urlRequest = URL(string: "https://api.deezer.com/user/\(UserDefaults.standard.value(forKey: "userProfileId")!)/tracks?&access_token=\(UserDefaults.standard.string(forKey: "accessToken")!)&request_method=delete&track_id=\(playlist[currentIndexPath].id)") else {return}
+        let request = URLRequest(url: urlRequest)
+        
+//        URLSession.shared.dataTask(with: request).resume()
+//
+//        TrackIsLiked.shared.userTrackIsLiked?.remove(playlist[currentIndexPath].id)
+//        //delegate?.updateInfoTableView()
+//        someAction()
+        
+        URLSession.shared.dataTask(with: request) { (_, _, _) in
+            TrackIsLiked.shared.userTrackIsLiked?.remove(self.playlist[self.currentIndexPath].id)
+            self.passToFavoriteTableViewAboutReloadTrackCount()
+            complition!()
+        }.resume()
+    }
+    
+    func checkTrackIsLiked() {
+        if TrackIsLiked.shared.userTrackIsLiked?.contains(playlist[currentIndexPath].id) ?? false {
+            let likeImage = UIImage(systemName: "heart.fill", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25))
+            DispatchQueue.main.async {
+                self.likeBtn.setImage(likeImage, for: .normal)
+            }
+            
+        } else {
+            let likeImage = UIImage(systemName: "heart", withConfiguration: UIImage.SymbolConfiguration(pointSize: 25))
+            DispatchQueue.main.async {
+                self.likeBtn.setImage(likeImage, for: .normal)
+            }
+            
+        }
+        
+    }
 }
 
 
@@ -237,3 +323,33 @@ extension PlayerController {
 
 
 // https://stackoverflow.com/questions/26758029/how-do-i-make-a-now-playing-bar-like-in-media-player-apps-in-ios-with-xcode
+
+
+
+
+////let parameters: [String: Any] = [ "access_token": UserDefaults.standard.string(forKey: "accessToken")!, "track_id": 678687242]
+//
+//       // guard let urlRequest = URL(string: "https://api.deezer.com/user/\(UserDefaults.standard.value(forKey: "userProfileId")!)/tracks") else {return}
+//        guard let urlRequest = URL(string: "https://api.deezer.com/user/\(UserDefaults.standard.value(forKey: "userProfileId")!)/tracks?&access_token=\(UserDefaults.standard.string(forKey: "accessToken")!)&request_method=delete&track_id=678687242") else {return}
+//        var request = URLRequest(url: urlRequest)
+//        //request.httpMethod = "POST"
+//        //request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+////        guard let httpBody = try? JSONSerialization.data(withJSONObject: parameters, options: []) else {return}
+////        request.httpBody = httpBody
+//
+//        URLSession.shared.dataTask(with: request) { (data, response, error) in
+//
+//            if let response = response {
+//                print(response)
+//            }
+//
+//            guard let data = data else {return}
+//
+//            do {
+//                let json = try JSONSerialization.jsonObject(with: data, options: [])
+//                print(json)
+//            } catch {
+//                print(error)
+//            }
+//
+//        }.resume()

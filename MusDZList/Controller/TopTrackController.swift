@@ -44,7 +44,6 @@ class TopTrackController: UIViewController {
             }
         }
         
-        
     }
     
     func preSettingController() {
@@ -52,7 +51,7 @@ class TopTrackController: UIViewController {
         navigationController?.navigationBar.topItem?.title = ""
         self.navigationItem.title = "\(name)"
     }
-
+    
 }
 
 
@@ -93,7 +92,7 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
     }
     
     func settingForTableView() {
-        tableViewTopTrack.rowHeight = 80
+        tableViewTopTrack.rowHeight = 100
     }
     
 }
@@ -146,7 +145,7 @@ extension TopTrackController {
                 
                 guard let data = data else {return}
                 
-                let trackInfo = TopTracksSongModel(artistName: track.artist.name, albumName: track.album.title, albumImage: data, nameOfSong: track.title, nameOFContributors: contributString, totalDuration: "30", urlForSong: track
+                let trackInfo = TopTracksSongModel(id: track.id, artistName: track.artist.name, albumName: track.album.title, albumImage: data, nameOfSong: track.title, nameOFContributors: contributString, totalDuration: "30", urlForSong: track
                     .preview)
                 self.topTracksInfo.append(trackInfo)
                 

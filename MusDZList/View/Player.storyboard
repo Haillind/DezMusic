@@ -99,6 +99,14 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="uIr-IX-ClU">
+                                <rect key="frame" x="192" y="433" width="30" height="30"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <state key="normal" title="Like"/>
+                                <connections>
+                                    <action selector="likeOrUnlikeTrack:" destination="aBk-e0-5HZ" eventType="touchUpInside" id="jyl-vQ-N6P"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" systemColor="systemBackgroundColor" cocoaTouchSystemColor="whiteColor"/>
                         <constraints>
@@ -130,6 +138,7 @@
                         <outlet property="albumImage" destination="WqY-Cc-K6h" id="NQh-oS-Utt"/>
                         <outlet property="artistNameLabel" destination="wMG-oY-RH1" id="e7c-Ut-zD0"/>
                         <outlet property="currentDurationSongLabel" destination="5KX-Zx-GiW" id="u3v-T5-pqz"/>
+                        <outlet property="likeBtn" destination="uIr-IX-ClU" id="R4t-vT-qD7"/>
                         <outlet property="playBtn" destination="GK4-au-h3y" id="KOl-yY-UAE"/>
                         <outlet property="progressOfSongLine" destination="Ugp-Pk-nLc" id="xrJ-yP-rR0"/>
                         <outlet property="songContributorsLabel" destination="qr7-lI-fjl" id="6OP-z1-XXl"/>

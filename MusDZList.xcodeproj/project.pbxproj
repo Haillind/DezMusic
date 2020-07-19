@@ -10,6 +10,8 @@
 		9206C9C02493A4420082565D /* TopTrackController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9BF2493A4420082565D /* TopTrackController.swift */; };
 		9206C9C52493A4820082565D /* TopTrackCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9206C9C32493A4820082565D /* TopTrackCell.swift */; };
 		9206C9C62493A4820082565D /* TopTrackCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9206C9C42493A4820082565D /* TopTrackCell.xib */; };
+		920D029524B7678200FB076F /* FavoritesTabController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920D029424B7678200FB076F /* FavoritesTabController.swift */; };
+		920D02BE24B7A12800FB076F /* FavoritesTabCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 920D02BC24B7A12800FB076F /* FavoritesTabCell.swift */; };
 		921014CF2492975A00757D79 /* FooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921014CD2492975A00757D79 /* FooterView.swift */; };
 		921014D02492975A00757D79 /* FooterView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 921014CE2492975A00757D79 /* FooterView.xib */; };
 		921186B4249B96F300D76BC2 /* PlayerDurationLogic.swift in Sources */ = {isa = PBXBuildFile; fileRef = 921186B3249B96F300D76BC2 /* PlayerDurationLogic.swift */; };
@@ -20,6 +22,10 @@
 		9234AAFF2490EC86006E37A8 /* PlayerController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9234AAFE2490EC86006E37A8 /* PlayerController.swift */; };
 		925573EB24923CA70057A2B5 /* UserInfoData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925573EA24923CA70057A2B5 /* UserInfoData.swift */; };
 		925573ED249242960057A2B5 /* RecomendedPlaylistsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */; };
+		925EF5D224BE044D00DC8B86 /* UserSettingsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EF5D124BE044D00DC8B86 /* UserSettingsCell.swift */; };
+		925EF5D524BE05FA00DC8B86 /* SectionsModels.swift in Sources */ = {isa = PBXBuildFile; fileRef = 925EF5D424BE05FA00DC8B86 /* SectionsModels.swift */; };
+		9296ECC324B865D800846055 /* FavoriteTracksData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9296ECC224B865D800846055 /* FavoriteTracksData.swift */; };
+		9296ECC524B8699700846055 /* FavoriteTracksTabTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9296ECC424B8699700846055 /* FavoriteTracksTabTableViewModel.swift */; };
 		9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */; };
 		929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297909E248FE72200006CB1 /* FavoriteArtistsCell.swift */; };
 		929790A1248FE72200006CB1 /* FavoriteArtistsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 9297909F248FE72200006CB1 /* FavoriteArtistsCell.xib */; };
@@ -30,6 +36,7 @@
 		92A763702489485200147C69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A7636E2489485200147C69 /* LaunchScreen.storyboard */; };
 		92A7C1812497943C0040347F /* TopTracksSongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7C1802497943C0040347F /* TopTracksSongModel.swift */; };
 		92A7C1832497A1500040347F /* FavoriteArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */; };
+		92C31F2424C05FA7009D9A88 /* UserSettingInfoProfileCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C31F2324C05FA7009D9A88 /* UserSettingInfoProfileCell.swift */; };
 		92D2C8942492884900579488 /* HeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92D2C8922492884900579488 /* HeaderView.swift */; };
 		92D2C8952492884900579488 /* HeaderView.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92D2C8932492884900579488 /* HeaderView.xib */; };
 		92DCD1892494DD540013A2C8 /* ListOfTopTracksData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */; };
@@ -38,6 +45,9 @@
 		92E47F6524A3CEF400E79774 /* LNPopupController.framework in Embed Frameworks */ = {isa = PBXBuildFile; fileRef = 92E47F6324A3CEF400E79774 /* LNPopupController.framework */; settings = {ATTRIBUTES = (CodeSignOnCopy, RemoveHeadersOnCopy, ); }; };
 		92E4A931249246E500A212BC /* RecomendedPlaylistsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */; };
 		92E4A932249246E500A212BC /* RecomendedPlaylistsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */; };
+		92E638B624B9C54900EB18A9 /* UserPlaylistsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E638B524B9C54900EB18A9 /* UserPlaylistsData.swift */; };
+		92E638B824B9C72200EB18A9 /* UserAlbumsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E638B724B9C72200EB18A9 /* UserAlbumsData.swift */; };
+		92E638BA24B9EF3D00EB18A9 /* UserSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E638B924B9EF3D00EB18A9 /* UserSettingsController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -58,6 +68,8 @@
 		9206C9BF2493A4420082565D /* TopTrackController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackController.swift; sourceTree = "<group>"; };
 		9206C9C32493A4820082565D /* TopTrackCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackCell.swift; sourceTree = "<group>"; };
 		9206C9C42493A4820082565D /* TopTrackCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = TopTrackCell.xib; sourceTree = "<group>"; };
+		920D029424B7678200FB076F /* FavoritesTabController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTabController.swift; sourceTree = "<group>"; };
+		920D02BC24B7A12800FB076F /* FavoritesTabCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesTabCell.swift; sourceTree = "<group>"; };
 		921014CD2492975A00757D79 /* FooterView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FooterView.swift; sourceTree = "<group>"; };
 		921014CE2492975A00757D79 /* FooterView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FooterView.xib; sourceTree = "<group>"; };
 		921186B3249B96F300D76BC2 /* PlayerDurationLogic.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerDurationLogic.swift; sourceTree = "<group>"; };
@@ -68,6 +80,10 @@
 		9234AAFE2490EC86006E37A8 /* PlayerController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PlayerController.swift; sourceTree = "<group>"; };
 		925573EA24923CA70057A2B5 /* UserInfoData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserInfoData.swift; sourceTree = "<group>"; };
 		925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendedPlaylistsData.swift; sourceTree = "<group>"; };
+		925EF5D124BE044D00DC8B86 /* UserSettingsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsCell.swift; sourceTree = "<group>"; };
+		925EF5D424BE05FA00DC8B86 /* SectionsModels.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SectionsModels.swift; sourceTree = "<group>"; };
+		9296ECC224B865D800846055 /* FavoriteTracksData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTracksData.swift; sourceTree = "<group>"; };
+		9296ECC424B8699700846055 /* FavoriteTracksTabTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTracksTabTableViewModel.swift; sourceTree = "<group>"; };
 		9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteArtistsData.swift; sourceTree = "<group>"; };
 		9297909E248FE72200006CB1 /* FavoriteArtistsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteArtistsCell.swift; sourceTree = "<group>"; };
 		9297909F248FE72200006CB1 /* FavoriteArtistsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = FavoriteArtistsCell.xib; sourceTree = "<group>"; };
@@ -80,6 +96,7 @@
 		92A763712489485200147C69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92A7C1802497943C0040347F /* TopTracksSongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksSongModel.swift; sourceTree = "<group>"; };
 		92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteArtistsModel.swift; sourceTree = "<group>"; };
+		92C31F2324C05FA7009D9A88 /* UserSettingInfoProfileCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingInfoProfileCell.swift; sourceTree = "<group>"; };
 		92D2C8922492884900579488 /* HeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HeaderView.swift; sourceTree = "<group>"; };
 		92D2C8932492884900579488 /* HeaderView.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = HeaderView.xib; sourceTree = "<group>"; };
 		92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListOfTopTracksData.swift; sourceTree = "<group>"; };
@@ -87,6 +104,9 @@
 		92E47F6324A3CEF400E79774 /* LNPopupController.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = LNPopupController.framework; path = Carthage/Build/iOS/LNPopupController.framework; sourceTree = "<group>"; };
 		92E4A92F249246E500A212BC /* RecomendedPlaylistsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecomendedPlaylistsCell.swift; sourceTree = "<group>"; };
 		92E4A930249246E500A212BC /* RecomendedPlaylistsCell.xib */ = {isa = PBXFileReference; lastKnownFileType = file.xib; path = RecomendedPlaylistsCell.xib; sourceTree = "<group>"; };
+		92E638B524B9C54900EB18A9 /* UserPlaylistsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlaylistsData.swift; sourceTree = "<group>"; };
+		92E638B724B9C72200EB18A9 /* UserAlbumsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAlbumsData.swift; sourceTree = "<group>"; };
+		92E638B924B9EF3D00EB18A9 /* UserSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -116,6 +136,22 @@
 				9206C9C42493A4820082565D /* TopTrackCell.xib */,
 			);
 			path = TopTrackCell;
+			sourceTree = "<group>";
+		};
+		920D02BA24B7A0B400FB076F /* FavoritesTabContoller */ = {
+			isa = PBXGroup;
+			children = (
+				920D02BB24B7A0E100FB076F /* FavoritesTabCell */,
+			);
+			path = FavoritesTabContoller;
+			sourceTree = "<group>";
+		};
+		920D02BB24B7A0E100FB076F /* FavoritesTabCell */ = {
+			isa = PBXGroup;
+			children = (
+				920D02BC24B7A12800FB076F /* FavoritesTabCell.swift */,
+			);
+			path = FavoritesTabCell;
 			sourceTree = "<group>";
 		};
 		921014CA2492910400757D79 /* RecomendedHeader */ = {
@@ -154,6 +190,7 @@
 				925573EA24923CA70057A2B5 /* UserInfoData.swift */,
 				925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */,
 				92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */,
+				9296ECC124B865B900846055 /* FavoriteTabControllerData */,
 			);
 			path = CodableDataFiles;
 			sourceTree = "<group>";
@@ -163,6 +200,8 @@
 			children = (
 				92A7C1802497943C0040347F /* TopTracksSongModel.swift */,
 				92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */,
+				9296ECC424B8699700846055 /* FavoriteTracksTabTableViewModel.swift */,
+				925EF5D324BE05D400DC8B86 /* UserSettingsModels */,
 			);
 			path = ObjectModels;
 			sourceTree = "<group>";
@@ -201,13 +240,44 @@
 				921560C6248FA73900229F1F /* MusicController.swift */,
 				9234AAFE2490EC86006E37A8 /* PlayerController.swift */,
 				9206C9BF2493A4420082565D /* TopTrackController.swift */,
+				920D029424B7678200FB076F /* FavoritesTabController.swift */,
+				92E638B924B9EF3D00EB18A9 /* UserSettingsController.swift */,
 			);
 			path = Controller;
+			sourceTree = "<group>";
+		};
+		925EF5D024BE041800DC8B86 /* UserSettingsCell */ = {
+			isa = PBXGroup;
+			children = (
+				925EF5D124BE044D00DC8B86 /* UserSettingsCell.swift */,
+				92C31F2324C05FA7009D9A88 /* UserSettingInfoProfileCell.swift */,
+			);
+			path = UserSettingsCell;
+			sourceTree = "<group>";
+		};
+		925EF5D324BE05D400DC8B86 /* UserSettingsModels */ = {
+			isa = PBXGroup;
+			children = (
+				925EF5D424BE05FA00DC8B86 /* SectionsModels.swift */,
+			);
+			path = UserSettingsModels;
+			sourceTree = "<group>";
+		};
+		9296ECC124B865B900846055 /* FavoriteTabControllerData */ = {
+			isa = PBXGroup;
+			children = (
+				9296ECC224B865D800846055 /* FavoriteTracksData.swift */,
+				92E638B524B9C54900EB18A9 /* UserPlaylistsData.swift */,
+				92E638B724B9C72200EB18A9 /* UserAlbumsData.swift */,
+			);
+			path = FavoriteTabControllerData;
 			sourceTree = "<group>";
 		};
 		9297909D248FE6F900006CB1 /* Cells */ = {
 			isa = PBXGroup;
 			children = (
+				925EF5D024BE041800DC8B86 /* UserSettingsCell */,
+				920D02BA24B7A0B400FB076F /* FavoritesTabContoller */,
 				9206C9C12493A44F0082565D /* TopTrackTableView */,
 				921014CB2492913600757D79 /* RecomendedCollection */,
 				92E4A92D249246AE00A212BC /* FavoriteArtistsCell */,
@@ -375,16 +445,24 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				925EF5D524BE05FA00DC8B86 /* SectionsModels.swift in Sources */,
 				925573EB24923CA70057A2B5 /* UserInfoData.swift in Sources */,
+				92C31F2424C05FA7009D9A88 /* UserSettingInfoProfileCell.swift in Sources */,
 				921014CF2492975A00757D79 /* FooterView.swift in Sources */,
 				921560C5248F979100229F1F /* TestController.swift in Sources */,
+				9296ECC524B8699700846055 /* FavoriteTracksTabTableViewModel.swift in Sources */,
 				92DF0742248AB636008C4353 /* AuthData.swift in Sources */,
 				925573ED249242960057A2B5 /* RecomendedPlaylistsData.swift in Sources */,
+				92E638B624B9C54900EB18A9 /* UserPlaylistsData.swift in Sources */,
 				9206C9C52493A4820082565D /* TopTrackCell.swift in Sources */,
 				9234AAFF2490EC86006E37A8 /* PlayerController.swift in Sources */,
+				920D02BE24B7A12800FB076F /* FavoritesTabCell.swift in Sources */,
 				921FCDDE248ED13A000DB7FE /* AuthController.swift in Sources */,
 				92A7C1832497A1500040347F /* FavoriteArtistsModel.swift in Sources */,
 				92A763642489485100147C69 /* AppDelegate.swift in Sources */,
+				920D029524B7678200FB076F /* FavoritesTabController.swift in Sources */,
+				92E638B824B9C72200EB18A9 /* UserAlbumsData.swift in Sources */,
+				9296ECC324B865D800846055 /* FavoriteTracksData.swift in Sources */,
 				92E4A931249246E500A212BC /* RecomendedPlaylistsCell.swift in Sources */,
 				92A7C1812497943C0040347F /* TopTracksSongModel.swift in Sources */,
 				92DCD1892494DD540013A2C8 /* ListOfTopTracksData.swift in Sources */,
@@ -393,6 +471,8 @@
 				9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */,
 				929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */,
 				921560C7248FA73900229F1F /* MusicController.swift in Sources */,
+				92E638BA24B9EF3D00EB18A9 /* UserSettingsController.swift in Sources */,
+				925EF5D224BE044D00DC8B86 /* UserSettingsCell.swift in Sources */,
 				92D2C8942492884900579488 /* HeaderView.swift in Sources */,
 				9206C9C02493A4420082565D /* TopTrackController.swift in Sources */,
 			);

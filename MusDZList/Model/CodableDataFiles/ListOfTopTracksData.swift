@@ -13,6 +13,7 @@ struct ListOfTopTracksData: Codable {
 }
 
 struct TopTracksList: Codable {
+    let id: Int
     let title: String
     let preview: URL
     let contributors: [ContributorsOfTrack]

@@ -18,6 +18,7 @@ class AuthController: UIViewController {
     let consumerKey = "417762"
     let consumerSecret = "dce9d10fa1483d1585df63ce363592f6"
     let authorizationEndPoint = "https://connect.deezer.com/oauth/auth.php"
+    let permissions = "basic_access,email,manage_library,delete_library"
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,7 +65,7 @@ extension AuthController: WKNavigationDelegate, WKUIDelegate {
     func startAuthorization() {
         
         let redirectURL = "https://haillind.github.io"
-        let authorizationURL = "\(authorizationEndPoint)?app_id=\(consumerKey)&redirect_uri=\(redirectURL)&perms=basic_access,email"
+        let authorizationURL = "\(authorizationEndPoint)?app_id=\(consumerKey)&redirect_uri=\(redirectURL)&perms=\(permissions)"
         
         let request = URLRequest(url: URL(string: authorizationURL)!)
         webView.load(request)

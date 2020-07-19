@@ -10,6 +10,7 @@ import Foundation
 
 struct TopTracksSongModel {
     
+    let id: Int
     let artistName: String
     let albumName: String
     let albumImage: Data
@@ -17,5 +18,6 @@ struct TopTracksSongModel {
     let nameOFContributors: String
     let totalDuration: String
     let urlForSong: URL
+    var isLiked = false
     
 }
