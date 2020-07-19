@@ -9,6 +9,18 @@
 import Foundation
 import UIKit
 
+struct SectionWithUserFollowers {
+    
+    let currentSectionsModel: [CurentSectionModel]
+    static var configurate = UIColor.white
+    
+    struct CurentSectionModel {
+        let image: UIImage
+        let title: String
+        //let backgoundColor: UIColor
+    }
+}
+
 struct SectionsModelOne {
     
     let currentSectionsModel: [CurentSectionModel]

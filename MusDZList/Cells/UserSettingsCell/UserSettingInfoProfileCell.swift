@@ -205,15 +205,3 @@ class UserSettingInfoProfileCell: UITableViewCell {
     }
 
 }
-
-struct TestSection {
-    
-    let currentSectionsModel: [CurentSectionModel]
-    static var configurate = UIColor.white
-    
-    struct CurentSectionModel {
-        let image: UIImage
-        let title: String
-        //let backgoundColor: UIColor
-    }
-}

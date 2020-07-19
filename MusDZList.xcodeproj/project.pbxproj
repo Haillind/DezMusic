@@ -48,6 +48,7 @@
 		92E638B624B9C54900EB18A9 /* UserPlaylistsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E638B524B9C54900EB18A9 /* UserPlaylistsData.swift */; };
 		92E638B824B9C72200EB18A9 /* UserAlbumsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E638B724B9C72200EB18A9 /* UserAlbumsData.swift */; };
 		92E638BA24B9EF3D00EB18A9 /* UserSettingsController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92E638B924B9EF3D00EB18A9 /* UserSettingsController.swift */; };
+		92F71FE124C4ACD000E76748 /* UserSettingsLogicModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F71FE024C4ACD000E76748 /* UserSettingsLogicModel.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXCopyFilesBuildPhase section */
@@ -107,6 +108,7 @@
 		92E638B524B9C54900EB18A9 /* UserPlaylistsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserPlaylistsData.swift; sourceTree = "<group>"; };
 		92E638B724B9C72200EB18A9 /* UserAlbumsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserAlbumsData.swift; sourceTree = "<group>"; };
 		92E638B924B9EF3D00EB18A9 /* UserSettingsController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsController.swift; sourceTree = "<group>"; };
+		92F71FE024C4ACD000E76748 /* UserSettingsLogicModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserSettingsLogicModel.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -210,6 +212,7 @@
 			isa = PBXGroup;
 			children = (
 				921186B3249B96F300D76BC2 /* PlayerDurationLogic.swift */,
+				92F71FE024C4ACD000E76748 /* UserSettingsLogicModel.swift */,
 			);
 			path = LogicFiles;
 			sourceTree = "<group>";
@@ -455,6 +458,7 @@
 				925573ED249242960057A2B5 /* RecomendedPlaylistsData.swift in Sources */,
 				92E638B624B9C54900EB18A9 /* UserPlaylistsData.swift in Sources */,
 				9206C9C52493A4820082565D /* TopTrackCell.swift in Sources */,
+				92F71FE124C4ACD000E76748 /* UserSettingsLogicModel.swift in Sources */,
 				9234AAFF2490EC86006E37A8 /* PlayerController.swift in Sources */,
 				920D02BE24B7A12800FB076F /* FavoritesTabCell.swift in Sources */,
 				921FCDDE248ED13A000DB7FE /* AuthController.swift in Sources */,
