@@ -21,36 +21,13 @@ struct SectionWithUserFollowers {
     }
 }
 
-struct SectionsModelOne {
+struct SectionsModel {
     
-    let currentSectionsModel: [CurentSectionModel]
     static var configurate = UIColor.white
     
+    let currentSectionsModel: [CurentSectionModel]
+    
     struct CurentSectionModel {
-        let image: UIImage
-        let title: String
-        let backgoundColor: UIColor
-    }
-    
-}
-
-struct SectionsModelTwo {
-    
-    let currentSectionsModel: [CurentSectionModelTwo]
-    
-    struct CurentSectionModelTwo {
-        let image: UIImage
-        let title: String
-        var backgoundColor: UIColor = .systemGray
-    }
-    
-}
-
-struct SectionsModelThree {
-    
-    let currentSectionsModel: [CurentSectionModelThree]
-    
-    struct CurentSectionModelThree {
         let image: UIImage
         let title: String
         let backgoundColor: UIColor

@@ -1,8 +1,8 @@
 //
-//  FavoriteTracksTabTableViewModel.swift
+//  FavoriteRow.swift
 //  MusDZList
 //
-//  Created by Denis Selivanov on 10.07.2020.
+//  Created by Denis Selivanov on 10.08.2020.
 //  Copyright © 2020 Denis Selivanov. All rights reserved.
 //
 

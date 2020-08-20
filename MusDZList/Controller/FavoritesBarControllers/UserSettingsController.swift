@@ -74,7 +74,7 @@ extension UserSettingsController: UITableViewDelegate, UITableViewDataSource {
         
         let currentRow = userSettingsLogicModel.settingsForEachCell(indexPath: indexPath)
         
-        if currentRow.1 != nil {
+        if currentRow.color != nil {
             cell.rowImageView.image = currentRow.image
             cell.viewForRowImage.backgroundColor = currentRow.color!
             cell.rowTitle.text = currentRow.title
@@ -101,10 +101,8 @@ extension UserSettingsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
 
-        
-        if (userSettingsLogicModel.tableUserSettings[section] as? SectionsModelTwo) != nil {
+        if section == 2 {
             let view = UITableViewHeaderFooterView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.width, height: tableView.sectionHeaderHeight))
-            //view.contentView.layoutMargins = UIEdgeInsets(top: 10, left: 20, bottom: 0, right: 20)
             view.contentView.backgroundColor = UIColor.init(red: 235/255, green: 235/255, blue: 235/255, alpha: 0)
             view.textLabel?.numberOfLines = 0
             view.textLabel?.text = "In oflline mode you can only listen to previously downloaded playlists and albums"
@@ -118,7 +116,7 @@ extension UserSettingsController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
         
-        if (userSettingsLogicModel.tableUserSettings[section] as? SectionsModelTwo) != nil {
+        if section == 2 {
             return 50
         }
         

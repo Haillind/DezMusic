@@ -26,12 +26,6 @@ class TopTrackCell: UITableViewCell {
 
     override func setSelected(_ selected: Bool, animated: Bool) {
         super.setSelected(selected, animated: animated)
-
-        // Configure the view for the selected state
-//        let storyboard = UIStoryboard(name: "Player", bundle: nil)
-//        let playerVC = storyboard.instantiateViewController(withIdentifier: "PlayerController") as! PlayerController
-        
-        
     }
     
 }

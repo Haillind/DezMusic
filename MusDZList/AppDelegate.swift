@@ -16,39 +16,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
-        
-//        do
-//        {
-//            try AVAudioSession.sharedInstance().setCategory(AVAudioSession.Category.playback)
-//            try AVAudioSession.sharedInstance().setActive(true)
-//
-//         //!! IMPORTANT !!
-//         /*
-//         If you're using 3rd party libraries to play sound or generate sound you should
-//         set sample rate manually here.
-//         Otherwise you wont be able to hear any sound when you lock screen
-//         */
-//            //try AVAudioSession.sharedInstance().setPreferredSampleRate(4096)
-//        }
-//        catch
-//        {
-//            print(error)
-//        }
-//        // This will enable to show nowplaying controls on lock screen
-//        application.beginReceivingRemoteControlEvents()
-        
-        
-//        do {
-//            try AVAudioSession.sharedInstance().setCategory(.playback, mode: .default, options: [.mixWithOthers, .allowAirPlay])
-//            print("Playback OK")
-//            try AVAudioSession.sharedInstance().setActive(true)
-//            print("Session is Active")
-//        } catch {
-//            print(error)
-//        }
-        
-        
-        
         return true
     }
 

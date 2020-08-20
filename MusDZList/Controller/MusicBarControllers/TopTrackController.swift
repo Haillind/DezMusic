@@ -82,8 +82,6 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         playerVC.artistName = topTracksInfo[indexPath.item].artistName
         playerVC.playlistOptional = topTracksInfo
         playerVC.indexPath = indexPath.item
-                
-        //present(playerVC, animated: true, completion: nil)
         
         tabBarController?.popupBar.progressViewStyle = .top
         tabBarController?.popupInteractionStyle = .drag

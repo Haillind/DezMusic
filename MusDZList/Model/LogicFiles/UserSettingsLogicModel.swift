@@ -12,21 +12,23 @@ import UIKit
 struct UserSettingsLogicModel {
     
     var tableUserSettings: [Any] = [
-        SectionWithUserFollowers(currentSectionsModel: [.init(image: UIImage(named: "rock")!, title: "UserProfileName")]),
+        SectionWithUserFollowers(currentSectionsModel: [
+            .init(image: UIImage(named: "rock")!, title: "UserProfileName")
+        ]),
         
-        SectionsModelOne(currentSectionsModel: [
+        SectionsModel(currentSectionsModel: [
             .init(image: UIImage(systemName: "person.fill")!, title: "My account", backgoundColor: .systemBlue)
         ]),
         
-        SectionsModelTwo(currentSectionsModel: [
-            .init(image: UIImage(systemName: "eye")!, title: "Display settings"),
-            .init(image: UIImage(systemName: "slider.horizontal.3")!, title: "Audio settings"),
-            .init(image: UIImage(systemName: "wrench")!, title: "App"),
-            .init(image: UIImage(systemName: "desktopcomputer")!, title: "My connected devices"),
-            .init(image: UIImage(systemName: "airplane")!, title: "Offline mode")
+        SectionsModel(currentSectionsModel: [
+            .init(image: UIImage(systemName: "eye")!, title: "Display settings", backgoundColor: .systemGray),
+            .init(image: UIImage(systemName: "slider.horizontal.3")!, title: "Audio settings", backgoundColor: .systemGray),
+            .init(image: UIImage(systemName: "wrench")!, title: "App", backgoundColor: .systemGray),
+            .init(image: UIImage(systemName: "desktopcomputer")!, title: "My connected devices", backgoundColor: .systemGray),
+            .init(image: UIImage(systemName: "airplane")!, title: "Offline mode", backgoundColor: .systemGray)
         ]),
         
-        SectionsModelThree(currentSectionsModel: [
+        SectionsModel(currentSectionsModel: [
             .init(image: UIImage(systemName: "triangle")!, title: "Deezer labs", backgoundColor: .systemBlue),
             .init(image: UIImage(systemName: "questionmark")!, title: "Help", backgoundColor: .systemGreen),
             .init(image: UIImage(systemName: "star.fill")!, title: "Rate the App", backgoundColor: .systemYellow),
@@ -39,16 +41,13 @@ struct UserSettingsLogicModel {
         let localSection = tableUserSettings[section]
         
         switch localSection {
-        case let object where object as? SectionsModelOne != nil:
-            return (tableUserSettings[section] as! SectionsModelOne).currentSectionsModel.count
-        case let object where object as? SectionsModelTwo != nil:
-            return (tableUserSettings[section] as! SectionsModelTwo).currentSectionsModel.count
-        case let object where object as? SectionsModelThree != nil:
-            return (tableUserSettings[section] as! SectionsModelThree).currentSectionsModel.count
+            
+        case let sectionType where sectionType as? SectionsModel != nil:
+            return (localSection as! SectionsModel).currentSectionsModel.count
         
         default:
             
-            return (tableUserSettings[section] as! SectionWithUserFollowers).currentSectionsModel.count
+            return (localSection as! SectionWithUserFollowers).currentSectionsModel.count
         }
     }
     
@@ -58,34 +57,18 @@ struct UserSettingsLogicModel {
         
         switch localSection {
             
-        case let object where object as? SectionsModelOne != nil:
+        case let sectionType where sectionType as? SectionsModel != nil:
             
-            let image = (tableUserSettings[indexPath.section].self as! SectionsModelOne).currentSectionsModel[indexPath.row].image
-            let title = (tableUserSettings[indexPath.section].self as! SectionsModelOne).currentSectionsModel[indexPath.row].title
-            let color = (tableUserSettings[indexPath.section].self as! SectionsModelOne).currentSectionsModel[indexPath.row].backgoundColor
-            
-            return (image, color, title)
-            
-        case let object where object as? SectionsModelTwo != nil:
-            
-            let image = (tableUserSettings[indexPath.section].self as! SectionsModelTwo).currentSectionsModel[indexPath.row].image
-            let title = (tableUserSettings[indexPath.section].self as! SectionsModelTwo).currentSectionsModel[indexPath.row].title
-            let color = (tableUserSettings[indexPath.section].self as! SectionsModelTwo).currentSectionsModel[indexPath.row].backgoundColor
-            
-            return (image, color, title)
-            
-        case let object where object as? SectionsModelThree != nil:
-            
-            let image = (tableUserSettings[indexPath.section].self as! SectionsModelThree).currentSectionsModel[indexPath.row].image
-            let title = (tableUserSettings[indexPath.section].self as! SectionsModelThree).currentSectionsModel[indexPath.row].title
-            let color = (tableUserSettings[indexPath.section].self as! SectionsModelThree).currentSectionsModel[indexPath.row].backgoundColor
+            let image = (localSection as! SectionsModel).currentSectionsModel[indexPath.row].image
+            let title = (localSection as! SectionsModel).currentSectionsModel[indexPath.row].title
+            let color = (localSection as! SectionsModel).currentSectionsModel[indexPath.row].backgoundColor
             
             return (image, color, title)
             
         default:
             
-            let image = (tableUserSettings[indexPath.section].self as! SectionWithUserFollowers).currentSectionsModel[indexPath.row].image
-            let title = (tableUserSettings[indexPath.section].self as! SectionWithUserFollowers).currentSectionsModel[indexPath.row].title
+            let image = (localSection as! SectionWithUserFollowers).currentSectionsModel[indexPath.row].image
+            let title = (localSection as! SectionWithUserFollowers).currentSectionsModel[indexPath.row].title
             
             return (image, nil, title)
         }

@@ -14,7 +14,6 @@ struct FavoriteArtistsModel {
     let name: String
     let picture_big: Data
     //let tracklist: URL
-    
 }
 
 

@@ -22,13 +22,11 @@ class AuthController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        // Do any additional setup after loading the view.
         
         let webConfiguration = WKWebViewConfiguration()
         webView = WKWebView(frame: .zero, configuration: webConfiguration)
         webView.uiDelegate = self
         webView.navigationDelegate = self
-        
     }
     
     @IBAction func authorizePressed(_ sender: UIButton) {
@@ -54,7 +52,6 @@ class AuthController: UIViewController {
             }
             completion!()
         }.resume()
-        
     }
 }
 
@@ -119,15 +116,4 @@ extension AuthController: WKNavigationDelegate, WKUIDelegate {
             }
         }
     }
-
 }
-    
-    // https://www.appcoda.com/linkedin-sign-in/
-    // https://medium.com/@kiransjadhav111/how-to-use-wkwebview-migrating-uiwebview-to-wkwebview-with-swift-30506885d916
-
-// https://www.youtube.com/watch?v=YA20F7RJnwA
-
-// https://www.youtube.com/watch?v=e6u-NnpgSRo
-
-
-//{\"id\":3699700782,\"name\":\"Haillind\",\"lastname\":\"\",\"firstname\":\"\",\"email\":\"selivanovdzenis@gmail.com\",\"status\":0,\"birthday\":\"0000-00-00\",\"inscription_date\":\"2020-06-02\",\"gender\":\"\",\"link\":\"https:\\/\\/www.deezer.com\\/profile\\/3699700782\",\"picture\":\"https:\\/\\/api.deezer.com\\/user\\/3699700782\\/image\",\"picture_small\":\"https:\\/\\/cdns-images.dzcdn.net\\/images\\/user\\/\\/56x56-000000-80-0-0.jpg\",\"picture_medium\":\"https:\\/\\/cdns-images.dzcdn.net\\/images\\/user\\/\\/250x250-000000-80-0-0.jpg\",\"picture_big\":\"https:\\/\\/cdns-images.dzcdn.net\\/images\\/user\\/\\/500x500-000000-80-0-0.jpg\",\"picture_xl\":\"https:\\/\\/cdns-images.dzcdn.net\\/images\\/user\\/\\/1000x1000-000000-80-0-0.jpg\",\"country\":\"BY\",\"lang\":\"RU\",\"is_kid\":false,\"explicit_content_level\":\"explicit_display\",\"explicit_content_levels_available\":[\"explicit_display\",\"explicit_no_recommendation\",\"explicit_hide\"],\"tracklist\":\"https:\\/\\/api.deezer.com\\/user\\/3699700782\\/flow\",\"type\":\"user\"}
