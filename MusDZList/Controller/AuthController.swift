@@ -35,25 +35,8 @@ class AuthController: UIViewController {
         startAuthorization()
     }
     
-    func getUserInfo(accessToken: String?, completion: (() -> Void)?) {
-        guard let accessToken = accessToken else {return}
-        let urlQuery = "https://api.deezer.com/user/me?access_token=\(accessToken)"
-        guard let url = URL(string: urlQuery) else {return}
-        
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-            
-            guard let data = data else {return}
-            
-            do {
-                let userInfo = try JSONDecoder().decode(UserInfoData.self, from: data)
-                self.defaults.set(userInfo.id, forKey: "userProfileId")
-            } catch {
-                print(error)
-            }
-            completion!()
-        }.resume()
-    }
 }
+
 
 //MARK: - WKWeb Methods
 
@@ -83,7 +66,8 @@ extension AuthController: WKNavigationDelegate, WKUIDelegate {
                 
                 let jsonData = try JSONDecoder().decode(AuthData.self, from: data)
                 self.defaults.set(jsonData.accessToken, forKey: "accessToken")
-                self.getUserInfo(accessToken: jsonData.accessToken){
+                self.defaults.set(jsonData.expires, forKey: "expiresToken")
+                self.getUserInfo(accessToken: jsonData.accessToken) {
                     DispatchQueue.main.async {
                         self.performSegue(withIdentifier: "goToTabBar", sender: self)
                     }
@@ -109,11 +93,31 @@ extension AuthController: WKNavigationDelegate, WKUIDelegate {
             
             if url.absoluteString.contains("code=") {
                 
+                
                 redirectAuthCode = url.absoluteString.components(separatedBy: "code=").last
                 
                 requestForAccessToken(authorizationCode: redirectAuthCode)
-                
             }
         }
     }
+    
+    func getUserInfo(accessToken: String?, completion: (() -> Void)?) {
+        guard let accessToken = accessToken else {return}
+        let urlQuery = "https://api.deezer.com/user/me?access_token=\(accessToken)"
+        guard let url = URL(string: urlQuery) else {return}
+        
+        URLSession.shared.dataTask(with: url) { (data, _, error) in
+            
+            guard let data = data else {return}
+            
+            do {
+                let userInfo = try JSONDecoder().decode(UserInfoData.self, from: data)
+                self.defaults.set(userInfo.id, forKey: "userProfileId")
+            } catch {
+                print(error)
+            }
+            completion!()
+        }.resume()
+    }
+    
 }

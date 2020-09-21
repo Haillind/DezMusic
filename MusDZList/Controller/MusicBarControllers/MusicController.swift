@@ -52,6 +52,10 @@ class MusicController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 3) {
+//            print("Expires: \(UserDefaults.standard.value(forKey: "expiresToken"))")
+//        }
+        
 //        print((collectionViewRecomendedPlaylists.frame.width - 45) / 2 - 1)
         
         collectionViewFavorArtists.dataSource = self

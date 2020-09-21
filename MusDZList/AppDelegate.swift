@@ -12,10 +12,13 @@ import AVFoundation
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
-
-
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        //print("Expires: \(UserDefaults.standard.value(forKey: "expiresToken"))")
+//        DispatchQueue.global().asyncAfter(deadline: .now() + 2) {
+//            self.checkExpiresToken()
+//        }
+        
         return true
     }
 
@@ -35,4 +38,32 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
 
 }
+
+//extension AppDelegate {
+//
+//    func checkExpiresToken() {
+//
+//        guard let url = URL(string: "https://api.deezer.com/user/me?access_token=\(String(describing: UserDefaults.standard.value(forKey: "accessToken")))") else {return}
+//
+//        URLSession.shared.dataTask(with: url) { (data, response, error) in
+//
+//            guard let data = data else {return}
+//
+//            do {
+//                let json1 = try JSONSerialization.jsonObject(with: data, options: [])
+//                print(json1)
+//                let json = try JSONDecoder().decode(AuthData.self, from: data)
+//                if json.error != nil && json.error?.code == 300 {
+//                    print("Code error: \(String(describing: json.error?.code))")
+//                }
+//
+//            } catch {
+//
+//            }
+//
+//        }.resume()
+//
+//    }
+//
+//}
 
