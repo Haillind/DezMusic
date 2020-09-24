@@ -331,17 +331,25 @@
 		92A763622489485100147C69 /* MusDZList */ = {
 			isa = PBXGroup;
 			children = (
-				92A763632489485100147C69 /* AppDelegate.swift */,
-				92A763652489485100147C69 /* SceneDelegate.swift */,
 				921560C2248F971A00229F1F /* Model */,
 				921560C3248F976C00229F1F /* Controller */,
 				921560C1248F971100229F1F /* View */,
 				9297909D248FE6F900006CB1 /* Cells */,
+				92C08F44251CC01500ECA320 /* Supporting files */,
+			);
+			path = MusDZList;
+			sourceTree = "<group>";
+		};
+		92C08F44251CC01500ECA320 /* Supporting files */ = {
+			isa = PBXGroup;
+			children = (
+				92A763632489485100147C69 /* AppDelegate.swift */,
+				92A763652489485100147C69 /* SceneDelegate.swift */,
 				92A7636C2489485200147C69 /* Assets.xcassets */,
 				92A7636E2489485200147C69 /* LaunchScreen.storyboard */,
 				92A763712489485200147C69 /* Info.plist */,
 			);
-			path = MusDZList;
+			path = "Supporting files";
 			sourceTree = "<group>";
 		};
 		92D3A2DC24E179F700DDE6C1 /* MusicBarControllers */ = {
@@ -704,7 +712,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = MusDZList/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MusDZList/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -726,7 +734,7 @@
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
-				INFOPLIST_FILE = MusDZList/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/MusDZList/Supporting files/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
