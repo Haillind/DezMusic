@@ -9,6 +9,7 @@
 import Foundation
 
 struct SearchData: Codable {
+    
     let data: [SearchResult]
     
     struct SearchResult: Codable {

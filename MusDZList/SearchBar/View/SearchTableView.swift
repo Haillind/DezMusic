@@ -10,7 +10,7 @@ import UIKit
 
 class SearchTableView: UITableView {
     
-    var someArray = [String]()
+    var cellsData = [SearchData.SearchResult]()
     
     init() {
         super.init(frame: .zero, style: .plain)
@@ -29,18 +29,22 @@ class SearchTableView: UITableView {
         fatalError("init(coder:) has not been implemented")
     }
     
+    func set(cells: [SearchData.SearchResult]) {
+        cellsData = cells
+    }
+    
 }
 
 extension SearchTableView: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return someArray.count
+        return cellsData.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         let cell = tableView.dequeueReusableCell(withIdentifier: String(describing: SearchCell.self), for: indexPath) as! SearchCell
-        cell.textLabel?.text = someArray[indexPath.row]
+        cell.textLabel?.text = "\(cellsData[indexPath.row].artist.name) - \(cellsData[indexPath.row].title)"
         return cell
     }
     
