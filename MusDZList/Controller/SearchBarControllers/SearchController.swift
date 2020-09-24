@@ -10,6 +10,8 @@ import UIKit
 
 class SearchController: UIViewController {
     
+    var tableView = SearchTableView()
+    
     private var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
         searchBar.placeholder = "Artists, tracks, playlists..."
@@ -18,8 +20,6 @@ class SearchController: UIViewController {
         searchBar.translatesAutoresizingMaskIntoConstraints = false
         return searchBar
     }()
-    
-    var tableView: UITableView!
     
     private var textField: UITextField = {
         let textField = UITextField()
@@ -34,6 +34,7 @@ class SearchController: UIViewController {
     
     private var searchLabel: UILabel = {
         let label = UILabel()
+        label.font = UIFont(name: "Helvetica Neue Bold", size: 40)
         label.text = "Search"
         label.translatesAutoresizingMaskIntoConstraints = false
         return label
@@ -43,55 +44,92 @@ class SearchController: UIViewController {
         super.viewDidLoad()
         
         searchBar.delegate = self
+        setSearchLabel()
         setSearch()
-        
+        setTableView()
+        tableView.separatorStyle = .none
     }
     
-    private func setTableView() {
-        view.addSubview(tableView)
+    private func setSearchLabel() {
+        view.addSubview(searchLabel)
         
-        tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 50).isActive = true
-        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
-        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
-        //searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-        tableView.widthAnchor.constraint(equalToConstant: 200).isActive = true
-        //tableView.heightAnchor.constraint(equalToConstant: 200).isActive = true
+        searchLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 68).isActive = true
+        searchLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+        searchLabel.heightAnchor.constraint(equalToConstant: 40).isActive = true
     }
     
     private func setSearch() {
         view.addSubview(searchBar)
         
         searchBar.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
-        searchBar.topAnchor.constraint(equalTo: view.topAnchor, constant: 50).isActive = true
-        searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
-        //searchBar.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -15).isActive = true
-        searchBar.widthAnchor.constraint(equalToConstant: 200).isActive = true
+        searchBar.topAnchor.constraint(equalTo: searchLabel.bottomAnchor, constant: 15).isActive = true
+        searchBar.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 10).isActive = true
         searchBar.heightAnchor.constraint(equalToConstant: 50).isActive = true
     }
-
+    
+    private func setTableView() {
+        view.addSubview(tableView)
+        
+        tableView.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        tableView.topAnchor.constraint(equalTo: searchBar.bottomAnchor, constant: 15).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 15).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        tableView.widthAnchor.constraint(equalToConstant: 200).isActive = true
+    }
+    
 }
 
 extension SearchController: UISearchBarDelegate {
     
     func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        testNetworkingFor(searching: searchText.lowercased())
+        
+        goLoadAndShowSearchInfo(searchText: searchText)
     }
     
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
-        print(searchBar.text ?? " ")
         
-        //testNetworkingFor(searching: searchBar.text)
-        getTestDataForSearch(searchText: searchBar.text) { (data) in
-            print(String(data: data, encoding: .utf8))
-            self.tableView = SearchTableView.init()
-            self.setTableView()
-        }
-        
-        
-        
+        goLoadAndShowSearchInfo(searchText: searchBar.text)
     }
     
+    func searchBarTextDidBeginEditing(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(true, animated: true)
+        
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
+            let intend: CGFloat = -68
+            let transform = CGAffineTransform(translationX: 0, y: intend)
+            self.searchLabel.transform = transform
+            self.searchLabel.alpha = 0
+            self.searchBar.transform = transform
+            self.tableView.transform = transform
+        }
+    }
+    
+    func searchBarTextDidEndEditing(_ searchBar: UISearchBar) {
+        
+        searchBar.setShowsCancelButton(false, animated: true)
+        UIView.animate(withDuration: 0.2, delay: 0, options: .curveEaseOut) {
+            self.searchLabel.transform = .identity
+            self.searchLabel.alpha = 1
+            self.searchBar.transform = .identity
+            self.tableView.transform = .identity
+        }
+    }
+    
+    func searchBarCancelButtonClicked(_ searchBar: UISearchBar) {
+        
+//        let searchBarText = ""
+        self.searchBar.endEditing(true)
+        searchBar.text = ""
+        tableView.isHidden = true
+        //goLoadAndShowSearchInfo(searchText: searchBarText)
+    }
+    
+    override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
+        
+        self.searchBar.endEditing(true)
+    }
+
     
 }
 
@@ -116,9 +154,13 @@ extension SearchController {
         }.resume()
     }
     
+    func testFunc() {
+        
+    }
+    
     func getTestDataForSearch(searchText: String?, completion: @escaping (_ data: Data)->()) {
         
-        guard let searchText = searchText, let url = URL(string: "https://api.deezer.com/search?q=artist:\'\(searchText)\'") else { return }
+        guard let searchText = searchText, let url = URL(string: "https://api.deezer.com/search?q=\(searchText)") else { return }
         
         URLSession.shared.dataTask(with: url) { (data, response, error) in
             if let data = data {
@@ -127,6 +169,33 @@ extension SearchController {
                 }
             }
         } .resume()
+    }
+    
+    func goLoadAndShowSearchInfo(searchText: String?) {
+        
+        guard let searchText = searchText else {return}
+        tableView.someArray = []
+        getTestDataForSearch(searchText: searchText) { (data) in
+            
+            do {
+                let decodingData = try JSONDecoder().decode(SearchData.self, from: data)
+                
+                for result in decodingData.data {
+                    self.tableView.someArray.append(result.title)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            if searchText == "" {
+                self.tableView.isHidden = true
+            } else {
+                self.tableView.isHidden = false
+//                self.setTableView()
+                self.tableView.reloadData()
+            }
+            
+        }
     }
     
 }
