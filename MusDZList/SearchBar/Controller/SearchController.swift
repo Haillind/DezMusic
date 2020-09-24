@@ -12,7 +12,7 @@ class SearchController: UIViewController {
     
     var tableView = SearchTableView()
     
-    let decoder = DecoderJSON()
+    let decoderJSON = DecoderJSON()
     
     private var searchBar: UISearchBar = {
         let searchBar = UISearchBar()
@@ -124,11 +124,11 @@ extension SearchController {
             
             guard let data = data else { return }
             
-            self.decoder.decodeToJSON(data: data, toDecode: SearchData.self) { (data) in
+            self.decoderJSON.decodeToJSON(data: data, toDecode: SearchData.self) { (decodeData) in
                 
                 var cellsData = [SearchData.SearchResult]()
                 
-                for result in data.data {
+                for result in decodeData.data {
                     cellsData.append(result)
                 }
                 
