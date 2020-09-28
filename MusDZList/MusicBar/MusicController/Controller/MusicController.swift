@@ -8,12 +8,6 @@
 
 import UIKit
 
-class TrackIsLiked {
-    var userTrackIsLiked: Set<Int>?
-    static let shared = TrackIsLiked()
-    private init() {}
-}
-
 class MusicController: UIViewController {
     
     var accessToken: String?
@@ -29,6 +23,8 @@ class MusicController: UIViewController {
     var recomendedPlaylistImages = [UIImage]()
     
     var countForRecommendedList = 0
+    
+    let decoderJSON = DecoderJSON()
     
     var collectionViewGenre: UICollectionView = {
         let layout = UICollectionViewFlowLayout()
@@ -66,7 +62,6 @@ class MusicController: UIViewController {
         collectionViewGenre.delegate = self
         
         settingCollectionView()
-        
         setGenreCollectionView()
         
         collectionViewFavorArtists.register(UINib(nibName: "FavoriteArtistsCell", bundle: nil), forCellWithReuseIdentifier: "favArtistCell")
@@ -80,25 +75,10 @@ class MusicController: UIViewController {
         accessToken = UserDefaults.standard.string(forKey: "accessToken")!
         userProfileId = UserDefaults.standard.string(forKey: "userProfileId")!
         
-        getFavoriteArtistsUrl(){
-            self.getFavoriteArtistsInfo() {
-                DispatchQueue.main.async {
-                    self.collectionViewFavorArtists.reloadData()
-                }
-            }
-        }
+        getDataForFavoriteArtistsCollectionAndShowIt()
+        getDataRecommendedPlaylistsCollectionAndShowIt()
         
-        getRecomendedPlaylists() {
-            self.getImagesForRecomendedList() {
-                print(self.recomendedPlaylistResults)
-                print(self.recomendedPlaylistImages)
-                DispatchQueue.main.async {
-                    self.collectionViewRecomendedPlaylists.reloadData()
-                }
-            }
-        }
-        
-        singletonForCheckFavoriteTracksIsLiked()
+        NetworkingTrackLikes.shared.singletonForCheckFavoriteTracksIsLikedRefactoring()
     }
     
     private func setGenreCollectionView() {
@@ -286,164 +266,37 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
     
 }
 
+
+// Networking Methods for CollectionViews
+
 extension MusicController {
     
-    func getFavoriteArtistsUrl(completion: (() -> Void)?) {
+    func getDataForFavoriteArtistsCollectionAndShowIt() {
         
-        let urlUser = "https://api.deezer.com/user/me/artists?access_token=\(accessToken!)"
-
-        guard let url = URL(string: urlUser) else {return}
-
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
-
-            guard let data = data else {return}
+        FavoriteCollectionNetworkManager.shared.getFavoriteArtistsUrlFromServer(accessToken: accessToken) { (arrayFavoriteArtist) in
             
-            do {
-                let favoritesArtists = try JSONDecoder().decode(UserFavoriteArtistsData.self, from: data)
-                for artist in favoritesArtists.data {
-                    
-                    self.userFavoriteArtistData.append(artist)
-                }
-            } catch {
-                print(error)
+            self.userFavoriteArtistData = arrayFavoriteArtist
+            
+            FavoriteCollectionNetworkManager.shared.getFavoriteArtistsInfoAndGettingImageForShowing(favoriteArtistsData: arrayFavoriteArtist) { (arrayFavoriteModels) in
+                
+                self.userFavoriteArtistModels = arrayFavoriteModels
+                self.collectionViewFavorArtists.reloadData()
             }
-            completion!()
-        }.resume()
-    }
-    
-    func getFavoriteArtistsInfo(completion: (() -> Void)?) {
-        
-        for artist in userFavoriteArtistData {
-            
-            let urlForImage = artist.pictureBig
-            
-            URLSession.shared.dataTask(with: urlForImage) { (data, _, _) in
-                
-                guard let data = data else {return}
-                
-                let artistInfo = FavoriteArtistsModel(id: artist.id, name: artist.name, picture_big: data)
-                self.userFavoriteArtistModels.append(artistInfo)
-                
-                completion!()
-            }.resume()
         }
     }
     
-    func getRecomendedPlaylists(completion: (() -> Void)?) {
-        
-        let urlForRecomendedPlaylists = "https://api.deezer.com/user/\(userProfileId!)/recommendations/playlists?access_token=\(accessToken!)"
-        
-        guard let url = URL(string: urlForRecomendedPlaylists) else {return}
-        
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
+    func getDataRecommendedPlaylistsCollectionAndShowIt() {
+        RecommendedCollectionNetworkManager.shared.getRecomendedPlaylistsFromServer(accessToken: accessToken, userProfileId: userProfileId) { (recommendedPLInfo) in
             
-            guard let data = data else {return}
+            self.fourRecomendedPlaylistResults = recommendedPLInfo
             
-            do{
-                let recomendedPlaylistInfo = try JSONDecoder().decode(RecomendedPlaylistsData.self, from: data)
-                for object in recomendedPlaylistInfo.data {
-                    self.recomendedPlaylistResults.append(object)
-                    
-                    if self.countForRecommendedList <= 3 {
-                        self.fourRecomendedPlaylistResults.append(object)
-                        self.countForRecommendedList += 1
-                    }
-                }
+            RecommendedCollectionNetworkManager.shared.getRecommendedPlaylistsInfoAndGettingImageForShowing(recommendedPlaylistsData: recommendedPLInfo) { (data) in
                 
-            } catch {
-                print(error)
-            }
-            completion!()
-        }.resume()
-    }
-    
-    func getImagesForRecomendedList(completion: (() -> Void)?) {
-        
-        for playlistInfo in recomendedPlaylistResults {
-            
-            URLSession.shared.dataTask(with: playlistInfo.pictureBig) { (data, _, error) in
-                
-                guard let data = data else {return}
-                guard let image = UIImage(data: data) else {return}
-                self.recomendedPlaylistImages.append(image)
-                
-                completion!()
-            }.resume()
-        }
-        
-        for playlistInfo in fourRecomendedPlaylistResults {
-            
-            URLSession.shared.dataTask(with: playlistInfo.pictureBig) { (data, _, error) in
-                
-                guard let data = data else {return}
                 guard let image = UIImage(data: data) else {return}
                 self.fourRecomendedPlaylistImages.append(image)
-                
-                completion!()
-            }.resume()
+                self.collectionViewRecomendedPlaylists.reloadData()
+            }
         }
     }
     
-    // Check for Track Likes
-    
-    func singletonForCheckFavoriteTracksIsLiked() {
-        
-        TrackIsLiked.shared.userTrackIsLiked = Set.init()
-        
-        let urlFavoriteTracks = "https://api.deezer.com/user/me/tracks?access_token=\(UserDefaults.standard.string(forKey: "accessToken")!)"
-        
-        guard let url = URL(string: urlFavoriteTracks) else {return}
-        
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
-            
-            guard let data = data else {return}
-            
-            do {
-                let safeData = try JSONDecoder().decode(FavoriteTracksData.self, from: data)
-                
-                for object in safeData.data {
-                    TrackIsLiked.shared.userTrackIsLiked?.insert(object.id)
-                }
-                
-                if safeData.next != nil {
-                    self.downloadNextListOfFavoriteTrackForSingleton(url: safeData.next)
-                } else {
-                    return
-                }
-                
-                
-            } catch {
-                print(error)
-            }
-        }.resume()
-    }
-    
-    func downloadNextListOfFavoriteTrackForSingleton(url: URL?) {
-        
-        guard let url = url else {return}
-        
-        URLSession.shared.dataTask(with: url) { (data, _, _) in
-            
-            guard let data = data else {return}
-            
-            do {
-                let safeData = try JSONDecoder().decode(FavoriteTracksData.self, from: data)
-                
-                for object in safeData.data {
-                    TrackIsLiked.shared.userTrackIsLiked?.insert(object.id)
-                }
-                
-                if safeData.next != nil {
-                    self.downloadNextListOfFavoriteTrackForSingleton(url: safeData.next)
-                } else {
-                    print(TrackIsLiked.shared.userTrackIsLiked?.count)
-                    return
-                }
-                
-            } catch {
-                print(error)
-            }
-            
-        }.resume()
-    }
 }
