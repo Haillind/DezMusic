@@ -307,7 +307,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="goh-1x-yHf" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="4009" y="-974"/>
+            <point key="canvasLocation" x="4009" y="-1050"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="DjG-R8-KPf">

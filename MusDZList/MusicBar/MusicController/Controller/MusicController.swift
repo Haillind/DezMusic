@@ -92,7 +92,6 @@ class MusicController: UIViewController {
         collectionViewGenre.bottomAnchor.constraint(equalTo: controllerScrollView.bottomAnchor, constant: -15).isActive = true
         
         collectionViewGenre.heightAnchor.constraint(equalToConstant: 100).isActive = true
-        
     }
     
     @IBAction func logOut(_ sender: UIButton) {

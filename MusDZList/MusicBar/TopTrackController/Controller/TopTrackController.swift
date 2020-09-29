@@ -14,48 +14,42 @@ class TopTrackController: UIViewController {
 
     @IBOutlet weak var tableViewTopTrack: UITableView!
     
+    let decoderJSON = DecoderJSON()
+    
     var nameForTitle: String?
     var idArtistsForQuery: Int?
     
-    var arrayOfDataTracks = [TopTracksList]()
     var topTracksInfo = [TopTracksSongModel]()
     
     override func viewWillAppear(_ animated: Bool) {
         navigationController?.navigationBar.isHidden = false
+        
+        guard let name = nameForTitle else {return}
+        navigationController?.navigationBar.topItem?.title = ""
+        self.navigationItem.title = "\(name)"
     }
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
-        preSettingController()
         
         tableViewTopTrack.delegate = self
         tableViewTopTrack.dataSource = self
         
         tableViewTopTrack.register(UINib(nibName: "TopTrackCell", bundle: nil), forCellReuseIdentifier: "topTrackCell")
         
-        settingForTableView()
+        settingsForTableView()
         
-        getTopTrackListOfArtists(idArtist: idArtistsForQuery){
-            self.getImageForTrackInTopList() {
-                DispatchQueue.main.async {
-                    self.tableViewTopTrack.reloadData()
-                }
+        getTopTrackListOfArtistsRefactoring(idArtist: idArtistsForQuery) { (topTrackList) in
+            self.getImageForTrackInTopListRefactoring(arrayOf: topTrackList) {
+                self.tableViewTopTrack.reloadData()
             }
         }
-        
-    }
-    
-    func preSettingController() {
-        guard let name = nameForTitle else {return}
-        navigationController?.navigationBar.topItem?.title = ""
-        self.navigationItem.title = "\(name)"
     }
     
 }
 
 
-
+//MARK: - TableView Delegate Methods
 extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -71,7 +65,6 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         cell.imageAlbumTrack.image = UIImage(data: topTracksInfo[indexPath.item].albumImage)
         
         return cell
-        
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -89,7 +82,7 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
         tabBarController?.presentPopupBar(withContentViewController: playerVC, openPopup: true, animated: true,  completion: nil)
     }
     
-    func settingForTableView() {
+    func settingsForTableView() {
         tableViewTopTrack.rowHeight = 100
     }
     
@@ -97,58 +90,44 @@ extension TopTrackController: UITableViewDelegate, UITableViewDataSource {
 
 extension TopTrackController {
     
-    func getTopTrackListOfArtists(idArtist: Int?, completion: (() -> Void)?) {
+    func getTopTrackListOfArtistsRefactoring(idArtist: Int?, completion: @escaping ([TopTracksList]) -> ()) {
         
         guard let idArtist = idArtist else {return}
         let urlForTopTrackList = "https://api.deezer.com/artist/\(idArtist)/top?limit=50"
         guard let url = URL(string: urlForTopTrackList) else {return}
         
-        URLSession.shared.dataTask(with: url) { (data, _, error) in
+        NetworkService.shared.getDataFromServer(url: url) { (data, _, _) in
             
             guard let data = data else {return}
             
-            do {
-                
-                let topTrackData = try JSONDecoder().decode(ListOfTopTracksData.self, from: data)
-                for object in topTrackData.data {
-                    self.arrayOfDataTracks.append(object)
+            self.decoderJSON.decodeToJSON(data: data, toDecode: ListOfTopTracksData.self) { (decoderData) in
+                var arrayOfTracks = [TopTracksList]()
+                for topTrack in decoderData.data {
+                    arrayOfTracks.append(topTrack)
                 }
-                
-            } catch {
-                print(error)
+                completion(arrayOfTracks)
             }
-            
-            completion!()
-        }.resume()
+        }
     }
     
-    func getImageForTrackInTopList(completion: (() -> Void)?) {
+    func getImageForTrackInTopListRefactoring(arrayOf topTrackList: [TopTracksList], completion: @escaping () -> ()) {
         
-        for track in arrayOfDataTracks {
-            var contributString = ""
+        for track in topTrackList {
             
-            for (index, contribut) in track.contributors.enumerated() {
-                if index != track.contributors.count - 1 {
-                    contributString += "\(contribut.name), "
-                } else {
-                    contributString += "\(contribut.name)"
-                }
-            }
+            let contributString = ConstructOfString.shared.constructContributers(listOf: track.contributors)
             
-            // URL Sesion
-            
+            // Networking
             let urlForImage = track.album.coverBig
             
-            URLSession.shared.dataTask(with: urlForImage) { (data, _, error) in
+            NetworkService.shared.getDataFromServer(url: urlForImage) { (data, _, _) in
                 
                 guard let data = data else {return}
-                
                 let trackInfo = TopTracksSongModel(id: track.id, artistName: track.artist.name, albumName: track.album.title, albumImage: data, nameOfSong: track.title, nameOFContributors: contributString, totalDuration: "30", urlForSong: track
                     .preview)
                 self.topTracksInfo.append(trackInfo)
-                
-                completion!()
-            }.resume()
+                completion()
+            }
         }
     }
+    
 }

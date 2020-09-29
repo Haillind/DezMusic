@@ -30,6 +30,7 @@
 		9269B860251905FC00C12FC7 /* SearchTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269B85F251905FC00C12FC7 /* SearchTableView.swift */; };
 		9269B864251908AC00C12FC7 /* SearchCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269B863251908AC00C12FC7 /* SearchCell.swift */; };
 		9269B86925190E7500C12FC7 /* SearchData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9269B86825190E7500C12FC7 /* SearchData.swift */; };
+		9289378D2523625300E9F119 /* ConstructOfString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9289378C2523625300E9F119 /* ConstructOfString.swift */; };
 		9296ECC324B865D800846055 /* FavoriteTracksData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9296ECC224B865D800846055 /* FavoriteTracksData.swift */; };
 		9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */; };
 		929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9297909E248FE72200006CB1 /* FavoriteArtistsCell.swift */; };
@@ -41,6 +42,9 @@
 		92A763702489485200147C69 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 92A7636E2489485200147C69 /* LaunchScreen.storyboard */; };
 		92A7C1812497943C0040347F /* TopTracksSongModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7C1802497943C0040347F /* TopTracksSongModel.swift */; };
 		92A7C1832497A1500040347F /* FavoriteArtistsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */; };
+		92B58E37252247EC0026B277 /* TopTrackTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B58E36252247EC0026B277 /* TopTrackTableView.swift */; };
+		92B58E39252249230026B277 /* TopTrackControllerTest.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B58E38252249230026B277 /* TopTrackControllerTest.swift */; };
+		92B58E3B252249DC0026B277 /* TopTrackListCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92B58E3A252249DC0026B277 /* TopTrackListCell.swift */; };
 		92C08F53251CC7B500ECA320 /* NetworkService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C08F52251CC7B500ECA320 /* NetworkService.swift */; };
 		92C08F55251CE03B00ECA320 /* DecoderJSON.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C08F54251CE03B00ECA320 /* DecoderJSON.swift */; };
 		92C08F58251CFA1700ECA320 /* Constants.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92C08F57251CFA1700ECA320 /* Constants.swift */; };
@@ -102,6 +106,7 @@
 		9269B85F251905FC00C12FC7 /* SearchTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchTableView.swift; sourceTree = "<group>"; };
 		9269B863251908AC00C12FC7 /* SearchCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchCell.swift; sourceTree = "<group>"; };
 		9269B86825190E7500C12FC7 /* SearchData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchData.swift; sourceTree = "<group>"; };
+		9289378C2523625300E9F119 /* ConstructOfString.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConstructOfString.swift; sourceTree = "<group>"; };
 		9296ECC224B865D800846055 /* FavoriteTracksData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteTracksData.swift; sourceTree = "<group>"; };
 		9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UserFavoriteArtistsData.swift; sourceTree = "<group>"; };
 		9297909E248FE72200006CB1 /* FavoriteArtistsCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteArtistsCell.swift; sourceTree = "<group>"; };
@@ -115,6 +120,9 @@
 		92A763712489485200147C69 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		92A7C1802497943C0040347F /* TopTracksSongModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTracksSongModel.swift; sourceTree = "<group>"; };
 		92A7C1822497A1500040347F /* FavoriteArtistsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteArtistsModel.swift; sourceTree = "<group>"; };
+		92B58E36252247EC0026B277 /* TopTrackTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackTableView.swift; sourceTree = "<group>"; };
+		92B58E38252249230026B277 /* TopTrackControllerTest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackControllerTest.swift; sourceTree = "<group>"; };
+		92B58E3A252249DC0026B277 /* TopTrackListCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TopTrackListCell.swift; sourceTree = "<group>"; };
 		92C08F52251CC7B500ECA320 /* NetworkService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NetworkService.swift; sourceTree = "<group>"; };
 		92C08F54251CE03B00ECA320 /* DecoderJSON.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DecoderJSON.swift; sourceTree = "<group>"; };
 		92C08F57251CFA1700ECA320 /* Constants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Constants.swift; sourceTree = "<group>"; };
@@ -213,7 +221,6 @@
 		921186B0249B964D00D76BC2 /* CodableDataFiles */ = {
 			isa = PBXGroup;
 			children = (
-				92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */,
 				9296ECC124B865B900846055 /* FavoriteTabControllerData */,
 			);
 			path = CodableDataFiles;
@@ -222,7 +229,6 @@
 		921186B1249B969400D76BC2 /* ObjectModels */ = {
 			isa = PBXGroup;
 			children = (
-				92A7C1802497943C0040347F /* TopTracksSongModel.swift */,
 				92D3A2E524E17CFD00DDE6C1 /* FavoriteControllerRowValue.swift */,
 				925EF5D324BE05D400DC8B86 /* UserSettingsModels */,
 			);
@@ -278,8 +284,8 @@
 		922385682522352800E4373E /* CodableData */ = {
 			isa = PBXGroup;
 			children = (
-				92B58E28252235CC0026B277 /* FavoriteCollection */,
-				92B58E29252235E20026B277 /* RecommendedCollection */,
+				92B58E342522471B0026B277 /* FavoriteCollection */,
+				92B58E35252247240026B277 /* RecommendedCollection */,
 			);
 			path = CodableData;
 			sourceTree = "<group>";
@@ -309,6 +315,24 @@
 			path = UserSettingsModels;
 			sourceTree = "<group>";
 		};
+		9289378B25235B9700E9F119 /* TestsControllers */ = {
+			isa = PBXGroup;
+			children = (
+				92B58E38252249230026B277 /* TopTrackControllerTest.swift */,
+				92B58E36252247EC0026B277 /* TopTrackTableView.swift */,
+				92B58E3A252249DC0026B277 /* TopTrackListCell.swift */,
+			);
+			path = TestsControllers;
+			sourceTree = "<group>";
+		};
+		9289378E2523647700E9F119 /* LogicFiles */ = {
+			isa = PBXGroup;
+			children = (
+				9289378C2523625300E9F119 /* ConstructOfString.swift */,
+			);
+			path = LogicFiles;
+			sourceTree = "<group>";
+		};
 		9296ECC124B865B900846055 /* FavoriteTabControllerData */ = {
 			isa = PBXGroup;
 			children = (
@@ -336,6 +360,7 @@
 			isa = PBXGroup;
 			children = (
 				92A763622489485100147C69 /* MusDZList */,
+				9289378B25235B9700E9F119 /* TestsControllers */,
 				925D48EE251A53C800002BD4 /* Fonts */,
 				92A763612489485100147C69 /* Products */,
 				92E47F6224A3CEF400E79774 /* Frameworks */,
@@ -368,7 +393,7 @@
 			path = MusDZList;
 			sourceTree = "<group>";
 		};
-		92B58E28252235CC0026B277 /* FavoriteCollection */ = {
+		92B58E342522471B0026B277 /* FavoriteCollection */ = {
 			isa = PBXGroup;
 			children = (
 				9297909B248FD0A400006CB1 /* UserFavoriteArtistsData.swift */,
@@ -377,7 +402,7 @@
 			path = FavoriteCollection;
 			sourceTree = "<group>";
 		};
-		92B58E29252235E20026B277 /* RecommendedCollection */ = {
+		92B58E35252247240026B277 /* RecommendedCollection */ = {
 			isa = PBXGroup;
 			children = (
 				925573EC249242960057A2B5 /* RecomendedPlaylistsData.swift */,
@@ -514,7 +539,7 @@
 		92C08F5B251D016E00ECA320 /* TopTrackController */ = {
 			isa = PBXGroup;
 			children = (
-				9206C9BF2493A4420082565D /* TopTrackController.swift */,
+				9289378E2523647700E9F119 /* LogicFiles */,
 				92C08F5F251D01CB00ECA320 /* Model */,
 				92C08F5E251D01C700ECA320 /* View */,
 				92C08F5D251D01BC00ECA320 /* Controller */,
@@ -525,6 +550,7 @@
 		92C08F5C251D017A00ECA320 /* MusicController */ = {
 			isa = PBXGroup;
 			children = (
+				922385652522227900E4373E /* Networking */,
 				92C08F65251D01E100ECA320 /* Model */,
 				92C08F63251D01E100ECA320 /* View */,
 				92C08F64251D01E100ECA320 /* Controller */,
@@ -535,6 +561,7 @@
 		92C08F5D251D01BC00ECA320 /* Controller */ = {
 			isa = PBXGroup;
 			children = (
+				9206C9BF2493A4420082565D /* TopTrackController.swift */,
 			);
 			path = Controller;
 			sourceTree = "<group>";
@@ -549,6 +576,8 @@
 		92C08F5F251D01CB00ECA320 /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				92A7C1802497943C0040347F /* TopTracksSongModel.swift */,
+				92DCD1882494DD540013A2C8 /* ListOfTopTracksData.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -595,7 +624,6 @@
 			isa = PBXGroup;
 			children = (
 				922385682522352800E4373E /* CodableData */,
-				922385652522227900E4373E /* Networking */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -775,8 +803,10 @@
 				9234AAFF2490EC86006E37A8 /* PlayerController.swift in Sources */,
 				92C08F53251CC7B500ECA320 /* NetworkService.swift in Sources */,
 				920D02BE24B7A12800FB076F /* FavoritesTabCell.swift in Sources */,
+				92B58E3B252249DC0026B277 /* TopTrackListCell.swift in Sources */,
 				921FCDDE248ED13A000DB7FE /* AuthController.swift in Sources */,
 				92A7C1832497A1500040347F /* FavoriteArtistsModel.swift in Sources */,
+				92B58E37252247EC0026B277 /* TopTrackTableView.swift in Sources */,
 				92A763642489485100147C69 /* AppDelegate.swift in Sources */,
 				920D029524B7678200FB076F /* FavoritesTabController.swift in Sources */,
 				92E638B824B9C72200EB18A9 /* UserAlbumsData.swift in Sources */,
@@ -790,9 +820,11 @@
 				921186B4249B96F300D76BC2 /* PlayerDurationLogic.swift in Sources */,
 				922385622521F8EB00E4373E /* FavoriteCollectionNetworkManager.swift in Sources */,
 				9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */,
+				9289378D2523625300E9F119 /* ConstructOfString.swift in Sources */,
 				929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */,
 				92D3A2E424E17ACE00DDE6C1 /* SearchController.swift in Sources */,
 				922385672522230800E4373E /* NetworkingTrackLikes.swift in Sources */,
+				92B58E39252249230026B277 /* TopTrackControllerTest.swift in Sources */,
 				9269B860251905FC00C12FC7 /* SearchTableView.swift in Sources */,
 				921560C7248FA73900229F1F /* MusicController.swift in Sources */,
 				92FC820424C7031D00B3BBFD /* GenreCell.swift in Sources */,
