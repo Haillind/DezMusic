@@ -8,11 +8,11 @@
 
 import Foundation
 
-class FavoriteControllerRowValue {
-    var titleOfTableRow: String
+struct FavoriteControllerMenuValue {
+    var titleOfTableRow: FavoriteActions
     var countOfDataInfoForCurrentRow: Int
     
-    init(titleOfTableRow: String, countOfDataInfoForCurrentRow: Int) {
+    init(titleOfTableRow: FavoriteActions, countOfDataInfoForCurrentRow: Int) {
         self.titleOfTableRow = titleOfTableRow
         self.countOfDataInfoForCurrentRow = countOfDataInfoForCurrentRow
     }

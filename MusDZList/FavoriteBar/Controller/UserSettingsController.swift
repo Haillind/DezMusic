@@ -52,7 +52,6 @@ class UserSettingsController: UIViewController {
         tableViewFooter.backgroundColor = .clear
         tableView.tableFooterView  = tableViewFooter
     }
-    
 
 }
 
@@ -96,7 +95,6 @@ extension UserSettingsController: UITableViewDelegate, UITableViewDataSource {
         } else {
             return 60
         }
-
     }
     
     func tableView(_ tableView: UITableView, viewForFooterInSection section: Int) -> UIView? {
@@ -111,7 +109,6 @@ extension UserSettingsController: UITableViewDelegate, UITableViewDataSource {
         
         let view = UITableViewHeaderFooterView.init(frame: CGRect.init(x: 0, y: 0, width: tableView.bounds.width, height: tableView.sectionHeaderHeight))
         return view
-
     }
     
     func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
