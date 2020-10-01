@@ -19,13 +19,13 @@ class PlayerManager {
     private init() {}
 }
 
-protocol PlayerControllerFavoriteTableDelegate {
-    func updateInfoTableView()
-}
+//protocol PlayerControllerFavoriteTableDelegate {
+//    func updateInfoTableView()
+//}
 
 class PlayerController: UIViewController {
     
-    var delegate: PlayerControllerFavoriteTableDelegate?
+//    var delegate: PlayerControllerFavoriteTableDelegate?
     
     let playerManage = PlayerDurationLogic()
     
@@ -86,7 +86,6 @@ class PlayerController: UIViewController {
         PlayerManager.shared.player = nil
         
         play()
-        
     }
     
     func passToFavoriteTableViewAboutReloadTrackCount (){
@@ -119,7 +118,6 @@ class PlayerController: UIViewController {
         checkTrackIsLiked()
         likeBtn.setTitle("", for: .normal)
         likeBtn.frame.size = CGSize(width: 40, height: 40)
-        
     }
     
     func setPopupScreen() {
@@ -252,6 +250,7 @@ extension PlayerController {
             self.currentDurationSongLabel.text = self.playerManage.setCurrentDuration(currentTimeSong: Int(currentTimeSong))
         }
     }
+    
 }
 
 //MARK: - Add and delete methods for favorite track(track likes on/off)
@@ -267,7 +266,6 @@ extension PlayerController {
             self.passToFavoriteTableViewAboutReloadTrackCount()
             complition!()
         }.resume()
-        
     }
     
     func unlikeTrackAndDeleteFromUserFavoriteTrackList(complition: (() -> Void)?) {
@@ -295,4 +293,5 @@ extension PlayerController {
             }
         }
     }
+    
 }
