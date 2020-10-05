@@ -53,4 +53,40 @@ class RecommendedCollectionNetworkManager {
         }
     }
     
+    func getRecomendedPlaylistsFromServerForNextRecommendedController(accessToken: String?, userProfileId: String?, completion: @escaping ([RecomendedPlaylistInfo]) -> ()) {
+        
+        guard let accessToken = accessToken, let userProfileId = userProfileId else {return}
+        
+        var recomendedPLData = [RecomendedPlaylistInfo]()
+        
+        let urlUser = "https://api.deezer.com/user/\(userProfileId)/recommendations/playlists?access_token=\(accessToken)"
+        guard let url = URL(string: urlUser) else {return}
+        
+        NetworkService.shared.getDataFromServer(url: url) { (data, _, error) in
+            
+            guard let data = data else {return}
+            
+            self.decoderJSON.decodeToJSON(data: data, toDecode: RecomendedPlaylistsData.self) { (decodedData) in
+                for recomendedData in decodedData.data {
+                    recomendedPLData.append(recomendedData)
+                }
+                completion(recomendedPLData)
+            }
+        }
+    }
+    
+    func getRecommendedPlaylistsInfoAndGettingImageForShowingForNextRecommendedController(recommendedPlaylistsData array: [RecomendedPlaylistInfo], completion: @escaping ([RecomendModel]) -> ()) {
+        
+        var listOfRecommendModels = [RecomendModel]()
+        for playlistsInfo in array {
+            
+            NetworkService.shared.getDataFromServer(url: playlistsInfo.pictureBig) { (data, _, _) in
+                guard let data = data else {return}
+                let model = RecomendModel(data: playlistsInfo, image: data)
+                listOfRecommendModels.append(model)
+                completion(listOfRecommendModels)
+            }
+        }
+    }
+    
 }

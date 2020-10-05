@@ -66,7 +66,6 @@
                     <connections>
                         <segue destination="FdD-EP-eeR" kind="show" identifier="settingsSegue" id="Mqq-uu-WwQ"/>
                         <segue destination="ISf-YA-BLe" kind="show" identifier="notificateSegue" id="NSz-zU-FM0"/>
-                        <segue destination="ARc-2v-eqR" kind="show" id="Izs-fX-xpM"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="97x-f9-6sP" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
@@ -104,22 +103,6 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="Cza-qT-uhx" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="4009" y="366"/>
-        </scene>
-        <!--View Controller-->
-        <scene sceneID="vay-Et-uRG">
-            <objects>
-                <viewController id="ARc-2v-eqR" sceneMemberID="viewController">
-                    <view key="view" contentMode="scaleToFill" id="ORF-7y-RgU">
-                        <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
-                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                        <viewLayoutGuide key="safeArea" id="INM-qB-nM5"/>
-                        <color key="backgroundColor" systemColor="systemBackgroundColor"/>
-                    </view>
-                    <navigationItem key="navigationItem" id="7Eq-2N-lFJ"/>
-                </viewController>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="dxh-uf-OaW" userLabel="First Responder" customClass="UIResponder" sceneMemberID="firstResponder"/>
-            </objects>
-            <point key="canvasLocation" x="4888" y="708"/>
         </scene>
         <!--Music Controller-->
         <scene sceneID="93K-2w-8yV">
@@ -267,10 +250,10 @@
             </objects>
             <point key="canvasLocation" x="2984.057971014493" y="-318.08035714285711"/>
         </scene>
-        <!--Recomended Playlist Controller-->
+        <!--Recommended Controller-->
         <scene sceneID="bvx-jp-8GK">
             <objects>
-                <viewController id="AIi-hK-l4H" customClass="RecomendedPlaylistController" customModule="MusDZList" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController id="AIi-hK-l4H" customClass="RecommendedController" customModule="MusDZList" customModuleProvider="target" sceneMemberID="viewController">
                     <view key="view" contentMode="scaleToFill" id="7bU-xA-kSA">
                         <rect key="frame" x="0.0" y="0.0" width="414" height="896"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>

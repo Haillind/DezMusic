@@ -24,6 +24,8 @@ class MusicController: UIViewController {
     
     var countForRecommendedList = 0
     
+    var nextController = [RecomendModel]()
+    
     let decoderJSON = DecoderJSON()
     
     var collectionViewGenre: UICollectionView = {
@@ -67,8 +69,8 @@ class MusicController: UIViewController {
         collectionViewFavorArtists.register(UINib(nibName: "FavoriteArtistsCell", bundle: nil), forCellWithReuseIdentifier: "favArtistCell")
         
         collectionViewRecomendedPlaylists.register(UINib(nibName: "RecomendedPlaylistsCell", bundle: nil), forCellWithReuseIdentifier: "recomendListCell")
-        collectionViewRecomendedPlaylists.register(UINib(nibName: "HeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: "header")
-        collectionViewRecomendedPlaylists.register(UINib(nibName: "FooterView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: "footer")
+        collectionViewRecomendedPlaylists.register(RecommendedHeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: RecommendedHeaderView.self))
+        collectionViewRecomendedPlaylists.register(RecommendedFooterView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionFooter, withReuseIdentifier: String(describing: RecommendedFooterView.self))
         
         collectionViewGenre.register(GenreCell.self, forCellWithReuseIdentifier: GenreCell.genreCellId)
         
@@ -77,6 +79,10 @@ class MusicController: UIViewController {
         
         getDataForFavoriteArtistsCollectionAndShowIt()
         getDataRecommendedPlaylistsCollectionAndShowIt()
+        
+        //next controller
+        getAllDataForNextRecommendedController()
+        //
         
         NetworkingTrackLikes.shared.singletonForCheckFavoriteTracksIsLikedRefactoring()
     }
@@ -159,10 +165,14 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
             performSegue(withIdentifier: "topTrackSegue", sender: self)
         }
         
-        if collectionView == collectionViewRecomendedPlaylists {
-            
-            performSegue(withIdentifier: "recomendedPlaylistSegue", sender: self)
-        }
+//        if collectionView == collectionViewRecomendedPlaylists {
+//            
+////            performSegue(withIdentifier: "recomendedPlaylistSegue", sender: self)
+//            let settingVC = RecommendedController()
+//            settingVC.dataForRecommendedCells = nextController
+//            self.navigationController?.pushViewController(settingVC, animated: true)
+//        }
+        
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -177,15 +187,16 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
             }
         }
         
-        if segue.identifier == "recomendedPlaylistSegue" {
-            let recomendedPlaylistsVC = segue.destination as! RecomendedPlaylistController
-            
-            if let indexPath = collectionViewRecomendedPlaylists.indexPathsForSelectedItems?.first {
-                
-                recomendedPlaylistsVC.recomendedPlaylistOptional = self.recomendedPlaylistResults
-            }
-        }
-        
+//        if segue.identifier == "recomendedPlaylistSegue" {
+//            let recomendedPlaylistsVC = segue.destination as! RecommendedController
+////            let recomendedPlaylistsVC = segue.destination as! RecomendedPlaylistController
+//            
+////            if let indexPath = collectionViewRecomendedPlaylists.indexPathsForSelectedItems?.first {
+////
+////                recomendedPlaylistsVC.recomendedPlaylistOptional = self.recomendedPlaylistResults
+////            }
+//        }
+      
         
     }
     
@@ -229,12 +240,16 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
 
         case UICollectionView.elementKindSectionHeader:
 
-            let headerView = collectionViewRecomendedPlaylists.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderView
+            let headerView = collectionViewRecomendedPlaylists.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: RecommendedHeaderView.self), for: indexPath) as! RecommendedHeaderView
+            
+            headerView.delegate = self
             return headerView
 
         case UICollectionView.elementKindSectionFooter:
             
-            let footerView = collectionViewRecomendedPlaylists.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "footer", for: indexPath) as! FooterView
+            let footerView = collectionViewRecomendedPlaylists.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: RecommendedFooterView.self), for: indexPath) as! RecommendedFooterView
+            
+            footerView.delegate = self
             return footerView
 
         default:
@@ -266,7 +281,7 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
 }
 
 
-// Networking Methods for CollectionViews
+//MARK: - Networking Methods for CollectionViews
 
 extension MusicController {
     
@@ -285,6 +300,7 @@ extension MusicController {
     }
     
     func getDataRecommendedPlaylistsCollectionAndShowIt() {
+        
         RecommendedCollectionNetworkManager.shared.getRecomendedPlaylistsFromServer(accessToken: accessToken, userProfileId: userProfileId) { (recommendedPLInfo) in
             
             self.fourRecomendedPlaylistResults = recommendedPLInfo
@@ -298,4 +314,26 @@ extension MusicController {
         }
     }
     
+    func getAllDataForNextRecommendedController() {
+        
+        RecommendedCollectionNetworkManager.shared.getRecomendedPlaylistsFromServerForNextRecommendedController(accessToken: accessToken, userProfileId: userProfileId) { (recommendedPLInfo) in
+            RecommendedCollectionNetworkManager.shared.getRecommendedPlaylistsInfoAndGettingImageForShowingForNextRecommendedController(recommendedPlaylistsData: recommendedPLInfo) { (listOfRecommendedModels) in
+                self.nextController = listOfRecommendedModels
+                print(self.nextController.count)
+            }
+        }
+    }
+    
+}
+
+
+//MARK: - Recommended Header Delegate
+
+extension MusicController: RecommendedHeaderAndFooterDelegate {
+    
+    func openAllRecommendedResultsInNextController() {
+        let settingVC = RecommendedController()
+        settingVC.dataForRecommendedCells = nextController
+        self.navigationController?.pushViewController(settingVC, animated: true)
+    }
 }
