@@ -19,6 +19,17 @@ enum CellActionsDoing: Int {
 
 class FavoritesTabController: UIViewController {
     
+    var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .black
+        indicator.startAnimating()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
+    
+    private let networkingGroup = DispatchGroup()
+    
     private var tableView = FavoritesMenuTableView()
     
     private let networking = NetworkingFavoriteMenu()
@@ -40,6 +51,7 @@ class FavoritesTabController: UIViewController {
         webSessionsForTableViewContent()
         
         tableViewSettings()
+        setActivityIndicator()
         
         setNavBarButtons()
         
@@ -50,6 +62,7 @@ class FavoritesTabController: UIViewController {
 
         networking.favoriteTracksList = []
         networking.favoriteTracksListData = []
+        networking.countOfTracks = 0
         
         webSessionsForTableViewContent()
     }
@@ -62,6 +75,13 @@ class FavoritesTabController: UIViewController {
         tableView.favoritesTableListEnum[CellActionsDoing.Artists.rawValue].countOfDataInfoForCurrentRow = userFavoriteArtistData.count
     }
     
+    private func setActivityIndicator() {
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
     private func setNavBarButtons() {
         let notificateBarBtn = UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: #selector(notificateSelector))
         
@@ -71,7 +91,7 @@ class FavoritesTabController: UIViewController {
     }
     
     @objc private func notificateSelector() {
-        print(TrackIsLiked.shared.userTrackIsLiked?.count)
+//        print(TrackIsLiked.shared.userTrackIsLiked?.count)
         passToFavoriteTableViewAboutReloadTrackCount()
         tableView.reloadData()
     }
@@ -91,18 +111,29 @@ class FavoritesTabController: UIViewController {
 extension FavoritesTabController {
     
     private func webSessionsForTableViewContent() {
-
-        networking.getCountOfUserFavoriteTrack {
+        
+        networkingGroup.enter()
+        self.networking.getCountOfUserFavoriteTrack {
             self.tableView.favoritesTableListEnum[CellActionsDoing.FavoriteTracks.rawValue].countOfDataInfoForCurrentRow = self.networking.favoriteTracksList.count
-            self.tableView.reloadData()
+            self.networkingGroup.leave()
         }
         
-        networking.getAndSetCountOfUserPlaylists { (countPlaylists) in
+        networkingGroup.enter()
+        self.networking.getAndSetCountOfUserPlaylists { (countPlaylists) in
             self.tableView.favoritesTableListEnum[CellActionsDoing.Playlists.rawValue].countOfDataInfoForCurrentRow = countPlaylists
+            self.networkingGroup.leave()
         }
         
-        networking.getAndSetCountOfUserAlbums { (countAlbums) in
+        networkingGroup.enter()
+        self.networking.getAndSetCountOfUserAlbums { (countAlbums) in
             self.tableView.favoritesTableListEnum[CellActionsDoing.Albums.rawValue].countOfDataInfoForCurrentRow = countAlbums
+            self.networkingGroup.leave()
+        }
+        
+        networkingGroup.notify(queue: DispatchQueue.main) {
+            self.activityIndicator.stopAnimating()
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
         }
     }
     

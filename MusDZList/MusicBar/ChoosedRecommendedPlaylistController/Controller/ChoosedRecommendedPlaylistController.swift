@@ -10,54 +10,105 @@ import UIKit
 
 class ChoosedRecommendedPlaylistController: UIViewController {
     
+    var activityIndicator: UIActivityIndicatorView = {
+        let indicator = UIActivityIndicatorView()
+        indicator.style = .large
+        indicator.color = .black
+        indicator.startAnimating()
+        indicator.translatesAutoresizingMaskIntoConstraints = false
+        return indicator
+    }()
     
     var tracklist: RecomendModel?
     
-    var viewForImage: UIView = {
-        let view = UIView()
-        view.backgroundColor = .red
-        view.translatesAutoresizingMaskIntoConstraints = false
-        return view
-    }()
+    let tableView = CustomTracksTableView()
+    let networking = NetworkingChoosedRecommendedTrackList()
+    var testModelList = [ChoosedList]()
     
-    var tracklistImage: UIImageView = {
-        let imageView = UIImageView()
-        imageView.backgroundColor = .green
-        imageView.translatesAutoresizingMaskIntoConstraints = false
-        return imageView
-    }()
+    override func viewWillAppear(_ animated: Bool) {
+        navigationController?.navigationBar.isHidden = false
+    }
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        view.backgroundColor = .cyan
-        print(tracklist?.data.tracklist)
-        print(tracklist?.image)
+        
+        activityIndicator.startAnimating()
+        
+        testNetworking()
+    }
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
         
         setView()
-//        self.view.layoutIfNeeded()
-//        print(viewForImage.heightAnchor.hashValue)
-//        print(viewForImage.frame.size.width)
-        print(view.frame.size.height)
-        print(view.frame.size.width)
-        print(viewForImage.frame.size.height)
-        print(viewForImage.frame.width)
+        tableView.screenHeight = self.view.frame.height - 88
+        
+        tableView.tracklist = tracklist
+        
+        setNavBarButtons()
+        
+        tableView.layoutIfNeeded()
     }
     
     func setView() {
-        view.addSubview(viewForImage)
-        viewForImage.addSubview(tracklistImage)
+        view.addSubview(tableView)
         
-        viewForImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 88).isActive = true
-        viewForImage.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
-        viewForImage.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
-        viewForImage.heightAnchor.constraint(equalTo: view.heightAnchor, multiplier: 0.5, constant: -88).isActive = true
-        self.view.layoutIfNeeded()
-//        tracklistImage.topAnchor.constraint(equalTo: viewForImage.topAnchor, constant: 5).isActive = true
-        tracklistImage.centerXAnchor.constraint(equalTo: viewForImage.centerXAnchor).isActive = true
-        tracklistImage.centerYAnchor.constraint(equalTo: viewForImage.centerYAnchor).isActive = true
-        tracklistImage.heightAnchor.constraint(equalToConstant: viewForImage.frame.width / 2).isActive = true
-        tracklistImage.widthAnchor.constraint(equalToConstant: viewForImage.frame.width / 2).isActive = true
+        tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
+        tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
+        tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor).isActive = true
+        tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
+        
+        tableView.rowHeight = self.view.frame.width / 6
+        
+        
+        view.addSubview(activityIndicator)
+        
+        activityIndicator.centerXAnchor.constraint(equalTo: view.centerXAnchor).isActive = true
+        activityIndicator.centerYAnchor.constraint(equalTo: view.centerYAnchor).isActive = true
+    }
+    
+    private func setNavBarButtons() {
+        let checkTableHeader = UIBarButtonItem(image: UIImage(systemName: "bell.fill"), style: .plain, target: self, action: #selector(checkHeader))
+        
+        self.navigationItem.rightBarButtonItems = [checkTableHeader]
+    }
+    
+    @objc func checkHeader() {
+        
+        if (tableView.headerView(forSection: 0) != nil) == true {
+            print("Header is not nil")
+        }
     }
 
 }
+
+extension ChoosedRecommendedPlaylistController {
+    
+    func testNetworking() {
+        guard let tracklistUrl = tracklist?.data.tracklist else {return}
+        networking.getTestChoosedListOfDataFinally(tracklistURL: tracklistUrl) {
+            self.tableView.choosedList = self.networking.choosedModelList
+            
+            self.activityIndicator.stopAnimating()
+            self.tableView.isHidden = false
+            self.tableView.reloadData()
+        }
+    }
+    
+}
+
+extension ChoosedRecommendedPlaylistController: CustomTracksTableViewDelegate {
+    
+    func presentAlertController() {
+        let alertVC = UIAlertController(title: "ACD", message: "ACD", preferredStyle: .alert)
+        let action = UIAlertAction(title: "OK", style: .default, handler: nil)
+
+        alertVC.addAction(action)
+
+        present(alertVC, animated: true, completion: nil)
+        
+        print("Delegate was activated")
+    }
+}
+
+

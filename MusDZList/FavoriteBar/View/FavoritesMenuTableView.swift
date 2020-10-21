@@ -34,6 +34,8 @@ class FavoritesMenuTableView: UITableView {
         translatesAutoresizingMaskIntoConstraints = false
         showsVerticalScrollIndicator = false
         
+        isHidden = true
+        
         delegate = self
         dataSource = self
         register(FavoritesMenuCell.self, forCellReuseIdentifier: String(describing: FavoritesMenuCell.self))

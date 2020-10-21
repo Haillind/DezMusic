@@ -161,17 +161,16 @@ extension MusicController: UICollectionViewDataSource, UICollectionViewDelegate,
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
         if collectionView == collectionViewFavorArtists {
-            
             performSegue(withIdentifier: "topTrackSegue", sender: self)
         }
         
-//        if collectionView == collectionViewRecomendedPlaylists {
-//            
-////            performSegue(withIdentifier: "recomendedPlaylistSegue", sender: self)
-//            let settingVC = RecommendedController()
-//            settingVC.dataForRecommendedCells = nextController
-//            self.navigationController?.pushViewController(settingVC, animated: true)
-//        }
+        if collectionView == collectionViewRecomendedPlaylists {
+            guard let imageData = fourRecomendedPlaylistImages[indexPath.item].pngData() else {return}
+            let recommendedListModel = RecomendModel(data: fourRecomendedPlaylistResults[indexPath.item], image: imageData)
+            let choosedVC = ChoosedRecommendedPlaylistController()
+            choosedVC.tracklist = recommendedListModel
+            navigationController?.pushViewController(choosedVC, animated: true)
+        }
         
     }
     

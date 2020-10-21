@@ -14,6 +14,9 @@ class NetworkingFavoriteMenu {
     
     var favoriteTracksListData = [FavoriteTracksData]()
     var favoriteTracksList = [FavoriteTracksTabTableViewModel]()
+    
+    var countOfTracks = 0
+    private let tracksInOneStack = 25
 
     //MARK: - Count of favorite songs
     func getCountOfUserFavoriteTrack(completion: @escaping () -> ()) {
@@ -43,6 +46,8 @@ class NetworkingFavoriteMenu {
     
     func setCountOfUserFavoriteTracksInMenu(allList: [FavoriteTracksData], completion: @escaping () -> ()) {
         
+        let finalTracksCount = tracksInOneStack * allList.count
+        
         for trackList in allList  {
             for track in trackList.data {
                 
@@ -51,7 +56,11 @@ class NetworkingFavoriteMenu {
                     guard let data = data else {return}
                     let newTrack = FavoriteTracksTabTableViewModel(artistName: track.artist.name, nameOfSong: track.title, titleAlbum: track.album.title, imageAlbum: data)
                     self.favoriteTracksList.append(newTrack)
-                    completion()
+                    self.countOfTracks += 1
+                    
+                    if self.countOfTracks == finalTracksCount - ( self.tracksInOneStack - trackList.data.count) {
+                        completion()
+                    }
                 }
             }
         }
