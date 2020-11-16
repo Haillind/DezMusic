@@ -110,7 +110,7 @@ extension SearchController: UISearchBarDelegate {
 
 extension SearchController {
     
-    func testNetworkServiceWithDecode(searchText: String?) {
+    private func testNetworkServiceWithDecode(searchText: String?) {
         
         tableView.cellsData = []
         

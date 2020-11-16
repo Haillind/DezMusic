@@ -32,8 +32,9 @@ class ChoosedRecommendedPlaylistController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        activityIndicator.startAnimating()
-        
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
         testNetworking()
     }
     
@@ -52,6 +53,7 @@ class ChoosedRecommendedPlaylistController: UIViewController {
     
     func setView() {
         view.addSubview(tableView)
+        tableView.alertVCDelegate = self
         
         tableView.topAnchor.constraint(equalTo: view.topAnchor).isActive = true
         tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor).isActive = true
@@ -59,7 +61,6 @@ class ChoosedRecommendedPlaylistController: UIViewController {
         tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor).isActive = true
         
         tableView.rowHeight = self.view.frame.width / 6
-        
         
         view.addSubview(activityIndicator)
         
@@ -84,14 +85,20 @@ class ChoosedRecommendedPlaylistController: UIViewController {
 
 extension ChoosedRecommendedPlaylistController {
     
+    
     func testNetworking() {
-        guard let tracklistUrl = tracklist?.data.tracklist else {return}
-        networking.getTestChoosedListOfDataFinally(tracklistURL: tracklistUrl) {
-            self.tableView.choosedList = self.networking.choosedModelList
-            
-            self.activityIndicator.stopAnimating()
-            self.tableView.isHidden = false
-            self.tableView.reloadData()
+        
+        DispatchQueue.global(qos: .userInitiated).async {
+            guard let tracklistUrl = self.tracklist?.data.tracklist else {return}
+            self.networking.getTestChoosedListOfDataFinally(tracklistURL: tracklistUrl) {
+                self.tableView.choosedList = self.networking.choosedModelList
+                
+                DispatchQueue.main.async {
+                    self.activityIndicator.stopAnimating()
+                    self.tableView.isHidden = false
+                    self.tableView.reloadData()
+                }
+            }
         }
     }
     
@@ -100,7 +107,7 @@ extension ChoosedRecommendedPlaylistController {
 extension ChoosedRecommendedPlaylistController: CustomTracksTableViewDelegate {
     
     func presentAlertController() {
-        let alertVC = UIAlertController(title: "ACD", message: "ACD", preferredStyle: .alert)
+        let alertVC = UIAlertController(title: "Sorry, but now it doesn't work", message: "", preferredStyle: .alert)
         let action = UIAlertAction(title: "OK", style: .default, handler: nil)
 
         alertVC.addAction(action)

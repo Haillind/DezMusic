@@ -113,21 +113,27 @@ extension FavoritesTabController {
     private func webSessionsForTableViewContent() {
         
         networkingGroup.enter()
-        self.networking.getCountOfUserFavoriteTrack {
-            self.tableView.favoritesTableListEnum[CellActionsDoing.FavoriteTracks.rawValue].countOfDataInfoForCurrentRow = self.networking.favoriteTracksList.count
-            self.networkingGroup.leave()
+        DispatchQueue.global(qos: .userInitiated).async {
+            self.networking.getCountOfUserFavoriteTrack {
+                self.tableView.favoritesTableListEnum[CellActionsDoing.FavoriteTracks.rawValue].countOfDataInfoForCurrentRow = self.networking.favoriteTracksList.count
+                self.networkingGroup.leave()
+            }
         }
         
         networkingGroup.enter()
-        self.networking.getAndSetCountOfUserPlaylists { (countPlaylists) in
-            self.tableView.favoritesTableListEnum[CellActionsDoing.Playlists.rawValue].countOfDataInfoForCurrentRow = countPlaylists
-            self.networkingGroup.leave()
+        DispatchQueue.global(qos: .utility).async {
+            self.networking.getAndSetCountOfUserPlaylists { (countPlaylists) in
+                self.tableView.favoritesTableListEnum[CellActionsDoing.Playlists.rawValue].countOfDataInfoForCurrentRow = countPlaylists
+                self.networkingGroup.leave()
+            }
         }
         
         networkingGroup.enter()
-        self.networking.getAndSetCountOfUserAlbums { (countAlbums) in
-            self.tableView.favoritesTableListEnum[CellActionsDoing.Albums.rawValue].countOfDataInfoForCurrentRow = countAlbums
-            self.networkingGroup.leave()
+        DispatchQueue.global(qos: .utility).async {
+            self.networking.getAndSetCountOfUserAlbums { (countAlbums) in
+                self.tableView.favoritesTableListEnum[CellActionsDoing.Albums.rawValue].countOfDataInfoForCurrentRow = countAlbums
+                self.networkingGroup.leave()
+            }
         }
         
         networkingGroup.notify(queue: DispatchQueue.main) {
