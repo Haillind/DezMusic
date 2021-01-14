@@ -10,7 +10,7 @@ import UIKit
 import WebKit
 
 class AuthController: UIViewController {
-    
+    //
     var webView: WKWebView!
     var redirectAuthCode: String?
     var defaults = UserDefaults.standard
