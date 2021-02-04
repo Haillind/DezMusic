@@ -11,23 +11,35 @@ import UIKit
 class SceneDelegate: UIResponder, UIWindowSceneDelegate {
 
     var window: UIWindow?
-
+    var coordinator: MainCoordinator?
 
     func scene(_ scene: UIScene, willConnectTo session: UISceneSession, options connectionOptions: UIScene.ConnectionOptions) {
+
+//        let initialController = AuthorizationViewController()
+//        window?.rootViewController = initialController
+//        window?.makeKeyAndVisible()
         
-        let storyboard = UIStoryboard(name: "Main", bundle: nil)
-        
-        if UserDefaults.standard.string(forKey: "accessToken") != nil {
-            let initialController = storyboard.instantiateViewController(identifier: "TabBarController")
-            window?.rootViewController = initialController
-            window?.makeKeyAndVisible()
-        } else {
-            let initialController = storyboard.instantiateViewController(identifier: "LoginScreen")
-            window?.rootViewController = initialController
-            window?.makeKeyAndVisible()
-        }
+//        let storyboard = UIStoryboard(name: "Main", bundle: nil)
+//
+//        if UserDefaults.standard.string(forKey: "accessToken") != nil {
+//            let initialController = storyboard.instantiateViewController(identifier: "TabBarController")
+//            window?.rootViewController = initialController
+//            window?.makeKeyAndVisible()
+//        } else {
+//            let initialController = storyboard.instantiateViewController(identifier: "LoginScreen")
+//            window?.rootViewController = initialController
+//            window?.makeKeyAndVisible()
+//        }
         
         guard let _ = (scene as? UIWindowScene) else { return }
+
+        let navContoller = UINavigationController()
+        coordinator = MainCoordinator(navigationController: navContoller)
+        coordinator?.start()
+//        coordinator?.homeMusicBar()
+
+        window?.rootViewController = navContoller
+        window?.makeKeyAndVisible()
     }
 
     func sceneDidDisconnect(_ scene: UIScene) {
