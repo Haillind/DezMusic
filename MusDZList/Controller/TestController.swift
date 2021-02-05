@@ -30,7 +30,7 @@ class TestController: UIViewController {
             guard let data = data else {return}
 
             let info = String(data: data, encoding: .utf8)
-            print(info)
+            print(info as Any)
 
         }.resume()
     }

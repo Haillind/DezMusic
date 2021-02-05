@@ -6,15 +6,14 @@
 //  Copyright © 2021 Denis Selivanov. All rights reserved.
 //
 
-//import Foundation
-//import UIKit
 import RxSwift
 import RxCocoa
 
 class HomeMusicViewModel {
 
     let showLoading = BehaviorRelay<Bool>(value: true)
-    let favoriteArtistsData = PublishSubject<[FavoritesArtistsData]>()
+    private var arrayModel = [FavoriteArtistModel]()
+    let favoriteArtistsSubject = PublishSubject<[FavoriteArtistModel]>()
 
     let bag = DisposeBag()
 
@@ -26,21 +25,35 @@ class HomeMusicViewModel {
     }
 
     func transform(input: Input) -> Output {
-        
+
         requestForFavoriteList()
-            .do(onDispose:  {
+            .map { $0.data }
+            .flatMap { Observable.from($0) }
+            .map {$0}
+            .flatMap {
+                Observable.combineLatest(Observable.just($0), NetworkManager.sendRequestForImages(url: $0.picture_big))
+            }
+            .do { (artist, imageData) in
+                print("URL was dowloaded")
+                let newstruct = FavoriteArtistModel(id: artist.id, name: artist.name, image: imageData)
+                self.arrayModel.append(newstruct)
+                self.favoriteArtistsSubject.onNext(self.arrayModel)
+            }
+            .toArray()
+            .subscribe({_ in
                 self.showLoading.accept(false)
-            })
-            .subscribe (onNext: { data in
-                self.favoriteArtistsData.onNext(data.data)
-                self.favoriteArtistsData.onCompleted()
+                print("all url was downloaded")
             })
             .disposed(by: bag)
 
-        return Output()
+        let string = input.data.map {
+            return $0.name
+        }.asDriver(onErrorJustReturn: "")
+
+        return Output(text: string)
     }
 
-    func requestForFavoriteList() -> Observable<UserFavoriteArtistsData> {
+    private func requestForFavoriteList() -> Observable<UserFavoriteArtistsData> {
         let urlUser = "https://api.deezer.com/user/me/artists?access_token=\(accessToken)"
         guard let url = URL(string: urlUser) else { return Observable<UserFavoriteArtistsData>.never()}
         return NetworkManager.createRequest(url: url)
@@ -49,8 +62,10 @@ class HomeMusicViewModel {
 
 extension HomeMusicViewModel: ViewModelType {
     struct Input {
+        let data: ControlEvent<FavoriteArtistModel>
     }
 
     struct Output {
+        let text: Driver<String>
     }
 }

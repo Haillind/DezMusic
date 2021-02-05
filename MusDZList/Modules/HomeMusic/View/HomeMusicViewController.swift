@@ -12,38 +12,57 @@ import RxCocoa
 
 class HomeMusicViewController: UIViewController, Storyboarded {
 
-    @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
-
+    @IBOutlet weak var favoriteArtistsCollectionView: UICollectionView!
+    @IBOutlet weak var viewInScrollView: UIView!
+    @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var testDataLabel: UILabel!
+    
     weak var coordinator: MainCoordinator?
 
     private let viewModel = HomeMusicViewModel()
     private let bag = DisposeBag()
 
     private var input: HomeMusicViewModel.Input {
-        return HomeMusicViewModel.Input()
+        return HomeMusicViewModel.Input(data: favoriteArtistsCollectionView.rx.modelSelected(FavoriteArtistModel.self))
+    }
+
+    var favoriteArtistsContentSizeWidth: CGFloat {
+        return view.frame.width / 3.5
     }
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        heightConstraint.constant = favoriteArtistsContentSizeWidth
 
-        view.backgroundColor = .cyan
-        tableView.backgroundColor = .red
-        tableView.isHidden = true
+        favoriteArtistsCollectionView.register(UINib(nibName: "FavoriteArtistCell", bundle: nil), forCellWithReuseIdentifier: String(describing: FavoriteArtistCell.self))
 
-        tableView.register(UINib(nibName: "TestTableViewCell", bundle: nil), forCellReuseIdentifier: String(describing: TestTableViewCell.self))
+        favoriteArtistsCollectionView.rx.setDelegate(self).disposed(by: bag)
 
         bind(output: viewModel.transform(input: input))
     }
 
     private func bind(output: HomeMusicViewModel.Output) {
 
-        viewModel.favoriteArtistsData.bind(to: tableView.rx.items(cellIdentifier: String(describing: TestTableViewCell.self), cellType: TestTableViewCell.self)) { row, item, cell in
-            cell.favoriteArtistItem = item
-        }.disposed(by: bag)
+        output.text.drive(testDataLabel.rx.text).disposed(by: bag)
+
+        viewModel.favoriteArtistsSubject.bind(to: favoriteArtistsCollectionView.rx.items(cellIdentifier: String(describing: FavoriteArtistCell.self), cellType: FavoriteArtistCell.self)) { row, item, cell in
+            cell.artist = item
+        }
+        .disposed(by: bag)
 
         viewModel.showLoading.bind(to: activityIndicator.rx.isAnimating).disposed(by: bag)
-        viewModel.showLoading.bind(to: tableView.rx.isHidden).disposed(by: bag)
     }
 
+}
+
+extension HomeMusicViewController: UICollectionViewDelegateFlowLayout {
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
+        let width = favoriteArtistsContentSizeWidth
+        return CGSize(width: width, height: width)
+    }
+
+    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
+        return 15
+    }
 }

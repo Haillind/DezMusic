@@ -21,3 +21,9 @@ struct FavoritesArtistsData: Codable {
     let picture_big: URL
     let picture_xl: URL
 }
+
+struct FavoriteArtistModel {
+    let id: Int
+    let name: String
+    let image: Data
+}
