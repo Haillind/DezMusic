@@ -43,6 +43,8 @@ class AuthorizationViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(coordinator?.childCoordinators.count)
+        print(navigationController?.viewControllers.count)
 
         configureLoginButtonAutoSizing()
 

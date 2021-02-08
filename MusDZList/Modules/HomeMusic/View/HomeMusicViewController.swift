@@ -17,7 +17,7 @@ class HomeMusicViewController: UIViewController, Storyboarded {
     @IBOutlet weak var viewInScrollView: UIView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var testDataLabel: UILabel!
-    
+
     weak var coordinator: MainCoordinator?
 
     private let viewModel = HomeMusicViewModel()
@@ -38,6 +38,16 @@ class HomeMusicViewController: UIViewController, Storyboarded {
         favoriteArtistsCollectionView.register(UINib(nibName: "FavoriteArtistCell", bundle: nil), forCellWithReuseIdentifier: String(describing: FavoriteArtistCell.self))
 
         favoriteArtistsCollectionView.rx.setDelegate(self).disposed(by: bag)
+
+//        logOutButton.rx.tap
+//            .subscribe { (event) in
+//                print("tap")
+////                self.coordinator?.navigationController.popViewController(animated: true)
+////                self.navigationController?.dismiss(animated: true, completion: nil)
+////                self.navigationController?.popToRootViewController(animated: true)
+////                self.coordinator?.navigationController.popToRootViewController(animated: true)
+//            }
+//            .disposed(by: bag)
 
         bind(output: viewModel.transform(input: input))
     }

@@ -7,14 +7,30 @@
 //
 
 import UIKit
+import RxSwift
+import RxCocoa
 
 class MainTabBarController: UITabBarController, Storyboarded {
 
-    weak var coordinator: MainCoordinator?
+    weak var coordinator: MainTabBarCoordinator?
+
+    let logoutBarButton = UIBarButtonItem(title: "LogOut", style: .plain, target: self, action: nil)
+
+    let bag = DisposeBag()
     
     override func viewDidLoad() {
         super.viewDidLoad()
-//        tabBarConstructor()
+
+        navigationItem.rightBarButtonItem = logoutBarButton
+        navigationItem.hidesBackButton = true
+
+        logoutBarButton.rx.tap
+            .subscribe { (event) in
+                print("asdad")
+                self.coordinator?.navigationController.navigationBar.isHidden = true
+                self.coordinator?.navigationController.popToRootViewController(animated: true)
+            }
+            .disposed(by: bag)
     }
 
     func tabBarConstructor() {

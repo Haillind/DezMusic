@@ -34,6 +34,7 @@
 		92EC6BEB25C020BA00F3F88E /* AuthorizationViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92EC6BEA25C020BA00F3F88E /* AuthorizationViewModel.swift */; };
 		92F48B6725C8399800FB4F61 /* HomeMusicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F48B6625C8399800FB4F61 /* HomeMusicViewController.swift */; };
 		92F48B6B25C83C0000FB4F61 /* MainTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92F48B6A25C83C0000FB4F61 /* MainTabBarController.swift */; };
+		92FF763F25CDA024004BC790 /* MainTabBarCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 92FF763E25CDA024004BC790 /* MainTabBarCoordinator.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -68,6 +69,7 @@
 		92EC6BEA25C020BA00F3F88E /* AuthorizationViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthorizationViewModel.swift; sourceTree = "<group>"; };
 		92F48B6625C8399800FB4F61 /* HomeMusicViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeMusicViewController.swift; sourceTree = "<group>"; };
 		92F48B6A25C83C0000FB4F61 /* MainTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarController.swift; sourceTree = "<group>"; };
+		92FF763E25CDA024004BC790 /* MainTabBarCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainTabBarCoordinator.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -203,10 +205,11 @@
 		9277131025C459730095D8B8 /* Coordinator */ = {
 			isa = PBXGroup;
 			children = (
-				9277131125C459830095D8B8 /* Coordinator.swift */,
 				9277131725C45EEC0095D8B8 /* Storyboarded.swift */,
+				9277131125C459830095D8B8 /* Coordinator.swift */,
 				9277131A25C461A40095D8B8 /* MainCoordinator.swift */,
 				92F48B6A25C83C0000FB4F61 /* MainTabBarController.swift */,
+				92FF763E25CDA024004BC790 /* MainTabBarCoordinator.swift */,
 			);
 			path = Coordinator;
 			sourceTree = "<group>";
@@ -428,6 +431,7 @@
 				92A763642489485100147C69 /* AppDelegate.swift in Sources */,
 				92F48B6B25C83C0000FB4F61 /* MainTabBarController.swift in Sources */,
 				92A763662489485100147C69 /* SceneDelegate.swift in Sources */,
+				92FF763F25CDA024004BC790 /* MainTabBarCoordinator.swift in Sources */,
 				9297909C248FD0A400006CB1 /* UserFavoriteArtistsData.swift in Sources */,
 				929790A0248FE72200006CB1 /* FavoriteArtistsCell.swift in Sources */,
 				921560C7248FA73900229F1F /* MusicController.swift in Sources */,
