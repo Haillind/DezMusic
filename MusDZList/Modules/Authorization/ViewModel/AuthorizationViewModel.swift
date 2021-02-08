@@ -22,10 +22,20 @@ class AuthorizationViewModel {
 
     let url = URL(string: "https://jsonplaceholder.typicode.com/posts/1")!
 
+    let bag = DisposeBag()
 
     func transform(input: Input) -> Output {
         let createTap = input.loginTrigger
             .do(onNext: openWebView)
+
+//        requestForUserId(accessToken: UserDefaults.standard.value(forKey: "accessToken") as! String)
+//            .map { $0.id }
+//            .do { id in
+//                UserDefaults.standard.setValue(id, forKey: "userID")
+//            }
+//            .subscribe()
+//            .disposed(by: bag)
+
         return Output(openWebView: createTap)
     }
 
@@ -37,6 +47,12 @@ class AuthorizationViewModel {
         guard let authCode = authorizationCode else { return Observable<AuthData>.never()}
         let urlForAccessToken = "https://connect.deezer.com/oauth/access_token.php?app_id=\(consumerKey)&secret=\(consumerSecret)&code=\(authCode)&output=json"
         guard let url = URL(string: urlForAccessToken) else { return Observable<AuthData>.never()}
+        return NetworkManager.createRequest(url: url)
+    }
+
+    func requestForUserId(accessToken: String) -> Observable<UserInfoData> {
+        let urlString = "https://api.deezer.com/user/me?access_token=\(accessToken)"
+        guard let url = URL(string: urlString) else { return  Observable<UserInfoData>.never() }
         return NetworkManager.createRequest(url: url)
     }
 

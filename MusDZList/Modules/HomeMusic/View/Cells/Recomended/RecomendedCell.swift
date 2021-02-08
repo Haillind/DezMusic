@@ -15,7 +15,12 @@ class RecomendedCell: UICollectionViewCell {
     
     override func awakeFromNib() {
         super.awakeFromNib()
-        // Initialization code
+    }
+
+    override func draw(_ rect: CGRect) {
+        super.draw(rect)
+        recommendImageView.layer.cornerRadius = recommendImageView.frame.width / 10
+        recommendImageView.clipsToBounds = true
     }
 
 }

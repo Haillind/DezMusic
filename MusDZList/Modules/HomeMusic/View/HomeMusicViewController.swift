@@ -17,6 +17,7 @@ class HomeMusicViewController: UIViewController, Storyboarded {
     @IBOutlet weak var recomendedCollectionView: UICollectionView!
     @IBOutlet weak var viewInScrollView: UIView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
+    @IBOutlet weak var recommendedHeightConstraint: NSLayoutConstraint!
     @IBOutlet weak var testDataLabel: UILabel!
 
     weak var coordinator: MainCoordinator?
@@ -35,8 +36,10 @@ class HomeMusicViewController: UIViewController, Storyboarded {
     override func viewDidLoad() {
         super.viewDidLoad()
         heightConstraint.constant = favoriteArtistsContentSizeWidth
+        recommendedHeightConstraint.constant = (view.frame.width / 2 - 25 + 60) * 2
 
         favoriteArtistsCollectionView.register(UINib(nibName: "FavoriteArtistCell", bundle: nil), forCellWithReuseIdentifier: String(describing: FavoriteArtistCell.self))
+        recomendedCollectionView.register(UINib(nibName: "RecomendedCell", bundle: nil), forCellWithReuseIdentifier: String(describing: RecomendedCell.self))
 
         favoriteArtistsCollectionView.rx.setDelegate(self).disposed(by: bag)
         recomendedCollectionView.rx.setDelegate(self).disposed(by: bag)
@@ -53,7 +56,13 @@ class HomeMusicViewController: UIViewController, Storyboarded {
         }
         .disposed(by: bag)
 
-        viewModel.showLoading.bind(to: activityIndicator.rx.isAnimating).disposed(by: bag)
+        viewModel.showFavoriteArtistsLoading.bind(to: activityIndicator.rx.isAnimating).disposed(by: bag)
+
+        viewModel.recommendedNewSubject.bind(to: recomendedCollectionView.rx.items(cellIdentifier: String(describing: RecomendedCell.self), cellType: RecomendedCell.self)) { row, item, cell in
+            cell.recomendNameLabel.text = "\(item.info.numberOfTracks) Tracks\n\(item.info.title)"
+            cell.recommendImageView.image = UIImage(data: item.image)
+        }
+        .disposed(by: bag)
     }
 
 }
@@ -64,12 +73,17 @@ extension HomeMusicViewController: UICollectionViewDelegateFlowLayout {
             let width = favoriteArtistsContentSizeWidth
             return CGSize(width: width, height: width)
         } else {
-            return UICollectionView.layoutFittingCompressedSize
+            let width = view.frame.width / 2 - 25
+            return CGSize(width: width, height: width + 50)
         }
-
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {
-        return 15
+        if collectionView == favoriteArtistsCollectionView {
+            return 15
+        } else {
+            return 15
+        }
     }
+    
 }

@@ -49,8 +49,11 @@ class AuthorizationViewController: UIViewController, Storyboarded {
                 }
             }
 
+
         let input = AuthorizationViewModel.Input(loginTrigger: loginTrigger.asDriver(onErrorJustReturn: ()))
         bind(output: viewModel.transform(input: input))
+
+
     }
 
     func bind(output: AuthorizationViewModel.Output) {
@@ -103,9 +106,16 @@ extension AuthorizationViewController: WKNavigationDelegate, WKUIDelegate {
                     .subscribe(onNext: { auth in
                         guard let token = auth.access_token else {return}
                         self.defaults.set(token, forKey: "accessToken")
-                        DispatchQueue.main.async {
-                            self.coordinator?.homeMusicBar()
-                        }
+
+                        self.viewModel.requestForUserId(accessToken: token)
+                            .subscribe { (data) in
+                                guard let id = data.element?.id else {return}
+                                self.defaults.setValue(id, forKey: "userId")
+                                DispatchQueue.main.async {
+                                    self.coordinator?.homeMusicBar()
+                                }
+                            }
+                            .disposed(by: self.bag)
                     })
                     .disposed(by: self.bag)
             }
