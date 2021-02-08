@@ -169,6 +169,26 @@
                                                 <nil key="textColor"/>
                                                 <nil key="highlightedColor"/>
                                             </label>
+                                            <collectionView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" dataMode="prototypes" translatesAutoresizingMaskIntoConstraints="NO" id="rVe-lm-r7r">
+                                                <rect key="frame" x="0.0" y="298.5" width="414" height="130"/>
+                                                <color key="backgroundColor" systemColor="systemBackgroundColor"/>
+                                                <collectionViewFlowLayout key="collectionViewLayout" automaticEstimatedItemSize="YES" minimumLineSpacing="10" minimumInteritemSpacing="10" id="hv7-kv-U6m">
+                                                    <size key="itemSize" width="128" height="128"/>
+                                                    <size key="headerReferenceSize" width="0.0" height="0.0"/>
+                                                    <size key="footerReferenceSize" width="0.0" height="0.0"/>
+                                                    <inset key="sectionInset" minX="16" minY="0.0" maxX="16" maxY="0.0"/>
+                                                </collectionViewFlowLayout>
+                                                <cells>
+                                                    <collectionViewCell opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="QGB-20-rkW">
+                                                        <rect key="frame" x="16" y="0.0" width="128" height="128"/>
+                                                        <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                                        <collectionViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" id="z0V-ta-7th">
+                                                            <rect key="frame" x="0.0" y="0.0" width="128" height="128"/>
+                                                            <autoresizingMask key="autoresizingMask"/>
+                                                        </collectionViewCellContentView>
+                                                    </collectionViewCell>
+                                                </cells>
+                                            </collectionView>
                                         </subviews>
                                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                                         <constraints>
@@ -177,9 +197,13 @@
                                             <constraint firstAttribute="bottom" secondItem="Q26-xV-xdN" secondAttribute="bottom" constant="30" id="0zu-Zj-V8W"/>
                                             <constraint firstItem="FQ3-my-1E4" firstAttribute="top" secondItem="kVc-1I-NqW" secondAttribute="bottom" constant="20" id="7G2-7P-Wh7"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="FQ3-my-1E4" secondAttribute="trailing" constant="202" id="ASM-5v-IeB"/>
+                                            <constraint firstAttribute="trailing" secondItem="rVe-lm-r7r" secondAttribute="trailing" id="DJg-t6-Ifr"/>
+                                            <constraint firstItem="rVe-lm-r7r" firstAttribute="top" secondItem="csH-SM-fPC" secondAttribute="bottom" constant="50" id="I34-fu-kgz"/>
                                             <constraint firstItem="kVc-1I-NqW" firstAttribute="top" secondItem="28P-66-Vbm" secondAttribute="top" constant="10" id="PGg-Zd-ZLA"/>
+                                            <constraint firstItem="Q26-xV-xdN" firstAttribute="top" secondItem="rVe-lm-r7r" secondAttribute="bottom" constant="274.5" id="UQS-0H-06x"/>
                                             <constraint firstItem="csH-SM-fPC" firstAttribute="leading" secondItem="28P-66-Vbm" secondAttribute="leading" id="boC-U4-IXI"/>
                                             <constraint firstAttribute="trailing" relation="greaterThanOrEqual" secondItem="kVc-1I-NqW" secondAttribute="trailing" constant="20" symbolic="YES" id="f0r-KQ-Q8n"/>
+                                            <constraint firstItem="rVe-lm-r7r" firstAttribute="leading" secondItem="28P-66-Vbm" secondAttribute="leading" id="hDl-lt-2hO"/>
                                             <constraint firstItem="kVc-1I-NqW" firstAttribute="leading" secondItem="28P-66-Vbm" secondAttribute="leading" constant="16" id="hEE-nm-kSW"/>
                                             <constraint firstItem="FQ3-my-1E4" firstAttribute="leading" secondItem="28P-66-Vbm" secondAttribute="leading" constant="16" id="hEV-nQ-Cfv"/>
                                             <constraint firstItem="Q26-xV-xdN" firstAttribute="centerX" secondItem="28P-66-Vbm" secondAttribute="centerX" id="vq0-3z-ZWd"/>
@@ -210,6 +234,7 @@
                         <outlet property="activityIndicator" destination="JnR-9u-CT2" id="yQr-FY-jLt"/>
                         <outlet property="favoriteArtistsCollectionView" destination="csH-SM-fPC" id="VQ8-mu-YXZ"/>
                         <outlet property="heightConstraint" destination="Ok5-Gw-pkI" id="K3w-wm-rvV"/>
+                        <outlet property="recomendedCollectionView" destination="rVe-lm-r7r" id="oKf-Gt-8im"/>
                         <outlet property="testDataLabel" destination="Q26-xV-xdN" id="T0R-Sf-aDh"/>
                         <outlet property="viewInScrollView" destination="28P-66-Vbm" id="xDy-DX-Gdh"/>
                     </connections>

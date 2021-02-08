@@ -27,53 +27,10 @@ class AuthorizationViewModel {
         let createTap = input.loginTrigger
             .do(onNext: openWebView)
         return Output(openWebView: createTap)
-//        let event = input.webViewDelegate
-//            .debug()
-//            .do { view, action, handler in
-//            var actionPolicy: WKNavigationActionPolicy?
-//
-//            defer {
-//                handler(actionPolicy ?? .allow)
-//            }
-//
-//            //                guard let url = action.request.url else { return }
-//            guard let url = action.request.url else {return}
-//
-//            if url.host == "haillind.github.io" {
-//
-//                if url.absoluteString.contains("code=") {
-//
-//                    self.redirectAuthCode = url.absoluteString.components(separatedBy: "code=").last
-//
-//
-//                    //                requestForAccessToken(authorizationCode: redirectAuthCode)
-//                    self.requestForToken(authorizationCode: self.redirectAuthCode)
-//                        .subscribe { token in
-//                            print(token.element?.access_token)
-//                        }
-//                        .dispose()
-//
-//                }
-//            }
-//        }
-            
-
     }
 
     func openWebView() {
         print("hello webview from movel")
-//        let redirectURL = "https://haillind.github.io"
-//        let url = URL(string: "\(authorizationEndPoint)?app_id=\(consumerKey)&redirect_uri=\(redirectURL)&perms=basic_access,email")
-//        webView.load(URLRequest(url: url!))
-    }
-
-    var requestUrlNext: URLRequest? {
-        let redirectURL = "https://haillind.github.io"
-        let authorizationURL = "\(authorizationEndPoint)?app_id=\(consumerKey)&redirect_uri=\(redirectURL)&perms=basic_access,email"
-        if let url = URL(string: authorizationURL) {
-            return URLRequest(url: url)
-        }
-        return nil
     }
 
     func requestForToken(authorizationCode: String?) -> Observable<AuthData> {

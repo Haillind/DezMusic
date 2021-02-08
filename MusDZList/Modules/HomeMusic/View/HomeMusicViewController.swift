@@ -14,6 +14,7 @@ class HomeMusicViewController: UIViewController, Storyboarded {
 
     @IBOutlet weak var activityIndicator: UIActivityIndicatorView!
     @IBOutlet weak var favoriteArtistsCollectionView: UICollectionView!
+    @IBOutlet weak var recomendedCollectionView: UICollectionView!
     @IBOutlet weak var viewInScrollView: UIView!
     @IBOutlet weak var heightConstraint: NSLayoutConstraint!
     @IBOutlet weak var testDataLabel: UILabel!
@@ -38,16 +39,7 @@ class HomeMusicViewController: UIViewController, Storyboarded {
         favoriteArtistsCollectionView.register(UINib(nibName: "FavoriteArtistCell", bundle: nil), forCellWithReuseIdentifier: String(describing: FavoriteArtistCell.self))
 
         favoriteArtistsCollectionView.rx.setDelegate(self).disposed(by: bag)
-
-//        logOutButton.rx.tap
-//            .subscribe { (event) in
-//                print("tap")
-////                self.coordinator?.navigationController.popViewController(animated: true)
-////                self.navigationController?.dismiss(animated: true, completion: nil)
-////                self.navigationController?.popToRootViewController(animated: true)
-////                self.coordinator?.navigationController.popToRootViewController(animated: true)
-//            }
-//            .disposed(by: bag)
+        recomendedCollectionView.rx.setDelegate(self).disposed(by: bag)
 
         bind(output: viewModel.transform(input: input))
     }
@@ -68,8 +60,13 @@ class HomeMusicViewController: UIViewController, Storyboarded {
 
 extension HomeMusicViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
-        let width = favoriteArtistsContentSizeWidth
-        return CGSize(width: width, height: width)
+        if collectionView == favoriteArtistsCollectionView {
+            let width = favoriteArtistsContentSizeWidth
+            return CGSize(width: width, height: width)
+        } else {
+            return UICollectionView.layoutFittingCompressedSize
+        }
+
     }
 
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, minimumLineSpacingForSectionAt section: Int) -> CGFloat {

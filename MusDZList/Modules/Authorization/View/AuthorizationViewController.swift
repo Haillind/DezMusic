@@ -25,7 +25,6 @@ class AuthorizationViewController: UIViewController, Storyboarded {
     let consumerSecret = "dce9d10fa1483d1585df63ce363592f6"
     let authorizationEndPoint = "https://connect.deezer.com/oauth/auth.php"
     let redirectURL = "https://haillind.github.io"
-//    let authorizationURL = "\(authorizationEndPoint)?app_id=\(consumerKey)&redirect_uri=\(redirectURL)&perms=basic_access,email"
 
     var urlForAuth: URL? {
         let redirectURL = "https://haillind.github.io"
@@ -37,14 +36,8 @@ class AuthorizationViewController: UIViewController, Storyboarded {
     var redirectAuthCode: String?
     var defaults = UserDefaults.standard
 
-//    var input: AuthorizationViewModel.Input {
-//        return AuthorizationViewModel.Input(loginTrigger: loginButton.rx.tap.asDriver())
-//    }
-
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(coordinator?.childCoordinators.count)
-        print(navigationController?.viewControllers.count)
 
         configureLoginButtonAutoSizing()
 
@@ -109,7 +102,6 @@ extension AuthorizationViewController: WKNavigationDelegate, WKUIDelegate {
                 viewModel.requestForToken(authorizationCode: redirectAuthCode)
                     .subscribe(onNext: { auth in
                         guard let token = auth.access_token else {return}
-                        print(token)
                         self.defaults.set(token, forKey: "accessToken")
                         DispatchQueue.main.async {
                             self.coordinator?.homeMusicBar()
