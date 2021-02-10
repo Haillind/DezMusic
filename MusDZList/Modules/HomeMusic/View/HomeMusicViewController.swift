@@ -35,17 +35,15 @@ class HomeMusicViewController: UIViewController, Storyboarded {
 
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         heightConstraint.constant = favoriteArtistsContentSizeWidth
         recommendedHeightConstraint.constant = (view.frame.width / 2 - 25 + 60) * 2
+//        recommendedHeightConstraint.constant = 1000
 
         favoriteArtistsCollectionView.register(UINib(nibName: "FavoriteArtistCell", bundle: nil), forCellWithReuseIdentifier: String(describing: FavoriteArtistCell.self))
         recomendedCollectionView.register(UINib(nibName: "RecomendedCell", bundle: nil), forCellWithReuseIdentifier: String(describing: RecomendedCell.self))
 
-//        recomendedCollectionView.register(HeaderView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: HeaderView.self))
-
-//        recomendedCollectionView.register(UINib(nibName: "RecommendedHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: RecommendedHeaderView.self))
-
-        recomendedCollectionView.register(HeaderRecomendView.self, forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: HeaderRecomendView.self))
+        recomendedCollectionView.register(UINib(nibName: "RecommendedHeaderView", bundle: nil), forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader, withReuseIdentifier: String(describing: RecommendedHeaderView.self))
 
         favoriteArtistsCollectionView.rx.setDelegate(self).disposed(by: bag)
         recomendedCollectionView.rx.setDelegate(self).disposed(by: bag)
@@ -73,7 +71,7 @@ class HomeMusicViewController: UIViewController, Storyboarded {
 
 }
 
-extension HomeMusicViewController: UICollectionViewDelegateFlowLayout, UICollectionViewDelegate {
+extension HomeMusicViewController: UICollectionViewDelegateFlowLayout {
     func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, sizeForItemAt indexPath: IndexPath) -> CGSize {
         if collectionView == favoriteArtistsCollectionView {
             let width = favoriteArtistsContentSizeWidth
@@ -92,36 +90,37 @@ extension HomeMusicViewController: UICollectionViewDelegateFlowLayout, UICollect
         }
     }
 
-    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
-        if collectionView == recomendedCollectionView {
-            return CGSize(width: 100, height: 100)
-        }
-        return CGSize(width: 0, height: 0)
-    }
+//    func collectionView(_ collectionView: UICollectionView, layout collectionViewLayout: UICollectionViewLayout, referenceSizeForHeaderInSection section: Int) -> CGSize {
+//        if collectionView == recomendedCollectionView {
+//            return CGSize(width: 100, height: 100)
+//        }
+//        return CGSize(width: 0, height: 0)
+//    }
 
-    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
-
-            switch kind {
-
-            case UICollectionView.elementKindSectionHeader:
-
-                let headerView = recomendedCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: "header", for: indexPath) as! HeaderRecomendView
-
-//                headerView.delegate = self
-                headerView.backgroundColor = .red
-                return headerView
-
-//            case UICollectionView.elementKindSectionFooter:
+//    func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {
 //
-//                let footerView = collectionViewRecomendedPlaylists.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: RecommendedFooterView.self), for: indexPath) as! RecommendedFooterView
+//            switch kind {
 //
-//                footerView.delegate = self
-//                return footerView
-
-            default:
-                assert(false, "Unexpected element kind")
-            }
-        }
+//            case UICollectionView.elementKindSectionHeader:
+//
+//                let headerView = recomendedCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: RecommendedHeaderView.self), for: indexPath) as! RecommendedHeaderView
+//
+////                headerView.delegate = self
+////                headerView.backgroundColor = .red
+//                headerView.headerView.backgroundColor = .red
+//                return headerView
+//
+////            case UICollectionView.elementKindSectionFooter:
+////
+////                let footerView = recomendedCollectionView.dequeueReusableSupplementaryView(ofKind: kind, withReuseIdentifier: String(describing: HeaderRecomendView.self), for: indexPath) as! HeaderRecomendView
+////
+//////                footerView.delegate = self
+////                return footerView
+//
+    //            default:
+    //                assert(false, "Unexpected element kind")
+    //            }
+//        }
 
 
 }
